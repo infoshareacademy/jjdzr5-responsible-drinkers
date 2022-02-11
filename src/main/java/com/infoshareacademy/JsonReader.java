@@ -16,7 +16,7 @@ public class JsonReader {
     private List<Drink> drinkList;
 
     public JsonReader() {
-        Path path = Paths.get("src", "main", "java", "com", "infoshareacademy", "drinks.json");
+        Path path = Paths.get("src", "main", "resources", "drinks.json");
         String json = null;
         try {
             json = Files.readString(path);
