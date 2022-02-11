@@ -16,14 +16,13 @@ public class JsonReader {
     private List<Drink> drinkList;
 
     public JsonReader() {
-        Path path = Paths.get("src", "main", "java", "com", "infoshare", "drinks.txt");
+        Path path = Paths.get("src", "main", "java", "com", "infoshareacademy", "drinks.json");
         String json = null;
         try {
             json = Files.readString(path);
         } catch (IOException e) {
             System.out.println("File read Error.");
         }
-        System.out.println(json);
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder
