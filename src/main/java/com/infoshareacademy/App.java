@@ -10,5 +10,7 @@ public class App {
 
     public static void main(String[] args) {
         LOGGER.debug("Responsible drinkers");
+        Menu menu = new Menu();
+        menu.run();
     }
 }
