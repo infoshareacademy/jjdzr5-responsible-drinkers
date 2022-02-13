@@ -7,7 +7,6 @@ public class App {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
-
     public static void main(String[] args) {
         LOGGER.debug("Responsible drinkers");
         Menu menu = new Menu();
