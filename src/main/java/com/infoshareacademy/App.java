@@ -1,14 +1,15 @@
 package com.infoshareacademy;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class App {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) {
-        LOGGER.debug("Responsible drinkers");
+        LOGGER.log(Level.INFO,"Responsible drinkers");
         Menu menu = new Menu();
         menu.run();
     }
