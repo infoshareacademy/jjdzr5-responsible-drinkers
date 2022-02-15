@@ -5,23 +5,24 @@ public enum FilterElements {
     APPLE_JUICE("Apple juice"),
     COFFEE("Coffee"),
     COGNAC("Cognac"),
-    CRANBERRY_JIUCE("Cranberry juice"),
+    CRANBERRY_JUICE("Cranberry juice"),
     GIN("Gin"),
-    GRAPEFRUIT_JIUCE("Grapefruit juice"),
+    GRAPEFRUIT_JUICE("Grapefruit juice"),
     GRENADINE("Grenadine"),
-    JIUCE("Juice"),
+    JUICE("Juice"),
     LIME_JUICE("Lime juice"),
-    PINEAPPLE_JUICE("Pineapple juice"),
     MILK("Milk"),
     NON_ALCOHOL("Non alcoholic"),
-    ORANGE_JIUCE("Orange juice"),
+    ORANGE_JUICE("Orange juice"),
+    PINEAPPLE_JUICE("Pineapple juice"),
+    RUM("Rum"),
     SODA_WATER("Soda water"),
     SUGAR("Sugar"),
     TONIC_WATER("Tonic water"),
-    VODKA("Vodka");
+    VODKA("Vodka"),
+    WATER("Water");
 
-
-    private String name;
+    private final String name;
 
     FilterElements(String name) {
         this.name = name;
@@ -29,9 +30,5 @@ public enum FilterElements {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }
