@@ -17,9 +17,17 @@ public class AppProperties {
     private Properties appProperties;
 
     public AppProperties() {
+        readFileWithProperties("app_01.properties");
+    }
+
+    public AppProperties(String propertiesFileName) {
+        readFileWithProperties(propertiesFileName);
+    }
+
+    private void readFileWithProperties(String fileName) {
         Properties appProperties = new Properties();
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "app.properties");
+            Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", fileName);
             appProperties.load(new StringReader(Files.readString(path)));
 
             setAppProperties(appProperties);
@@ -32,6 +40,8 @@ public class AppProperties {
             LOGGER.log(Level.INFO, "File error, " + e.getMessage());
         } catch (NullPointerException e) {
             LOGGER.log(Level.INFO, "File not found, " + e.getMessage());
+        } catch (Exception e) {
+            LOGGER.log(Level.INFO, "Reading properties Error " + e.getMessage());
         }
     }
 
@@ -39,29 +49,41 @@ public class AppProperties {
         return appProperties;
     }
 
-    private void setAppProperties(Properties appProperties) {
+    private void setAppProperties(Properties appProperties) throws Exception {
         this.appProperties = appProperties;
+        if (appProperties == null) {
+            throw new Exception("Empty Properties");
+        }
+
     }
 
     public void printProperties() {
-        for (Object o : appProperties.entrySet()) {
-            System.out.println(o);
+        if (appProperties != null) {
+            for (Object o : appProperties.entrySet()) {
+                System.out.println(o);
+            }
         }
     }
 
     public String getDatePatern() {
-        String result = appProperties.getProperty("dateFormat");
-        if (!result.isEmpty()) {
-            return result;
+        String result = "";
+        if (appProperties != null) {
+            result = appProperties.getProperty("dateFormat");
+            if (!result.isEmpty()) {
+                return result;
+            }
         }
         result = "";
         return result;
     }
 
     public String getSortType() {
-        String result = appProperties.getProperty("sort");
-        if (!result.isEmpty()) {
-            return result;
+        String result = "";
+        if (appProperties != null) {
+            result = appProperties.getProperty("sort");
+            if (!result.isEmpty()) {
+                return result;
+            }
         }
         result = "";
         return result;
