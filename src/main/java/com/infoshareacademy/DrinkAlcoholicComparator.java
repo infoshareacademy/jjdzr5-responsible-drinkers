@@ -2,10 +2,10 @@ package com.infoshareacademy;
 
 import java.util.Comparator;
 
-public class DrinkAlcoholComparator implements Comparator<Drink> {
+public class DrinkAlcoholicComparator implements Comparator<Drink> {
     @Override
     public int compare(Drink o1, Drink o2) {
-        return 0;
+        return o1.getAlcoholic().compareTo(o2.getAlcoholic());
     }
 
     @Override

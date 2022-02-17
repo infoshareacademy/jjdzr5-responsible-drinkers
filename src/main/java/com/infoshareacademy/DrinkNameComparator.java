@@ -5,7 +5,7 @@ import java.util.Comparator;
 public class DrinkNameComparator implements Comparator<Drink>   {
     @Override
     public int compare(Drink o1, Drink o2) {
-        return 0;
+        return o1.getDrink().compareTo(o2.getDrink());
     }
 
     @Override
