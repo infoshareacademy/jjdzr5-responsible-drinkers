@@ -6,22 +6,30 @@ import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JsonReader {
 
     private Drinks drinks;
     private List<Drink> drinkList;
 
+    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+
     public JsonReader() {
-        Path path = Paths.get("src", "main", "resources", "drinks.json");
         String json = null;
+
         try {
+            Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "drinks.json");
             json = Files.readString(path);
         } catch (IOException e) {
-            System.out.println("File read Error.");
+            LOGGER.log(Level.WARNING, "File read Error");
+        } catch (InvalidPathException e) {
+            LOGGER.log(Level.WARNING, "Path not found");
         }
 
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -32,7 +40,7 @@ public class JsonReader {
             drinks = gson.fromJson(json, Drinks.class);
             drinkList = drinks.getDrinks();
         } catch (JsonSyntaxException jsonSyntaxException) {
-            System.out.println("Error parsing Json");
+            LOGGER.log(Level.WARNING, "Error parsing Json");
             drinkList = null;
             drinks = null;
         }

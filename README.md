@@ -4,3 +4,7 @@
 **Group name**: _Responsible Drinkers Inc._
 
 | API |	[Free API | TheCoctailDB.com](https://www.thecocktaildb.com/api.php)	|
+
+
+Build JAR with dependencies by command:
+`mvn clean compile assembly:single`
