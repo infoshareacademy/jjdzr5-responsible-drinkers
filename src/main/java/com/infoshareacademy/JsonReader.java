@@ -9,8 +9,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class JsonReader {
+
+    private static final Logger LOGGER = Logger.getLogger(JsonReader.class.getName());
+
 
     private Drinks drinks;
     private List<Drink> drinkList;

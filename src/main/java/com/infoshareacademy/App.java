@@ -10,12 +10,12 @@ public class App {
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     public static void main(String[] args) {
-        LOGGER.log(Level.INFO,"Responsible drinkers");
+        LOGGER.log(Level.INFO, "Responsible drinkers");
         JsonReader jsonReader = new JsonReader();
         FilterList filterList = new FilterList(jsonReader.getDrinkList());
-        List<Drink> drinkList = new ArrayList<>(filterList.getDrinkListFiltered(FilterElements.JUICE,FilterElements.NON_ALCOHOL));
+        List<Drink> drinkList = new ArrayList<>(filterList.getDrinkListFiltered(FilterElements.JUICE, FilterElements.ALCOHOL));
         filterList.printResults(drinkList);
-    //    Menu menu = new Menu();
-    //    menu.run();
+            Menu menu = new Menu();
+            menu.run();
     }
 }
