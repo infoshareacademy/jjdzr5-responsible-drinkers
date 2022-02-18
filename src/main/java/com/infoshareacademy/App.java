@@ -10,7 +10,9 @@ public class App {
 
     public static void main(String[] args) {
         LOGGER.log(Level.INFO,"Responsible drinkers");
-        Menu menu = new Menu();
-        menu.run();
+        new AppProperties().printProperties();
+        System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID,true));
+     //   Menu menu = new Menu();
+     //   menu.run();
     }
 }
