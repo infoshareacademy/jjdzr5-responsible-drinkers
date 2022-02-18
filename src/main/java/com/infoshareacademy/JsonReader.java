@@ -9,14 +9,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 public class JsonReader {
 
     private Drinks drinks;
     private List<Drink> drinkList;
 
+    private static final String JSON_FILE_NAME = "drinks.json";
+
     public JsonReader() {
-        Path path = Paths.get("src", "main", "resources", "drinks.json");
+        Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(JSON_FILE_NAME)).getPath());
         String json = null;
         try {
             json = Files.readString(path);
