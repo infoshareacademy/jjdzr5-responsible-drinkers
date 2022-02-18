@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +28,7 @@ public class AppProperties {
     private void readFileWithProperties(String fileName) {
         Properties appProperties = new Properties();
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", fileName);
+            Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(fileName)).toString());
             appProperties.load(new StringReader(Files.readString(path)));
 
             setAppProperties(appProperties);
