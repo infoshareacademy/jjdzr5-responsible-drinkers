@@ -69,7 +69,7 @@ public class Drink {
         return strDrink;
     }
 
-    public void setDrink(String strDrink) {
+    public void setDrinkName(String strDrink) {
         this.strDrink = strDrink;
     }
 
@@ -463,6 +463,10 @@ public class Drink {
 
     public void setDateModified(Date dateModified) {
         this.dateModified = dateModified;
+    }
+
+    public Drink copyOf() {
+        return this;
     }
 
     @Override
