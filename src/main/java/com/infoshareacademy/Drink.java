@@ -57,6 +57,10 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private Date dateModified;
 
+    public Drink() {
+        setDateModified(new Date());
+    }
+
     public int getIdDrink() {
         return idDrink;
     }
