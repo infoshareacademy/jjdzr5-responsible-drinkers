@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,8 +38,8 @@ public class JsonReader {
             drinkList = drinks.getDrinks();
         } catch (JsonSyntaxException jsonSyntaxException) {
             LOGGER.log(Level.WARNING, "Error parsing Json");
-            drinkList = null;
-            drinks = null;
+            drinkList = new ArrayList<>();
+            drinks = new Drinks();
         }
     }
 
