@@ -1,7 +1,6 @@
 package com.infoshareacademy;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
@@ -32,10 +31,7 @@ public class JsonReader {
             LOGGER.log(Level.WARNING, "Path not found");
         }
 
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .create();
+        Gson gson = GsonCreator.getGson();
         try {
             drinks = gson.fromJson(json, Drinks.class);
             drinkList = drinks.getDrinks();
@@ -60,5 +56,17 @@ public class JsonReader {
 
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
+    }
+
+    public String getJson(List<Drink> drinkList) {
+        Drinks drinks = new Drinks();
+        if (drinkList != null) {
+            drinks.setDrinks(drinkList);
+            Gson gson = GsonCreator.getGson();
+
+            return gson.toJson(drinks);
+        } else {
+            throw new RuntimeException("Empty entry class");
+        }
     }
 }
