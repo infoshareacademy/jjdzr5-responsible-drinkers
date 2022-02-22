@@ -1,5 +1,7 @@
 package com.infoshareacademy;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,16 +10,17 @@ public class PrintElement {
     private static final Logger LOGGER = Logger.getLogger(PrintElement.class.getName());
 
     public static void print(Drink drink) {
+        final int LINE_LENGTH = 110;
         if (drink != null) {
-            printLine(100);
-            System.out.print("ID: " + drink.getIdDrink() + ",\t");
-            System.out.print("Name: " + drink.getDrink() + ",\t");
-            System.out.print("Alcoholic: " + isAlcoholic(drink) + ",\t");
-            System.out.println("Cathegory: " + drink.getCategory());
-            System.out.println("Ingredients: " + ingredients(drink) + "\t");
-            System.out.println("Instructions: " + printInstructions(drink, InstructionsLanguage.EN));
-            System.out.println("Glass: " + drink.getGlass());
-            printLine(100);
+            printLine(LINE_LENGTH);
+            System.out.print(ConsoleColors.BLUE_BOLD + "ID: " + ConsoleColors.YELLOW + drink.getIdDrink() + ", ");
+            System.out.print(ConsoleColors.BLUE_BOLD + "Name: " + ConsoleColors.YELLOW + drink.getDrink() + ", ");
+            System.out.print(ConsoleColors.BLUE_BOLD + "Alcoholic: " + ConsoleColors.YELLOW + isAlcoholic(drink) + ", ");
+            System.out.print(ConsoleColors.BLUE_BOLD + "Glass: " + ConsoleColors.YELLOW + drink.getGlass() + ", ");
+            System.out.println(ConsoleColors.BLUE_BOLD + "Cathegory: " + ConsoleColors.YELLOW + drink.getCategory());
+            System.out.println(ConsoleColors.BLUE_BOLD + "Ingredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
+            System.out.println(ConsoleColors.BLUE_BOLD + "Instructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.EN));
+            printLine(LINE_LENGTH);
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
         }
@@ -78,7 +81,6 @@ public class PrintElement {
         if (drink.getIngredient15() != null) {
             result = result + ", " + drink.getIngredient15();
         }
-
         return result;
     }
 
@@ -130,6 +132,27 @@ public class PrintElement {
             line = line + "-";
         }
         line = line + "+";
-        System.out.println(line);
+        System.out.println(ConsoleColors.RED + line + ConsoleColors.RESET);
+    }
+
+    private static String getIngredients(Drink drink) {
+        Method[] methods = Drink.class.getMethods();
+        StringBuilder result = new StringBuilder();
+        for (Method m : methods) {
+            if (m.getName().contains("getIngredient")) {
+                try {
+                    if (m.invoke(drink) != null) {
+                        if (result.toString().equals("")) {
+                            result = new StringBuilder((String) m.invoke(drink));
+                        } else {
+                            result.append(", ").append(m.invoke(drink));
+                        }
+                    }
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    LOGGER.log(Level.INFO, e.toString());
+                }
+            }
+        }
+        return result.toString();
     }
 }
