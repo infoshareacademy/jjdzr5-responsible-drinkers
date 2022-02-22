@@ -28,7 +28,8 @@ public class AppProperties {
     private void readFileWithProperties(String fileName) {
         Properties appProperties = new Properties();
         try {
-            Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(fileName)).toString());
+       //     Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(fileName)).toString());
+            Path path = Paths.get(System.getProperty("user.dir"),"src","main","resources",fileName);
             appProperties.load(new StringReader(Files.readString(path)));
 
             setAppProperties(appProperties);
