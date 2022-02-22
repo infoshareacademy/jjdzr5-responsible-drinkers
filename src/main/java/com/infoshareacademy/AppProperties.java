@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class AppProperties {
 
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AppProperties.class.getName());
 
     private Properties appProperties;
 
