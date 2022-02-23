@@ -13,10 +13,10 @@ public class PrintElement {
         final int LINE_LENGTH = 113;
         if (drink != null) {
             printLine(LINE_LENGTH);
-            System.out.print(ConsoleColors.BLUE_BOLD + "\tID: " + ConsoleColors.YELLOW + drink.getIdDrink() + ", ");
-            System.out.print(ConsoleColors.BLUE_BOLD + "Name: " + ConsoleColors.YELLOW + drink.getDrink() + ", ");
-            System.out.print(ConsoleColors.BLUE_BOLD + "Alcoholic: " + ConsoleColors.YELLOW + isAlcoholic(drink) + ", ");
-            System.out.print(ConsoleColors.BLUE_BOLD + "Glass: " + ConsoleColors.YELLOW + drink.getGlass() + ", ");
+            System.out.print(ConsoleColors.BLUE_BOLD + "\tID: " + ConsoleColors.YELLOW + drink.getIdDrink() + "\t");
+            System.out.print(ConsoleColors.BLUE_BOLD + "Name: " + ConsoleColors.YELLOW + drink.getDrink() + "\t");
+            System.out.print(ConsoleColors.BLUE_BOLD + "Alcoholic: " + ConsoleColors.YELLOW + isAlcoholic(drink) + "\t");
+            System.out.print(ConsoleColors.BLUE_BOLD + "Glass: " + ConsoleColors.YELLOW + drink.getGlass() + "\t");
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
             System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
             System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.EN));
@@ -89,49 +89,48 @@ public class PrintElement {
         switch (instructionsLanguage) {
             case DE -> {
                 if (drink.getInstructionsDE() != null) {
-                    return drink.getInstructionsDE();
+                    result = drink.getInstructionsDE();
                 }
             }
             case EN -> {
                 if (drink.getInstructions() != null) {
-                    return drink.getInstructions();
+                    result = drink.getInstructions();
                 }
             }
             case ES -> {
                 if (drink.getInstructionsES() != null) {
-                    return drink.getInstructionsES();
+                    result = drink.getInstructionsES();
                 }
             }
             case FR -> {
                 if (drink.getInstructionsFR() != null) {
-                    return drink.getInstructionsFR();
+                    result = drink.getInstructionsFR();
                 }
             }
             case IT -> {
                 if (drink.getInstructionsIT() != null) {
-                    return drink.getInstructionsIT();
+                    result = drink.getInstructionsIT();
                 }
             }
             case ZH_HANS -> {
                 if (drink.getInstructionsZH_HANS() != null) {
-                    return drink.getInstructionsZH_HANS();
+                    result = drink.getInstructionsZH_HANS();
                 }
             }
             case ZH_HANT -> {
                 if (drink.getInstructionsZH_HANT() != null) {
-                    return drink.getInstructionsZH_HANT();
+                    result = drink.getInstructionsZH_HANT();
                 }
             }
         }
+        result = wrapLine(result);
         return result;
     }
 
     private static void printLine(int width) {
-        String line = "+";
-        for (int i = 0; i < width; i++) {
-            line = line + "-";
-        }
-        line = line + "+";
+        StringBuilder line = new StringBuilder("+");
+        line.append("-".repeat(Math.max(0, width)));
+        line.append("+");
         System.out.println(ConsoleColors.RED + line + ConsoleColors.RESET);
     }
 
@@ -154,5 +153,29 @@ public class PrintElement {
             }
         }
         return result.toString();
+    }
+
+    private static String wrapLine(String line) {
+        StringBuilder result = new StringBuilder();
+        final int MAX_LINE_LENGTH = 75;
+        int counter = 0;
+        if (line.length() > 0) {
+            String[] strings = line.split(" ");
+            for (String s : strings) {
+                counter += s.length();
+                if (counter < MAX_LINE_LENGTH) {
+                    result.append(s).append(" ");
+                } else {
+                    result.append(System.lineSeparator())
+                            .append("\t")
+                            .append(s)
+                            .append(" ");
+                    counter = 0;
+                }
+            }
+            return result.toString();
+        } else {
+            return result.toString();
+        }
     }
 }
