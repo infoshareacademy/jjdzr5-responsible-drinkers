@@ -8,11 +8,12 @@ import java.util.logging.Logger;
 public class PrintElement {
 
     private static final Logger LOGGER = Logger.getLogger(PrintElement.class.getName());
+    final static int FRAME_LENGTH = 113;
+    final static int MAX_LINE_LENGTH = 75;
 
     public static void print(Drink drink) {
-        final int LINE_LENGTH = 113;
         if (drink != null) {
-            printLine(LINE_LENGTH);
+            printLine();
             System.out.print(ConsoleColors.BLUE_BOLD + "\tID: " + ConsoleColors.YELLOW + drink.getIdDrink() + "\t");
             System.out.print(ConsoleColors.BLUE_BOLD + "Name: " + ConsoleColors.YELLOW + drink.getDrink() + "\t");
             System.out.print(ConsoleColors.BLUE_BOLD + "Alcoholic: " + ConsoleColors.YELLOW + isAlcoholic(drink) + "\t");
@@ -20,7 +21,7 @@ public class PrintElement {
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
             System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
             System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.EN));
-            printLine(LINE_LENGTH);
+            printLine();
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
         }
@@ -127,10 +128,8 @@ public class PrintElement {
         return result;
     }
 
-    private static void printLine(int width) {
-        StringBuilder line = new StringBuilder("+");
-        line.append("-".repeat(Math.max(0, width)));
-        line.append("+");
+    private static void printLine() {
+        String line = "+" + "-".repeat(Math.max(0, FRAME_LENGTH)) + "+";
         System.out.println(ConsoleColors.RED + line + ConsoleColors.RESET);
     }
 
@@ -157,7 +156,6 @@ public class PrintElement {
 
     private static String wrapLine(String line) {
         StringBuilder result = new StringBuilder();
-        final int MAX_LINE_LENGTH = 75;
         int counter = 0;
         if (line.length() > 0) {
             String[] strings = line.split(" ");
@@ -173,9 +171,7 @@ public class PrintElement {
                     counter = 0;
                 }
             }
-            return result.toString();
-        } else {
-            return result.toString();
         }
+        return result.toString();
     }
 }
