@@ -10,16 +10,16 @@ public class PrintElement {
     private static final Logger LOGGER = Logger.getLogger(PrintElement.class.getName());
 
     public static void print(Drink drink) {
-        final int LINE_LENGTH = 110;
+        final int LINE_LENGTH = 113;
         if (drink != null) {
             printLine(LINE_LENGTH);
-            System.out.print(ConsoleColors.BLUE_BOLD + "ID: " + ConsoleColors.YELLOW + drink.getIdDrink() + ", ");
+            System.out.print(ConsoleColors.BLUE_BOLD + "\tID: " + ConsoleColors.YELLOW + drink.getIdDrink() + ", ");
             System.out.print(ConsoleColors.BLUE_BOLD + "Name: " + ConsoleColors.YELLOW + drink.getDrink() + ", ");
             System.out.print(ConsoleColors.BLUE_BOLD + "Alcoholic: " + ConsoleColors.YELLOW + isAlcoholic(drink) + ", ");
             System.out.print(ConsoleColors.BLUE_BOLD + "Glass: " + ConsoleColors.YELLOW + drink.getGlass() + ", ");
-            System.out.println(ConsoleColors.BLUE_BOLD + "Cathegory: " + ConsoleColors.YELLOW + drink.getCategory());
-            System.out.println(ConsoleColors.BLUE_BOLD + "Ingredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
-            System.out.println(ConsoleColors.BLUE_BOLD + "Instructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.EN));
+            System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.EN));
             printLine(LINE_LENGTH);
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
