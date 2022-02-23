@@ -20,12 +20,13 @@ public class JsonReader {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
+    private static final Path FILE_JSON = Paths.get("src", "main", "resources", "drinks.json");
+
     public JsonReader() {
         String json = null;
 
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "drinks.json");
-            json = Files.readString(path);
+            json = Files.readString(FILE_JSON);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
         } catch (InvalidPathException e) {
