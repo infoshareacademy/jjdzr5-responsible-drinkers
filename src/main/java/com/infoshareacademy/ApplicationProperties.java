@@ -14,10 +14,10 @@ public class ApplicationProperties {
 
     private static final Logger LOGGER = Logger.getLogger(ApplicationProperties.class.getName());
 
-    private static final String FILE_NAME = "app_01.properties";
+    private static final Path PATH_FILE_NAME = Paths.get("src", "main", "resources","app_01.properties");
 
     public static String getDatePattern() {
-        Properties properties = readFileProperties(FILE_NAME);
+        Properties properties = readFileProperties(PATH_FILE_NAME);
         String result;
         if ((result = properties.getProperty("dateFormat")) != null) {
             return result;
@@ -28,7 +28,7 @@ public class ApplicationProperties {
     }
 
     public static String getSortDirection() {
-        Properties properties = readFileProperties(FILE_NAME);
+        Properties properties = readFileProperties(PATH_FILE_NAME);
         String result;
         if ((result = properties.getProperty("sort")) != null) {
             return result;
@@ -39,14 +39,13 @@ public class ApplicationProperties {
     }
 
     public static Properties getProperties() {
-        return readFileProperties(FILE_NAME);
+        return readFileProperties(PATH_FILE_NAME);
     }
 
-    private static Properties readFileProperties(String fileName) {
+    private static Properties readFileProperties(Path fileName) {
         Properties appProperties = new Properties();
         try {
-            Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", fileName);
-            appProperties.load(new StringReader(Files.readString(path)));
+            appProperties.load(new StringReader(Files.readString(fileName)));
         } catch (InvalidPathException e) {
             LOGGER.log(Level.INFO, "Path not found, " + e.getMessage());
         } catch (IOException e) {
