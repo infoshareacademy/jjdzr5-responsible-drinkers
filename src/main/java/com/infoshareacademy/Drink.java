@@ -57,7 +57,7 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private Date dateModified;
 
-    public int getIdDrink() {
+    public Integer getIdDrink() {
         return idDrink;
     }
 
