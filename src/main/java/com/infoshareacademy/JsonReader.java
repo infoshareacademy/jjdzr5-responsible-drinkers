@@ -10,6 +10,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +18,8 @@ public class JsonReader {
 
     private Drinks drinks;
     private List<Drink> drinkList;
+
+ //   private static final String JSON_FILE_NAME = "drinks.json";
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
@@ -26,6 +29,9 @@ public class JsonReader {
         String json = null;
         Path path = null;
         try {
+//        Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(JSON_FILE_NAME)).getPath());
+       //     Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "drinks.json");
+//            json = Files.readString(path);
             json = Files.readString(FILE_JSON);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
