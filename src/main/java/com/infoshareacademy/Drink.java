@@ -61,7 +61,7 @@ public class Drink {
         setDateModified(new Date());
     }
 
-    public int getIdDrink() {
+    public Integer getIdDrink() {
         return idDrink;
     }
 
