@@ -16,6 +16,9 @@ import java.util.logging.Logger;
 
 public class JsonReader {
 
+    private static final Logger LOGGER = Logger.getLogger(JsonReader.class.getName());
+
+
     private Drinks drinks;
     private List<Drink> drinkList;
 
