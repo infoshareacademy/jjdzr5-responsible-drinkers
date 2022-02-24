@@ -24,11 +24,12 @@ public class JsonReader {
 
     public JsonReader() {
         String json = null;
-
+        Path path = null;
         try {
             json = Files.readString(FILE_JSON);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
+            LOGGER.log(Level.INFO,path.toString());
         } catch (InvalidPathException e) {
             LOGGER.log(Level.WARNING, "Path not found");
         }
