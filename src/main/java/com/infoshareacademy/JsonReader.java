@@ -19,23 +19,17 @@ public class JsonReader {
     private Drinks drinks;
     private List<Drink> drinkList;
 
- //   private static final String JSON_FILE_NAME = "drinks.json";
-
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
 
     private static final Path FILE_JSON = Paths.get("src", "main", "resources", "drinks.json");
 
     public JsonReader() {
-        String json = null;
-        Path path = null;
+        String json = "";
         try {
-//        Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(JSON_FILE_NAME)).getPath());
-       //     Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "drinks.json");
-//            json = Files.readString(path);
             json = Files.readString(FILE_JSON);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
-            LOGGER.log(Level.INFO,path.toString());
+            LOGGER.log(Level.INFO, FILE_JSON.toString());
         } catch (InvalidPathException e) {
             LOGGER.log(Level.WARNING, "Path not found");
         }
