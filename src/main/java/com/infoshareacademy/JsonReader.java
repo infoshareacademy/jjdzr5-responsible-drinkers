@@ -27,7 +27,7 @@ public class JsonReader {
 
     public JsonReader() {
         String json = null;
-
+        Path path = null;
         try {
 //        Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(JSON_FILE_NAME)).getPath());
        //     Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "drinks.json");
@@ -35,6 +35,7 @@ public class JsonReader {
             json = Files.readString(FILE_JSON);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
+            LOGGER.log(Level.INFO,path.toString());
         } catch (InvalidPathException e) {
             LOGGER.log(Level.WARNING, "Path not found");
         }
