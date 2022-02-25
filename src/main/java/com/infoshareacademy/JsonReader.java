@@ -1,10 +1,10 @@
 package com.infoshareacademy;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -26,10 +26,9 @@ public class JsonReader {
         String json;
         try {
             json = Files.readString(FILE_JSON);
-            GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = GsonCreator.getGson();
+            Gson gson = GsonCreator.getGson();
 
-          drinks = gson.fromJson(json, Drinks.class);
+            drinks = gson.fromJson(json, Drinks.class);
             drinkList = drinks.getDrinks();
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
@@ -40,8 +39,6 @@ public class JsonReader {
             LOGGER.log(Level.WARNING, "Error parsing Json");
             drinkList = new ArrayList<>();
             drinks = new Drinks();
-        } catch (JsonSyntaxException jsonSyntaxException) {
-            LOGGER.log(Level.WARNING, "Error parsing Json");
         }
     }
 
