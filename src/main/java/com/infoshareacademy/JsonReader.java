@@ -5,12 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,38 +23,25 @@ public class JsonReader {
     private Drinks drinks;
     private List<Drink> drinkList;
 
- //   private static final String JSON_FILE_NAME = "drinks.json";
-
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
-
     private static final Path FILE_JSON = Paths.get("src", "main", "resources", "drinks.json");
 
     public JsonReader() {
-        String json = null;
-        Path path = null;
+        String json;
         try {
-//        Path path = Paths.get(Objects.requireNonNull(App.class.getClassLoader().getResource(JSON_FILE_NAME)).getPath());
-       //     Path path = Paths.get(System.getProperty("user.dir"), "src", "main", "resources", "drinks.json");
-//            json = Files.readString(path);
             json = Files.readString(FILE_JSON);
-        } catch (IOException e) {
-            LOGGER.log(Level.WARNING, "File read Error");
-            LOGGER.log(Level.INFO,path.toString());
-        } catch (InvalidPathException e) {
-            LOGGER.log(Level.WARNING, "Path not found");
-        }
-
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        Gson gson = gsonBuilder
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
-                .create();
-        try {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder
+                    .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                    .create();
             drinks = gson.fromJson(json, Drinks.class);
             drinkList = drinks.getDrinks();
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "File read Error");
+            LOGGER.log(Level.INFO, FILE_JSON.toString());
+        } catch (InvalidPathException e) {
+            LOGGER.log(Level.WARNING, "Path not found");
         } catch (JsonSyntaxException jsonSyntaxException) {
             LOGGER.log(Level.WARNING, "Error parsing Json");
-            drinkList = null;
-            drinks = null;
         }
     }
 
