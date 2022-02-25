@@ -4,44 +4,44 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class JsonReader {
 
+    private static final Logger LOGGER = Logger.getLogger(JsonReader.class.getName());
+    private static final Path FILE_JSON = Paths.get("src", "main", "resources", "drinks.json");
+
     private Drinks drinks;
     private List<Drink> drinkList;
 
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
-
-    private static final Path FILE_JSON = Paths.get("src", "main", "resources", "drinks.json");
-
     public JsonReader() {
-        String json = "";
+        String json;
         try {
             json = Files.readString(FILE_JSON);
+            GsonBuilder gsonBuilder = new GsonBuilder();
+        Gson gson = GsonCreator.getGson();
+
+          drinks = gson.fromJson(json, Drinks.class);
+            drinkList = drinks.getDrinks();
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
             LOGGER.log(Level.INFO, FILE_JSON.toString());
         } catch (InvalidPathException e) {
             LOGGER.log(Level.WARNING, "Path not found");
-        }
-
-        Gson gson = GsonCreator.getGson();
-        try {
-            drinks = gson.fromJson(json, Drinks.class);
-            drinkList = drinks.getDrinks();
         } catch (JsonSyntaxException jsonSyntaxException) {
             LOGGER.log(Level.WARNING, "Error parsing Json");
             drinkList = new ArrayList<>();
             drinks = new Drinks();
+        } catch (JsonSyntaxException jsonSyntaxException) {
+            LOGGER.log(Level.WARNING, "Error parsing Json");
         }
     }
 
