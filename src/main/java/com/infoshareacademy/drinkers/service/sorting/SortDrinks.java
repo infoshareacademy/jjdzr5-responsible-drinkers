@@ -1,5 +1,10 @@
-package com.infoshareacademy.drinkers;
+package com.infoshareacademy.drinkers.service.sorting;
 
+import com.infoshareacademy.drinkers.App;
+import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.service.filtering.DrinkAlcoholicComparator;
+import com.infoshareacademy.drinkers.service.filtering.DrinkIDComparator;
+import com.infoshareacademy.drinkers.service.filtering.DrinkNameComparator;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;

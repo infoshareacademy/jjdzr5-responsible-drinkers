@@ -1,4 +1,4 @@
-package com.infoshareacademy.drinkers;
+package com.infoshareacademy.drinkers.domain.drink;
 
 import java.util.List;
 import java.util.Objects;

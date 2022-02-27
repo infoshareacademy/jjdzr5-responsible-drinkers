@@ -2,6 +2,8 @@ package com.infoshareacademy.drinkers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.domain.drink.Drinks;
 
 import java.io.IOException;
 import java.nio.file.Files;

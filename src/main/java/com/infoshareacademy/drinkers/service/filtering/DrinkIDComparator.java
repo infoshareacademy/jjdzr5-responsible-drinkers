@@ -1,4 +1,6 @@
-package com.infoshareacademy.drinkers;
+package com.infoshareacademy.drinkers.service.filtering;
+
+import com.infoshareacademy.drinkers.domain.drink.Drink;
 
 import java.util.Comparator;
 

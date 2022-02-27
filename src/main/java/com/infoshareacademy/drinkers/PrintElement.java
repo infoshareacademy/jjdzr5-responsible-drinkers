@@ -1,5 +1,7 @@
 package com.infoshareacademy.drinkers;
 
+import com.infoshareacademy.drinkers.domain.drink.Drink;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
