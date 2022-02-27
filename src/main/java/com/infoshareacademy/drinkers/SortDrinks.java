@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers;
 
 import org.apache.log4j.Logger;
 

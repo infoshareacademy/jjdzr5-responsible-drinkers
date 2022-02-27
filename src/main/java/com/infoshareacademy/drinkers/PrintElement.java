@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

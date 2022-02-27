@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers;
 
 import java.util.ArrayList;
 import java.util.List;

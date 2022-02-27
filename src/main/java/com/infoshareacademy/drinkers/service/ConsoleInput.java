@@ -1,4 +1,4 @@
-package service;
+package com.infoshareacademy.drinkers.service;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

@@ -1,7 +1,6 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 import java.io.IOException;
