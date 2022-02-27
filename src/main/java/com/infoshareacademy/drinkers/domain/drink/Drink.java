@@ -1,11 +1,15 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
+import com.infoshareacademy.drinkers.service.filtering.FilterList;
+
 import java.net.URI;
 import java.util.Date;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Drink {
-    private int idDrink;
+    private String idDrink;
     private String strDrink;
     private String strDrinkAlternate;
     private String strTags;
@@ -57,15 +61,30 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private Date dateModified;
 
+    private static final Logger LOGGER = Logger.getLogger(Drink.class.getName());
+
+
     public Drink() {
         setDateModified(new Date());
     }
 
     public Integer getIdDrink() {
-        return idDrink;
+        return Integer.valueOf(idDrink);
     }
 
-    public void setIdDrink(int idDrink) {
+//    public String getIdDrink() {
+//        return idDrink;
+//    }
+
+    public void setIdDrink(Integer idDrink) {
+        try {
+            this.idDrink = String.valueOf(idDrink);
+        } catch (Exception e) {
+            LOGGER.log(Level.INFO, "Not a number", e);
+        }
+    }
+
+    public void setIdDrink(String idDrink) {
         this.idDrink = idDrink;
     }
 
