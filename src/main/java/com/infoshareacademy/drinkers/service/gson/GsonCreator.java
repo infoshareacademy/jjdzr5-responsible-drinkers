@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers.service.gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

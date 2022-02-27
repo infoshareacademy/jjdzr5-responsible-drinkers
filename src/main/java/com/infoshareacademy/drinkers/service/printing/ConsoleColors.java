@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers.service.printing;
 
 public class ConsoleColors {
     // Reset

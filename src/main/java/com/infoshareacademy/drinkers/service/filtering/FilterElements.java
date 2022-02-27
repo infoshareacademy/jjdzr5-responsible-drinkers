@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers.service.filtering;
 
 public enum FilterElements {
     ALCOHOL("Alcoholic"),

@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers.domain.drink;
 
 import java.net.URI;
 import java.util.Date;

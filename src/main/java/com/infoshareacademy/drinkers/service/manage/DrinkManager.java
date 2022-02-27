@@ -1,4 +1,6 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers.service.manage;
+
+import com.infoshareacademy.drinkers.domain.drink.Drink;
 
 import java.util.List;
 import java.util.logging.Level;

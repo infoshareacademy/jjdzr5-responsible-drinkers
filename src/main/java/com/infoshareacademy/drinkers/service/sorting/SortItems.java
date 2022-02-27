@@ -1,4 +1,4 @@
-package com.infoshareacademy;
+package com.infoshareacademy.drinkers.service.sorting;
 
 public enum SortItems {
     ID("ID"),
