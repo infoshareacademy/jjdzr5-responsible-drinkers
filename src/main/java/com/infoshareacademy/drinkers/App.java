@@ -3,6 +3,8 @@ package com.infoshareacademy.drinkers;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.service.filtering.FilterElements;
 import com.infoshareacademy.drinkers.service.filtering.FilterList;
+import com.infoshareacademy.drinkers.service.properties.AppProperties;
+import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 

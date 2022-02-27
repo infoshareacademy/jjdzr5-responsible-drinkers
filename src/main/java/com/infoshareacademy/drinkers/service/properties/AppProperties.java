@@ -1,4 +1,4 @@
-package com.infoshareacademy.drinkers;
+package com.infoshareacademy.drinkers.service.properties;
 
 import java.io.IOException;
 import java.io.StringReader;
