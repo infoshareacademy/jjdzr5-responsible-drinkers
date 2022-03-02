@@ -7,6 +7,7 @@ import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.properties.AppProperties;
 import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
+import com.infoshareacademy.drinkers.service.searching.Search;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
@@ -26,6 +27,14 @@ public class App {
         FilterList filterList = new FilterList(jsonReader.getDrinkList());
         List<Drink> drinkList = new ArrayList<>(filterList.getDrinkListFiltered(FilterElements.JUICE, FilterElements.ALCOHOL));
         filterList.printResults(drinkList);
+
+        List<Drink> searchDrink = new Search(drinkList)
+                .searchByName("al")
+                .searchByIngredients("vodka")
+                .getResult();
+        for (Drink drink : searchDrink) {
+            PrintElement.print(drink);
+        }
 
         System.out.println(ApplicationProperties.getDatePattern());
         System.out.println(ApplicationProperties.getSortDirection());
