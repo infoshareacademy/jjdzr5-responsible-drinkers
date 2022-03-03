@@ -31,6 +31,7 @@ public class App {
         System.out.println(ApplicationProperties.getSortDirection());
         new AppProperties().printProperties();
         System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID, true));
+        System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.DATE, true));
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
         Menu menu = new Menu();
