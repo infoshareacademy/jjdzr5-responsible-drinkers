@@ -3,17 +3,19 @@ package com.infoshareacademy.drinkers.service.filtering;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FilterList {
 
     private static final Logger LOGGER = Logger.getLogger(FilterList.class.getName());
 
-    private List<Drink> drinkList;
+    private List<Drink> resultDinkList;
 
     public FilterList(List<Drink> drinkList) {
-        this.drinkList = drinkList;
+        this.resultDinkList = drinkList;
     }
 
 /*    private List<Drink> getFilteredDrinkListStream() {
@@ -61,20 +63,28 @@ public class FilterList {
         return result;
     }*/
 
-    private List<Drink> getFilteredByAlcohol(FilterElements filterElements) {
+    public FilterList getFilteredByAlcoholic(Boolean isAlcoholic) {
         List<Drink> result = new ArrayList<>();
 
-        for (Drink drink : drinkList) {
+        FilterElements filterElements;
+        if (isAlcoholic) {
+            filterElements = FilterElements.ALCOHOL;
+        } else {
+            filterElements = FilterElements.NON_ALCOHOL;
+        }
+
+        for (Drink drink : resultDinkList) {
             if (!drink.getAlcoholic().isEmpty() && drink.getAlcoholic().equalsIgnoreCase(filterElements.getName())) {
                 result.add(drink);
             }
         }
-        return result;
+        this.resultDinkList = result;
+        return this;
     }
 
-    private List<Drink> getFilteredByIngredient(FilterElements ingredient) {
+    public FilterList getFilteredByIngredient(FilterElements ingredient) {
         List<Drink> result = new ArrayList<>();
-        for (Drink drink : this.drinkList) {
+        for (Drink drink : resultDinkList) {
             if (drink.getIngredient1() != null && drink.getIngredient1().toLowerCase().contains((ingredient.getName().toLowerCase())) ||
                     drink.getIngredient2() != null && drink.getIngredient2().toLowerCase().contains(ingredient.getName().toLowerCase()) ||
                     drink.getIngredient3() != null && drink.getIngredient3().toLowerCase().contains(ingredient.getName().toLowerCase()) ||
@@ -94,7 +104,8 @@ public class FilterList {
                 result.add(drink);
             }
         }
-        return result;
+        this.resultDinkList = result;
+        return this;
     }
 
     public void printResults(List<Drink> drinks) {
@@ -119,23 +130,42 @@ public class FilterList {
         System.out.println("Size: " + drinks.size());
     }
 
-    public List<Drink> getDrinkListFiltered(FilterElements... filterElements) {
-
-        for (FilterElements elements : filterElements) {
-            if (elements.equals(FilterElements.NON_ALCOHOL) || elements.equals(FilterElements.ALCOHOL)) {
-                this.drinkList = getFilteredByAlcohol(elements);
-            } else {
-                this.drinkList = getFilteredByIngredient(elements);
-            }
-        }
-        return this.drinkList;
-    }
+//    public List<Drink> getDrinkListFiltered(FilterElements... filterElements) {
+//
+//        for (FilterElements elements : filterElements) {
+//            if (elements.equals(FilterElements.NON_ALCOHOL) || elements.equals(FilterElements.ALCOHOL)) {
+//                this.drinkList = getFilteredByAlcohol(elements);
+//            } else {
+//                this.drinkList = getFilteredByIngredient(elements);
+//            }
+//        }
+//        return this.drinkList;
+//    }
 
     private String checkStringIsNull(String str) {
         if (str == null) {
             return "";
         }
         return str;
+    }
+
+    public FilterList getFilteredByDate(Date start, Date finish) {
+        List<Drink> result = new ArrayList<>();
+        for (Drink drink : resultDinkList) {
+            try {
+                if (drink.getDateModified().after(start) && drink.getDateModified().before(finish)) {
+                    result.add(drink);
+                }
+            } catch (NullPointerException e) {
+                LOGGER.log(Level.INFO, "Can't compare date", e);
+            }
+        }
+        this.resultDinkList = result;
+        return this;
+    }
+
+    public List<Drink> run() {
+        return this.resultDinkList;
     }
 
 }
