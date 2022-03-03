@@ -11,6 +11,7 @@ import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,9 @@ public class App {
 
         System.out.println(ApplicationProperties.getDatePattern());
         System.out.println(ApplicationProperties.getSortDirection());
-        new AppProperties().printProperties();
+        System.out.println(ApplicationProperties.isAscendingSort());
+        System.out.println(ApplicationProperties.getDataFormatPattern().format(new Date()));
+//        new AppProperties().printProperties();
         System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID, true));
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
