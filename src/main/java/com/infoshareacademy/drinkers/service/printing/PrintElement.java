@@ -1,6 +1,8 @@
 package com.infoshareacademy.drinkers.service.printing;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.domain.drink.Instruction;
+import com.infoshareacademy.drinkers.domain.drink.InstructionsLanguage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -22,7 +24,7 @@ public class PrintElement {
             System.out.print(ConsoleColors.BLUE_BOLD + "Glass: " + ConsoleColors.YELLOW + drink.getGlass() + "\t");
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
             System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
-            System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.EN));
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.FR));
             printLine();
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
@@ -89,41 +91,10 @@ public class PrintElement {
 
     private static String printInstructions(Drink drink, InstructionsLanguage instructionsLanguage) {
         String result = "-";
-        switch (instructionsLanguage) {
-            case DE -> {
-                if (drink.getInstructionsDE() != null) {
-                    result = drink.getInstructionsDE();
-                }
-            }
-            case EN -> {
-                if (drink.getInstructions() != null) {
-                    result = drink.getInstructions();
-                }
-            }
-            case ES -> {
-                if (drink.getInstructionsES() != null) {
-                    result = drink.getInstructionsES();
-                }
-            }
-            case FR -> {
-                if (drink.getInstructionsFR() != null) {
-                    result = drink.getInstructionsFR();
-                }
-            }
-            case IT -> {
-                if (drink.getInstructionsIT() != null) {
-                    result = drink.getInstructionsIT();
-                }
-            }
-            case ZH_HANS -> {
-                if (drink.getInstructionsZH_HANS() != null) {
-                    result = drink.getInstructionsZH_HANS();
-                }
-            }
-            case ZH_HANT -> {
-                if (drink.getInstructionsZH_HANT() != null) {
-                    result = drink.getInstructionsZH_HANT();
-                }
+        for (Instruction instruction : drink.getInstructionList()) {
+            if (instruction.getInstructionsLanguage() != null &&
+                    instruction.getInstructionsLanguage() == instructionsLanguage) {
+                result = instruction.getInstruction();
             }
         }
         result = wrapLine(result);
