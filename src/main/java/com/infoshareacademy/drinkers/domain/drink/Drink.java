@@ -1,10 +1,21 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
+import com.infoshareacademy.drinkers.App;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Drink {
+
+    private static final Logger LOGGER = Logger.getLogger(Drink.class.getName());
+
     private int idDrink;
     private String strDrink;
     private String strDrinkAlternate;
@@ -56,6 +67,56 @@ public class Drink {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private Date dateModified;
+
+    public List<String> getIngredients() {
+        List<String> result = new ArrayList<>();
+        if (getIngredient1() != null) {
+            result.add(getIngredient1());
+        }
+        if (getIngredient2() != null) {
+            result.add(getIngredient2());
+        }
+        if (getIngredient3() != null) {
+            result.add(getIngredient3());
+        }
+        if (getIngredient4() != null) {
+            result.add(getIngredient4());
+        }
+        if (getIngredient5() != null) {
+            result.add(getIngredient5());
+        }
+        if (getIngredient6() != null) {
+            result.add(getIngredient6());
+        }
+        if (getIngredient7() != null) {
+            result.add(getIngredient7());
+        }
+        if (getIngredient8() != null) {
+            result.add(getIngredient8());
+        }
+        if (getIngredient9() != null) {
+            result.add(getIngredient9());
+        }
+        if (getIngredient10() != null) {
+            result.add(getIngredient10());
+        }
+        if (getIngredient11() != null) {
+            result.add(getIngredient11());
+        }
+        if (getIngredient12() != null) {
+            result.add(getIngredient12());
+        }
+        if (getIngredient13() != null) {
+            result.add(getIngredient13());
+        }
+        if (getIngredient14() != null) {
+            result.add(getIngredient14());
+        }
+        if (getIngredient15() != null) {
+            result.add(getIngredient15());
+        }
+        return result;
+    }
 
     public Drink() {
         setDateModified(new Date());
