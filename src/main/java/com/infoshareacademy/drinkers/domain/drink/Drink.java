@@ -1,15 +1,10 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
-import com.infoshareacademy.drinkers.App;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Drink {
@@ -114,6 +109,32 @@ public class Drink {
         }
         if (getIngredient15() != null) {
             result.add(getIngredient15());
+        }
+        return result;
+    }
+
+    public List<Instruction> getInstructionList() {
+        List<Instruction> result = new ArrayList<>();
+        if (getInstructionsDE() != null) {
+            result.add(new Instruction(getInstructionsDE(), InstructionsLanguage.DE));
+        }
+        if (getInstructions() != null) {
+            result.add(new Instruction(getInstructions(), InstructionsLanguage.EN));
+        }
+        if (getInstructionsES() != null) {
+            result.add(new Instruction(getInstructionsES(), InstructionsLanguage.ES));
+        }
+        if (getInstructionsIT() != null) {
+            result.add(new Instruction(getInstructionsDE(), InstructionsLanguage.IT));
+        }
+        if (getInstructionsFR() != null) {
+            result.add(new Instruction(getInstructionsFR(), InstructionsLanguage.FR));
+        }
+        if (getInstructionsZH_HANS() != null) {
+            result.add(new Instruction(getInstructionsZH_HANS(), InstructionsLanguage.ZH_HANS));
+        }
+        if (getInstructionsZH_HANT() != null) {
+            result.add(new Instruction(getInstructionsZH_HANT(), InstructionsLanguage.ZH_HANT));
         }
         return result;
     }
