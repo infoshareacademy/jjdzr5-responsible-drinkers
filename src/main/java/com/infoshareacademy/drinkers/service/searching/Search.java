@@ -19,7 +19,7 @@ public class Search {
         if (!drinkList.isEmpty()) {
             this.drinkList = drinkList;
         } else {
-            LOGGER.log(Level.INFO, "Kolekcja pusta!");
+            LOGGER.log(Level.INFO, "Collection is empty!");
             this.drinkList = new ArrayList<>();
         }
     }
@@ -61,6 +61,4 @@ public class Search {
     public List<Drink> getResult() {
         return resultList;
     }
-
-
 }
