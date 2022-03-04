@@ -18,6 +18,13 @@ public class PrintElements {
     private static final int COL_7_WIDTH = 70;
     private static final int LINE_LENGTH = COL_1_WIDTH + COL_2_WIDTH + COL_3_WIDTH + COL_4_WIDTH + COL_5_WIDTH +
             COL_6_WIDTH + COL_7_WIDTH + 6;
+    private static final String COL_1_TITLE = "NO";
+    private static final String COL_2_TITLE = "ID";
+    private static final String COL_3_TITLE = "DRINK NAME";
+    private static final String COL_4_TITLE = "ALCOHOLIC";
+    private static final String COL_5_TITLE = "GLASS TYPE";
+    private static final String COL_6_TITLE = "DRINK CATEGORY";
+    private static final String COL_7_TITLE = "INGREDIENTS";
 
     private final List<Drink> drinkList;
 
@@ -26,20 +33,19 @@ public class PrintElements {
     }
 
     public void print() {
-        System.out.print(FrameHorizontal());
-        System.out.print(Title());
-        System.out.print(FrameHorizontal());
+        printFrameHorizontal();
+        printTitle();
+        printFrameHorizontal();
         int index = 0;
         for (Drink drink : drinkList) {
             printElement(drink, index);
             index++;
         }
-        System.out.print(FrameHorizontal());
+        printFrameHorizontal();
 
     }
 
     private void printElement(Drink drink, int index) {
-
         String strIngredients = "";
         for (String s : drink.getIngredients()) {
             if (strIngredients.equals("")) {
@@ -90,45 +96,45 @@ public class PrintElements {
         System.out.print(lineBuilder);
     }
 
-    private String FrameHorizontal() {
-        return "+" + "-".repeat(LINE_LENGTH) + "+" + System.lineSeparator();
+    private void printFrameHorizontal() {
+        System.out.print("+" + "-".repeat(LINE_LENGTH) + "+" + System.lineSeparator());
     }
 
-    private String Title() {
+    private void printTitle() {
         StringBuilder titleBuilder = new StringBuilder();
         String colorLine = ConsoleColors.WHITE_BOLD;
         String colorLineReset = ConsoleColors.RESET;
         titleBuilder
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format("%s", "NO."), COL_1_WIDTH))
+                .append(StringUtils.center(String.format("%s", COL_1_TITLE), COL_1_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format("%s", "ID"), COL_2_WIDTH))
+                .append(StringUtils.center(String.format("%s", COL_2_TITLE), COL_2_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format("%s", "DRINK NAME"), COL_3_WIDTH))
+                .append(StringUtils.center(String.format("%s", COL_3_TITLE), COL_3_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format("%s", "ALCOHOLIC"), COL_4_WIDTH))
+                .append(StringUtils.center(String.format("%s", COL_4_TITLE), COL_4_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format("%s", "GLASS TYPE"), COL_5_WIDTH))
+                .append(StringUtils.center(String.format("%s", COL_5_TITLE), COL_5_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format(" %s", "DRINK CATEGORY"), COL_6_WIDTH))
+                .append(StringUtils.center(String.format(" %s", COL_6_TITLE), COL_6_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format(" %s", "INGREDIENTS"), COL_7_WIDTH))
+                .append(StringUtils.center(String.format(" %s", COL_7_TITLE), COL_7_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(System.lineSeparator());
-        return titleBuilder.toString();
+        System.out.print(titleBuilder);
     }
 }
