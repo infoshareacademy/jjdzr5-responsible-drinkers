@@ -66,6 +66,7 @@ public class App {
         System.out.println(ApplicationProperties.getDataFormatPattern().format(new Date()));
 //        new AppProperties().printProperties();
         System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID, true));
+        System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.DATE, true));
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
         PrintElements printElements = new PrintElements(new JsonReader().getDrinkList());

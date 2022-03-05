@@ -2,9 +2,6 @@ package com.infoshareacademy.drinkers.service.sorting;
 
 import com.infoshareacademy.drinkers.App;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
-import com.infoshareacademy.drinkers.service.filtering.DrinkAlcoholicComparator;
-import com.infoshareacademy.drinkers.service.filtering.DrinkIDComparator;
-import com.infoshareacademy.drinkers.service.filtering.DrinkNameComparator;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -42,6 +39,13 @@ public class SortDrinks {
         return drinkList.stream().sorted(new DrinkAlcoholicComparator().reversed()).collect(Collectors.toList());
     }
 
+    private List<Drink> getSortedByDateModified(boolean isASC) {
+        if (isASC) {
+            return drinkList.stream().sorted(new DrinkDateModifiedComparator()).collect(Collectors.toList());
+        }
+        return drinkList.stream().sorted(new DrinkDateModifiedComparator().reversed()).collect(Collectors.toList());
+    }
+
     public List<Drink> getSortedList(SortItems item, boolean isASC) {
         List<Drink> result = new ArrayList<>();
 
@@ -56,6 +60,10 @@ public class SortDrinks {
             }
             case DRINK_NAME: {
                 result = getSortedByName(isASC);
+                break;
+            }
+            case DATE: {
+                result = getSortedByDateModified(isASC);
                 break;
             }
         }

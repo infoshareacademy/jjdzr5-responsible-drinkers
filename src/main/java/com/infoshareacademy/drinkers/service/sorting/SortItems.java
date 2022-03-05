@@ -1,9 +1,12 @@
 package com.infoshareacademy.drinkers.service.sorting;
 
+import java.util.Date;
+
 public enum SortItems {
     ID("ID"),
     DRINK_NAME("DrinkName"),
-    ALCOHOLIC("Alcoholic");
+    ALCOHOLIC("Alcoholic"),
+    DATE("DateModified");
 
     private final String name;
 
