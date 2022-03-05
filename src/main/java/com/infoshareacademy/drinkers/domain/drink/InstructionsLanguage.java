@@ -1,4 +1,4 @@
-package com.infoshareacademy.drinkers.service.printing;
+package com.infoshareacademy.drinkers.domain.drink;
 
 public enum InstructionsLanguage {
     ES("ES"),

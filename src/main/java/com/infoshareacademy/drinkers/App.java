@@ -5,6 +5,7 @@ import com.infoshareacademy.drinkers.service.filtering.FilterElements;
 import com.infoshareacademy.drinkers.service.filtering.FilterList;
 import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
+import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.properties.AppProperties;
 import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
 import com.infoshareacademy.drinkers.service.searching.Search;
@@ -65,6 +66,9 @@ public class App {
         System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID, true));
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
+        PrintElements printElements = new PrintElements(new JsonReader().getDrinkList());
+        printElements.print();
+
         Menu menu = new Menu();
 //        menu.run();
     }
