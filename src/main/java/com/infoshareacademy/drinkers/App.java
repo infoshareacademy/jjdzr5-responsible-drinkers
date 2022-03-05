@@ -62,7 +62,9 @@ public class App {
 
         System.out.println(ApplicationProperties.getDatePattern());
         System.out.println(ApplicationProperties.getSortDirection());
-        new AppProperties().printProperties();
+        System.out.println(ApplicationProperties.isAscendingSort());
+        System.out.println(ApplicationProperties.getDataFormatPattern().format(new Date()));
+//        new AppProperties().printProperties();
         System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID, true));
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
