@@ -1,20 +1,16 @@
 package com.infoshareacademy.drinkers;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
-import com.infoshareacademy.drinkers.service.filtering.FilterElements;
 import com.infoshareacademy.drinkers.service.filtering.FilterList;
 import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
-import com.infoshareacademy.drinkers.service.properties.AppProperties;
 import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
 import com.infoshareacademy.drinkers.service.searching.Search;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,14 +29,9 @@ public class App {
         JsonReader jsonReader = new JsonReader();
 
         FilterList filterList = new FilterList(jsonReader.getDrinkList());
-        String start = "1-1-2016";
-        String stop = "31-12-2016";
-        DateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
         try {
-            Date startDate, stopDate;
-
-            startDate = dateFormat.parse(start);
-            stopDate = dateFormat.parse(stop);
+            LocalDateTime startDate = LocalDateTime.of(2016, 1, 1, 0, 0, 0);
+            LocalDateTime stopDate = LocalDateTime.of(2017, 12, 31, 23, 59);
 
             List<Drink> drinkList = new ArrayList<>(filterList
                     .getFilteredByDate(startDate, stopDate)
@@ -57,7 +48,7 @@ public class App {
                 PrintElement.print(drink);
             }
 
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
