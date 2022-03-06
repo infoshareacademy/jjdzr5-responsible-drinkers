@@ -1,6 +1,7 @@
 package com.infoshareacademy.drinkers;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.service.filtering.FilterElements;
 import com.infoshareacademy.drinkers.service.filtering.FilterList;
 import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
@@ -35,10 +36,13 @@ public class App {
 
             List<Drink> drinkList = new ArrayList<>(filterList
                     .getFilteredByDate(startDate, stopDate)
-//                    .getFilteredByIngredient(FilterElements.JUICE)
-                    .getFilteredByAlcoholic(true)
+                    .getFilteredByIngredient(FilterElements.JUICE)
+                    .getFilteredByAlcoholic(false)
                     .run());
-            filterList.printResults(drinkList);
+ //           filterList.printResults(drinkList);
+
+            PrintElements printElements = new PrintElements(drinkList);
+            printElements.print();
 
             List<Drink> searchDrink = new Search(drinkList)
                     .searchByName("al")
