@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.infoshareacademy.drinkers.App.SORT_DIRECTION;
+
 public class SortDrinks {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
@@ -46,8 +48,12 @@ public class SortDrinks {
         return drinkList.stream().sorted(new DrinkDateModifiedComparator().reversed()).collect(Collectors.toList());
     }
 
-    public List<Drink> getSortedList(SortItems item, boolean isASC) {
+    public List<Drink> getSortedList(SortItems item) {
         List<Drink> result = new ArrayList<>();
+        boolean isASC = true;
+        if (SORT_DIRECTION.equalsIgnoreCase("DESC")) {
+            isASC =false;
+        }
 
         switch (item) {
             case ID: {
