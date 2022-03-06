@@ -58,7 +58,7 @@ public class Search {
         return this;
     }
 
-    public List<Drink> getResult() {
+    public List<Drink> getResults() {
         return resultList;
     }
 }

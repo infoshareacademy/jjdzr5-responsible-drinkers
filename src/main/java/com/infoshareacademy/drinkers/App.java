@@ -13,7 +13,6 @@ import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,8 +37,7 @@ public class App {
                     .getFilteredByDate(startDate, stopDate)
                     .getFilteredByIngredient(FilterElements.JUICE)
                     .getFilteredByAlcoholic(false)
-                    .run());
- //           filterList.printResults(drinkList);
+                    .getResults());
 
             PrintElements printElements = new PrintElements(drinkList);
             printElements.print();
@@ -47,7 +45,7 @@ public class App {
             List<Drink> searchDrink = new Search(drinkList)
                     .searchByName("al")
                     .searchByIngredients("vodka")
-                    .getResult();
+                    .getResults();
             for (Drink drink : searchDrink) {
                 PrintElement.print(drink);
             }
@@ -55,13 +53,8 @@ public class App {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        System.out.println(ApplicationProperties.getDatePattern());
-        System.out.println(ApplicationProperties.getSortDirection());
-        System.out.println(ApplicationProperties.isAscendingSort());
-        System.out.println(ApplicationProperties.getDataFormatPattern().format(new Date()));
-//        new AppProperties().printProperties();
-        PrintElements print = new PrintElements(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID));
+        System.out.println("Lista sortowana");
+        PrintElements print = new PrintElements(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.DATE));
         print.print();
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
