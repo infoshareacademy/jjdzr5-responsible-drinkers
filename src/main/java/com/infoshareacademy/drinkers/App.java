@@ -24,6 +24,8 @@ import java.util.logging.Logger;
 public class App {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    public final static String DATE_PATTERN = ApplicationProperties.getDatePattern();
+    public final static String SORT_DIRECTION = ApplicationProperties.getSortDirection();
 
     public static void main(String[] args) {
 
@@ -31,9 +33,9 @@ public class App {
         JsonReader jsonReader = new JsonReader();
 
         FilterList filterList = new FilterList(jsonReader.getDrinkList());
-        String start = "1/1/2016";
-        String stop = "31/12/2016";
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String start = "1-1-2016";
+        String stop = "31-12-2016";
+        DateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
         try {
             Date startDate, stopDate;
 
@@ -47,17 +49,16 @@ public class App {
                     .run());
             filterList.printResults(drinkList);
 
+            List<Drink> searchDrink = new Search(drinkList)
+                    .searchByName("al")
+                    .searchByIngredients("vodka")
+                    .getResult();
+            for (Drink drink : searchDrink) {
+                PrintElement.print(drink);
+            }
+
         } catch (ParseException e) {
             e.printStackTrace();
-        }
-
-
-        List<Drink> searchDrink = new Search(drinkList)
-                .searchByName("al")
-                .searchByIngredients("vodka")
-                .getResult();
-        for (Drink drink : searchDrink) {
-            PrintElement.print(drink);
         }
 
         System.out.println(ApplicationProperties.getDatePattern());
@@ -65,8 +66,8 @@ public class App {
         System.out.println(ApplicationProperties.isAscendingSort());
         System.out.println(ApplicationProperties.getDataFormatPattern().format(new Date()));
 //        new AppProperties().printProperties();
-        System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID, true));
-        System.out.println(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.DATE, true));
+        PrintElements print = new PrintElements(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.ID));
+        print.print();
 
         PrintElement.print(new JsonReader().getDrinkList().get(5));
         PrintElements printElements = new PrintElements(new JsonReader().getDrinkList());

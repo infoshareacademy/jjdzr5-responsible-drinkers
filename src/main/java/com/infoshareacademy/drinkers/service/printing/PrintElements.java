@@ -1,14 +1,20 @@
 package com.infoshareacademy.drinkers.service.printing;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 
 public class PrintElements {
 
     private static final Logger LOGGER = Logger.getLogger(PrintElements.class.getName());
+
+
     private static final int COL_1_WIDTH = 6;
     private static final int COL_2_WIDTH = 10;
     private static final int COL_3_WIDTH = 16;
@@ -16,8 +22,9 @@ public class PrintElements {
     private static final int COL_5_WIDTH = 22;
     private static final int COL_6_WIDTH = 20;
     private static final int COL_7_WIDTH = 70;
+    private static final int COL_8_WIDTH = 18;
     private static final int LINE_LENGTH = COL_1_WIDTH + COL_2_WIDTH + COL_3_WIDTH + COL_4_WIDTH + COL_5_WIDTH +
-            COL_6_WIDTH + COL_7_WIDTH + 6;
+            COL_6_WIDTH + COL_7_WIDTH + COL_8_WIDTH + 7;
     private static final String COL_1_TITLE = "NO";
     private static final String COL_2_TITLE = "ID";
     private static final String COL_3_TITLE = "DRINK NAME";
@@ -25,6 +32,7 @@ public class PrintElements {
     private static final String COL_5_TITLE = "GLASS TYPE";
     private static final String COL_6_TITLE = "DRINK CATEGORY";
     private static final String COL_7_TITLE = "INGREDIENTS";
+    private static final String COL_8_TITLE = "DATE MODIFIED";
 
     private final List<Drink> drinkList;
 
@@ -92,6 +100,10 @@ public class PrintElements {
                 .append(StringUtils.left(String.format(" %-70s", strIngredients), COL_7_WIDTH))
                 .append(colorLineReset)
                 .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format(" %s", new SimpleDateFormat(DATE_PATTERN).format(drink.getDateModified())), COL_8_WIDTH))
+                .append(colorLineReset)
+                .append("|")
                 .append(System.lineSeparator());
         System.out.print(lineBuilder);
     }
@@ -132,6 +144,10 @@ public class PrintElements {
                 .append("|")
                 .append(colorLine)
                 .append(StringUtils.center(String.format(" %s", COL_7_TITLE), COL_7_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format(" %s", COL_8_TITLE), COL_8_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(System.lineSeparator());
