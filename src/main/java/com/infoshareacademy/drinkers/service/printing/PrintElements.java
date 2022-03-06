@@ -1,10 +1,9 @@
 package com.infoshareacademy.drinkers.service.printing;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
-import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
 import org.apache.commons.lang3.StringUtils;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -13,7 +12,6 @@ import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 public class PrintElements {
 
     private static final Logger LOGGER = Logger.getLogger(PrintElements.class.getName());
-
 
     private static final int COL_1_WIDTH = 6;
     private static final int COL_2_WIDTH = 10;
@@ -54,14 +52,6 @@ public class PrintElements {
     }
 
     private void printElement(Drink drink, int index) {
-        String strIngredients = "";
-        for (String s : drink.getIngredients()) {
-            if (strIngredients.equals("")) {
-                strIngredients = s;
-            } else {
-                strIngredients += ", " + s;
-            }
-        }
         String colorLine;
         String colorLineReset = ConsoleColors.RESET;
         if (index % 2 == 0) {
@@ -97,11 +87,11 @@ public class PrintElements {
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.left(String.format(" %-70s", strIngredients), COL_7_WIDTH))
+                .append(StringUtils.left(String.format(" %-70s", drink.getStringIntredientrs()), COL_7_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format(" %s", new SimpleDateFormat(DATE_PATTERN).format(drink.getDateModified())), COL_8_WIDTH))
+                .append(StringUtils.center(String.format(" %s", drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN))), COL_8_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(System.lineSeparator());

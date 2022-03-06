@@ -2,6 +2,8 @@ package com.infoshareacademy.drinkers.service.filtering;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -149,11 +151,11 @@ public class FilterList {
         return str;
     }
 
-    public FilterList getFilteredByDate(Date start, Date finish) {
+    public FilterList getFilteredByDate(LocalDateTime start, LocalDateTime finish) {
         List<Drink> result = new ArrayList<>();
         for (Drink drink : resultDinkList) {
             try {
-                if (drink.getDateModified().after(start) && drink.getDateModified().before(finish)) {
+                if (drink.getDateModified().isAfter(start) && drink.getDateModified().isBefore(finish)) {
                     result.add(drink);
                 }
             } catch (NullPointerException e) {
