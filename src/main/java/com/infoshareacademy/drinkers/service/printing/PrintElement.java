@@ -6,8 +6,11 @@ import com.infoshareacademy.drinkers.domain.drink.InstructionsLanguage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 
 public class PrintElement {
 
@@ -25,6 +28,7 @@ public class PrintElement {
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
             System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
             System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.FR));
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + new SimpleDateFormat(DATE_PATTERN).format(drink.getDateModified()));
             printLine();
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
