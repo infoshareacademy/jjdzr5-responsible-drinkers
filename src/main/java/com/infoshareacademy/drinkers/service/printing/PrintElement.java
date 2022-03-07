@@ -4,9 +4,7 @@ import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.Instruction;
 import com.infoshareacademy.drinkers.domain.drink.InstructionsLanguage;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,9 +24,9 @@ public class PrintElement {
             System.out.print(ConsoleColors.BLUE_BOLD + "Alcoholic: " + ConsoleColors.YELLOW + isAlcoholic(drink) + "\t");
             System.out.print(ConsoleColors.BLUE_BOLD + "Glass: " + ConsoleColors.YELLOW + drink.getGlass() + "\t");
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
-            System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + getIngredients(drink) + " ");
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + drink.getStringIntredientrs() + " ");
             System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.FR));
-            System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + new SimpleDateFormat(DATE_PATTERN).format(drink.getDateModified()));
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
             printLine();
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
@@ -110,26 +108,6 @@ public class PrintElement {
         System.out.println(ConsoleColors.RED + line + ConsoleColors.RESET);
     }
 
-    private static String getIngredients(Drink drink) {
-        Method[] methods = Drink.class.getMethods();
-        StringBuilder result = new StringBuilder();
-        for (Method m : methods) {
-            if (m.getName().contains("getIngredient")) {
-                try {
-                    if (m.invoke(drink) != null) {
-                        if (result.toString().equals("")) {
-                            result = new StringBuilder((String) m.invoke(drink));
-                        } else {
-                            result.append(", ").append(m.invoke(drink));
-                        }
-                    }
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    LOGGER.log(Level.INFO, e.toString());
-                }
-            }
-        }
-        return result.toString();
-    }
 
     private static String wrapLine(String line) {
         StringBuilder result = new StringBuilder();

@@ -1,6 +1,8 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +63,7 @@ public class Drink {
     private URI strImageSource;
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
-    private Date dateModified;
+    private LocalDateTime dateModified;
 
     public List<String> getIngredients() {
         List<String> result = new ArrayList<>();
@@ -139,8 +141,20 @@ public class Drink {
         return result;
     }
 
+    public String getStringIntredientrs() {
+        String strIngredients = "";
+        for (String s : getIngredients()) {
+            if (strIngredients.equals("")) {
+                strIngredients = s;
+            } else {
+                strIngredients += ", " + s;
+            }
+        }
+        return strIngredients;
+    }
+
     public Drink() {
-        setDateModified(new Date());
+        setDateModified(LocalDateTime.now());
     }
 
     public Integer getIdDrink() {
@@ -543,11 +557,11 @@ public class Drink {
         this.strCreativeCommonsConfirmed = strCreativeCommonsConfirmed;
     }
 
-    public Date getDateModified() {
+    public LocalDateTime getDateModified() {
         return dateModified;
     }
 
-    public void setDateModified(Date dateModified) {
+    public void setDateModified(LocalDateTime dateModified) {
         this.dateModified = dateModified;
     }
 

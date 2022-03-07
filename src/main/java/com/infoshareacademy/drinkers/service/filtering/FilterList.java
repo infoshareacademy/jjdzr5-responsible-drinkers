@@ -2,8 +2,8 @@ package com.infoshareacademy.drinkers.service.filtering;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -108,28 +108,6 @@ public class FilterList {
         return this;
     }
 
-    public void printResults(List<Drink> drinks) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("ID: " + "Name" + "\t|\t")
-                .append("Alcohol" + "\t|\t")
-                .append("Ingredients" + "\t|\t")
-                .append(System.lineSeparator());
-        System.out.print(stringBuilder.toString());
-        stringBuilder = new StringBuilder();
-        for (Drink drink : drinks) {
-            stringBuilder.append(drink.getIdDrink() + ": " + drink.getDrink() + "\t|\t")
-                    .append(checkStringIsNull(drink.getAlcoholic()) + "\t|\t")
-                    .append(checkStringIsNull(drink.getIngredient1()) + ", ")
-                    .append(checkStringIsNull(drink.getIngredient2()) + ", ")
-                    .append(checkStringIsNull(drink.getIngredient3()) + ", ")
-                    .append(checkStringIsNull(drink.getIngredient4()) + ", ")
-                    .append(checkStringIsNull(drink.getIngredient5()))
-                    .append(System.lineSeparator());
-        }
-        System.out.print(stringBuilder);
-        System.out.println("Size: " + drinks.size());
-    }
-
 //    public List<Drink> getDrinkListFiltered(FilterElements... filterElements) {
 //
 //        for (FilterElements elements : filterElements) {
@@ -149,11 +127,11 @@ public class FilterList {
         return str;
     }
 
-    public FilterList getFilteredByDate(Date start, Date finish) {
+    public FilterList getFilteredByDate(LocalDateTime start, LocalDateTime finish) {
         List<Drink> result = new ArrayList<>();
         for (Drink drink : resultDinkList) {
             try {
-                if (drink.getDateModified().after(start) && drink.getDateModified().before(finish)) {
+                if (drink.getDateModified().isAfter(start) && drink.getDateModified().isBefore(finish)) {
                     result.add(drink);
                 }
             } catch (NullPointerException e) {
@@ -164,7 +142,7 @@ public class FilterList {
         return this;
     }
 
-    public List<Drink> run() {
+    public List<Drink> getResults() {
         return this.resultDinkList;
     }
 
