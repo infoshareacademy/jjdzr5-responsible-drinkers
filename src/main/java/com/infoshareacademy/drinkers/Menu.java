@@ -9,6 +9,8 @@ import com.infoshareacademy.drinkers.service.manage.DrinkManager;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.searching.Search;
+import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
+import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +38,7 @@ public class Menu {
         menuOptions.add("1. Sprawdz stan barku. ");
         menuOptions.add("2. Dodaj drink.");
         menuOptions.add("3. Usuń drink.");
-        menuOptions.add("4. Wprowadz drink do barku.");
+        menuOptions.add("4. Sortuj liste drinkow.");
         menuOptions.add("5. Wypij drinka.");
         menuOptions.add("6. Edytuj drinka.");
         menuOptions.add("7. Wyszukaj drinka.");
@@ -93,7 +95,8 @@ public class Menu {
                 option3();
                 break;
             case 4:
-                System.out.println("Wprowadzam drinka do barku..");
+                System.out.println("Sortuj listę drinków");
+                option4();
                 break;
             case 5:
                 System.out.println("Wypijam Drinka.");
@@ -140,4 +143,11 @@ public class Menu {
         PrintElement.print(drinkList.get(index));
         drinkList = drinkManager.removeDrink(index);
     }
+
+    private void option4() {
+        SortDrinks sortDrinks = new SortDrinks(drinkList);
+        PrintElements printElements = new PrintElements(sortDrinks.getSortedList(SortItems.ID));
+        printElements.print();
+    }
+
 }
