@@ -1,11 +1,27 @@
 package com.infoshareacademy.drinkers;
 
+import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
+import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
+import com.infoshareacademy.drinkers.service.console.ConsoleInput;
+import com.infoshareacademy.drinkers.service.gson.JsonReader;
+import com.infoshareacademy.drinkers.service.manage.DrinkManager;
+import com.infoshareacademy.drinkers.service.printing.PrintElement;
+import com.infoshareacademy.drinkers.service.printing.PrintElements;
+import com.infoshareacademy.drinkers.service.searching.Search;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
     private List<String> menuOptions = new ArrayList<>();
+    private List<Drink> drinkList;
+
+    public Menu() {
+        JsonReader jsonReader = new JsonReader();
+        drinkList = jsonReader.getDrinkList();
+    }
 
     public void run() {
         menuOptions = fillMenuOptions();
@@ -49,7 +65,7 @@ public class Menu {
         do {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Podaj nr menu gdzie chcesz wejsc: ");
-            result = scanner.nextInt();
+            result = ConsoleInput.getInputUserInteger();
             condition = result > menuOptions.size() || result < 0;
             if (condition) {
                 System.out.println("Brak takiego numeru w menu.");
@@ -66,16 +82,15 @@ public class Menu {
                 return;
             case 1:
                 System.out.println("Sprawdzam stan barku...");
-
-
+                option1();
                 break;
-
             case 2:
                 System.out.println("Przechodzę do dodawania drinku...");
-
+                option2();
                 break;
             case 3:
                 System.out.println("Przechodzę do usuwania drinka...");
+                option3();
                 break;
             case 4:
                 System.out.println("Wprowadzam drinka do barku..");
@@ -95,5 +110,34 @@ public class Menu {
     private void returnToMenu() {
         displayMenu();
         enterIntoMenuOptions(getMenuNumber());
+    }
+
+    private void option1() {
+        PrintElements printElements = new PrintElements(drinkList);
+        printElements.print();
+    }
+
+    private void option2() {
+        DrinkManager drinkManager = new DrinkManager(drinkList);
+        Drink newDrink = new DrinkBuilder()
+                .setID(1111)
+                .setName("Mohito")
+                .setisAlcoholic(true)
+                .setIngredient01("Orange juice")
+                .setIngredient02("White rum")
+                .build();
+        drinkManager.addDrinkToList(newDrink);
+    }
+
+    private void option3() {
+        DrinkManager drinkManager = new DrinkManager(drinkList);
+        int index;
+        do {
+            System.out.print("Podaj nr drinka: ");
+            index = ConsoleInput.getInputUserInteger();
+        } while (index < 0 || index > drinkList.size() - 1);
+        System.out.println("Usuwam drinka:");
+        PrintElement.print(drinkList.get(index));
+        drinkList = drinkManager.removeDrink(index);
     }
 }

@@ -25,7 +25,7 @@ public class DrinkManager {
         try {
             drinkList.remove(byIndex);
         } catch (IndexOutOfBoundsException e) {
-            LOGGER.log(Level.INFO, "Index out of bounds. Can't remove drink");
+            LOGGER.log(Level.INFO, "Index out of bounds. Can't remove drink", e);
         }
         return drinkList;
     }
@@ -35,7 +35,7 @@ public class DrinkManager {
             int drinkIndex = drinkList.indexOf(drink);
             removeDrink(drinkIndex);
         } catch (NullPointerException e) {
-            LOGGER.log(Level.INFO, "Can't find drink. Can't remove drink");
+            LOGGER.log(Level.INFO, "Can't find drink. Can't remove drink", e);
         }
         return drinkList;
     }
@@ -46,7 +46,7 @@ public class DrinkManager {
             removeDrink(drinkIndex);
             addDrinkToList(drinkModified);
         } catch (NullPointerException e) {
-            LOGGER.log(Level.INFO, "Drink is null. Can't modify drink");
+            LOGGER.log(Level.INFO, "Drink is null. Can't modify drink", e);
         }
         return drinkList;
     }

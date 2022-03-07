@@ -24,6 +24,15 @@ public class Search {
         }
     }
 
+    public Search searchByID(Integer ID) {
+        for (Drink drink : drinkList) {
+            if (drink.getIdDrink()==ID) {
+                resultList.add(drink);
+            }
+        }
+        return this;
+    }
+
     public Search searchByName(String textToFind) {
         textToFind = textToFind.toLowerCase();
         for (Drink drink : drinkList) {

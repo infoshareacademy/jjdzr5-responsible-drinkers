@@ -62,6 +62,6 @@ public class App {
         printElements.print();
 
         Menu menu = new Menu();
-//        menu.run();
+        menu.run();
     }
 }
