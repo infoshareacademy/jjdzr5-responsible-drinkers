@@ -1,10 +1,8 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
 import java.net.URI;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -151,10 +149,6 @@ public class Drink {
             }
         }
         return strIngredients;
-    }
-
-    public Drink() {
-        setDateModified(LocalDateTime.now());
     }
 
     public Integer getIdDrink() {
