@@ -64,9 +64,11 @@ public final class DrinkBuilder {
     public Drink build() {
         Drink drink = new Drink();
         if (idDrink <= 0) {
+            LOGGER.log(Level.INFO, "ID cannot be empty");
             throw new IllegalStateException("ID cannot be empty");
         }
         if (strDrink.isEmpty()) {
+            LOGGER.log(Level.INFO, "Name cannot be empty");
             throw new IllegalStateException("Name cannot be empty");
         }
         drink.setIdDrink(idDrink);
