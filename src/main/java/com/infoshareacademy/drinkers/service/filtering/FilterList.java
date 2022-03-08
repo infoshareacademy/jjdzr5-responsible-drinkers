@@ -6,6 +6,7 @@ import com.infoshareacademy.drinkers.domain.drink.Drink;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -144,10 +145,11 @@ public class FilterList {
     }
 
     public List<Drink> getResults() {
-        if (this.getResults() == null) {
-            return new ArrayList<>();
+        Optional<List<Drink>> optionalDrinkList = Optional.of(this.resultDinkList);
+        if (optionalDrinkList.isPresent()) {
+            return optionalDrinkList.get();
         } else {
-            return this.resultDinkList;
+            return optionalDrinkList.orElse(new ArrayList<>());
         }
     }
 
