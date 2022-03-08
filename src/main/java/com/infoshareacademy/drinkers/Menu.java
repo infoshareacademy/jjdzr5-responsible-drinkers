@@ -1,6 +1,5 @@
 package com.infoshareacademy.drinkers;
 
-import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
 import com.infoshareacademy.drinkers.service.console.ConsoleInput;
@@ -10,13 +9,12 @@ import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.manage.DrinkManager;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
-import com.infoshareacademy.drinkers.service.searching.Search;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class Menu {
     private List<String> menuOptions = new ArrayList<>();
@@ -29,40 +27,41 @@ public class Menu {
 
     public void run() {
         menuOptions = fillMenuOptions();
-        displayMenu();
-        int number = getMenuNumber();
+        displayMenu(menuOptions);
+        int number = getMenuNumber(menuOptions);
         enterIntoMenuOptions(number);
     }
 
     private List<String> fillMenuOptions() {
-        menuOptions.add("0. Wyjście z programu");
-        menuOptions.add("1. Sprawdz stan barku. ");
-        menuOptions.add("2. Dodaj drink.");
-        menuOptions.add("3. Usuń drink.");
-        menuOptions.add("4. Pokaż sortowaną liste drinkow.");
-        menuOptions.add("5. Filtruj listę drinków.");
-        menuOptions.add("6. Edytuj drinka.");
-        menuOptions.add("7. Wyszukaj drinka.");
+        menuOptions.add("Wyjście z programu");
+        menuOptions.add("Sprawdz stan barku. ");
+        menuOptions.add("Dodaj drink.");
+        menuOptions.add("Usuń drink.");
+        menuOptions.add("Pokaż sortowaną liste drinkow.");
+        menuOptions.add("Filtruj listę drinków.");
+        menuOptions.add("Edytuj drinka.");
+        menuOptions.add("Wyszukaj drinka.");
 
         return menuOptions;
     }
 
-    private void displayMenu() {
-        System.out.println("======================");
-        for (String i : menuOptions) {
-            System.out.println(i);
+    private void displayMenu(List<String> strings) {
+        System.out.println("@======================@");
+        int i = 0;
+        for (String s : strings) {
+            System.out.println(i++ + ". " + s);
         }
-        System.out.println("======================");
+        System.out.println("@======================@");
     }
 
-    private int getMenuNumber() {
+    private int getMenuNumber(List<String> strings) {
         int result;
         boolean condition;
         do {
-            Scanner scanner = new Scanner(System.in);
+//            Scanner scanner = new Scanner(System.in);
             System.out.println("Podaj nr menu gdzie chcesz wejsc: ");
             result = ConsoleInput.getInputUserInteger();
-            condition = result > menuOptions.size() || result < 0;
+            condition = result > strings.size() || result < 0;
             if (condition) {
                 System.out.println("Brak takiego numeru w menu.");
             }
@@ -76,23 +75,18 @@ public class Menu {
                 System.out.println("Zamykam program");
                 return;
             case 1:
-                System.out.println("Sprawdzam stan barku...");
                 option1();
                 break;
             case 2:
-                System.out.println("Przechodzę do dodawania drinku...");
                 option2();
                 break;
             case 3:
-                System.out.println("Przechodzę do usuwania drinka...");
                 option3();
                 break;
             case 4:
-                System.out.println("Sortuj listę drinków");
                 option4();
                 break;
             case 5:
-                System.out.println("Lista filtrowana.");
                 option5();
             case 6:
                 System.out.println("Edytuje Drinka.");
@@ -105,8 +99,8 @@ public class Menu {
     }
 
     private void returnToMenu() {
-        displayMenu();
-        enterIntoMenuOptions(getMenuNumber());
+        displayMenu(menuOptions);
+        enterIntoMenuOptions(getMenuNumber(menuOptions));
     }
 
     private void option1() {
@@ -141,9 +135,7 @@ public class Menu {
     }
 
     private void option4() {
-        SortDrinks sortDrinks = new SortDrinks(drinkList);
-        PrintElements printElements = new PrintElements(sortDrinks.getSortedList(SortItems.ID));
-        printElements.print();
+        lowerMenu(new ArrayList<>(Arrays.asList("exit", "sort by ID", "sort by Date", "sort by Drink name", "sort by alcoholic" )));
     }
 
     private void option5() {
@@ -152,6 +144,44 @@ public class Menu {
         list = filterElements.getFilteredByIngredient(FilterElements.APPLE_JUICE).getFilteredByAlcoholic(true).getResults();
         PrintElements printElements = new PrintElements(list);
         printElements.print();
+    }
+
+    private void lowerMenu(List<String> list) {
+        int input;
+        do {
+            displayMenu(list);
+            input = getMenuNumber(list);
+        } while (enterLowerMenuOptions(input));
+    }
+
+    private boolean enterLowerMenuOptions(int source) {
+        SortDrinks sortDrinks = new SortDrinks(drinkList);
+        PrintElements printElements;
+
+        switch (source) {
+            case 0:
+                System.out.println("Zamykam program");
+                return false;
+            case 1:
+                printElements = new PrintElements(sortDrinks.getSortedList(SortItems.ID));
+                printElements.print();
+                break;
+            case 2:
+                printElements = new PrintElements(sortDrinks.getSortedList(SortItems.DATE));
+                printElements.print();
+                break;
+            case 3:
+                printElements = new PrintElements(sortDrinks.getSortedList(SortItems.DRINK_NAME));
+                printElements.print();
+                break;
+            case 4:
+                printElements = new PrintElements(sortDrinks.getSortedList(SortItems.ALCOHOLIC));
+                printElements.print();
+                break;
+            default:
+                return false;
+        }
+        return true;
     }
 
 }
