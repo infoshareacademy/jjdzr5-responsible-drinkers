@@ -46,6 +46,7 @@ public class Menu {
         menuOptions.add("Pokaż sortowaną liste drinkow.");
         menuOptions.add("Filtruj listę drinków.");
         menuOptions.add("Edytuj drinka.");
+        menuOptions.add("Wyświetl drinka.");
         menuOptions.add("Wyszukaj drinka.");
 
         return menuOptions;
@@ -98,7 +99,10 @@ public class Menu {
                 System.out.println("Edytuje Drinka.");
                 break;
             case 7:
-                menuOptions.add("7. Wyszukaj drinka.");
+                option7();
+                break;
+            case 8:
+                System.out.println("7. Wyszukaj drinka.");
                 break;
         }
         returnToMenu();
@@ -107,6 +111,17 @@ public class Menu {
     private void returnToMenu() {
         displayMenu(menuOptions);
         enterIntoMenuOptions(getMenuNumber(menuOptions));
+    }
+
+    private void option7() {
+        option1();
+        int drinkIndex;
+        do {
+            System.out.print("Podaj nr drinka z listy: ");
+            drinkIndex = ConsoleInput.getInputUserInteger();
+        }
+        while (drinkIndex < 1 || drinkIndex > drinkList.size());
+        PrintElement.print(drinkList.get(drinkIndex-1));
     }
 
     private void option1() {
@@ -149,7 +164,7 @@ public class Menu {
             } catch (IllegalStateException e) {
                 System.out.println("Musisz podac conajmniej nazwę i ID");
             }
-        }   while (isNotValid);
+        } while (isNotValid);
         return drink;
     }
 
