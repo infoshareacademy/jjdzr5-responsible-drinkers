@@ -1,5 +1,6 @@
 package com.infoshareacademy.drinkers.service.filtering;
 
+import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 
 import java.time.LocalDateTime;
@@ -66,11 +67,11 @@ public class FilterList {
     public FilterList getFilteredByAlcoholic(Boolean isAlcoholic) {
         List<Drink> result = new ArrayList<>();
 
-        FilterElements filterElements;
+        Alcoholic filterElements;
         if (isAlcoholic) {
-            filterElements = FilterElements.ALCOHOL;
+            filterElements = Alcoholic.ALCOHOLIC;
         } else {
-            filterElements = FilterElements.NON_ALCOHOL;
+            filterElements = Alcoholic.NON_ALCOHOLIC;
         }
 
         for (Drink drink : resultDinkList) {
@@ -143,7 +144,11 @@ public class FilterList {
     }
 
     public List<Drink> getResults() {
-        return this.resultDinkList;
+        if (this.getResults() == null) {
+            return new ArrayList<>();
+        } else {
+            return this.resultDinkList;
+        }
     }
 
 }

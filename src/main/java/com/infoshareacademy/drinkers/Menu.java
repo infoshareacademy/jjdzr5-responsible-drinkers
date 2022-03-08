@@ -4,6 +4,8 @@ import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
 import com.infoshareacademy.drinkers.service.console.ConsoleInput;
+import com.infoshareacademy.drinkers.service.filtering.FilterElements;
+import com.infoshareacademy.drinkers.service.filtering.FilterList;
 import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.manage.DrinkManager;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
@@ -33,13 +35,12 @@ public class Menu {
     }
 
     private List<String> fillMenuOptions() {
-
         menuOptions.add("0. Wyjście z programu");
         menuOptions.add("1. Sprawdz stan barku. ");
         menuOptions.add("2. Dodaj drink.");
         menuOptions.add("3. Usuń drink.");
-        menuOptions.add("4. Sortuj liste drinkow.");
-        menuOptions.add("5. Wypij drinka.");
+        menuOptions.add("4. Pokaż sortowaną liste drinkow.");
+        menuOptions.add("5. Filtruj listę drinków.");
         menuOptions.add("6. Edytuj drinka.");
         menuOptions.add("7. Wyszukaj drinka.");
 
@@ -47,21 +48,14 @@ public class Menu {
     }
 
     private void displayMenu() {
-
-//        1.text menu : - na bazie listy
         System.out.println("======================");
-
         for (String i : menuOptions) {
             System.out.println(i);
         }
-
         System.out.println("======================");
-
     }
 
     private int getMenuNumber() {
-
-//        2. Pobieranie nr menu
         int result;
         boolean condition;
         do {
@@ -77,7 +71,6 @@ public class Menu {
     }
 
     private void enterIntoMenuOptions(int source) {
-
         switch (source) {
             case 0:
                 System.out.println("Zamykam program");
@@ -99,7 +92,8 @@ public class Menu {
                 option4();
                 break;
             case 5:
-                System.out.println("Wypijam Drinka.");
+                System.out.println("Lista filtrowana.");
+                option5();
             case 6:
                 System.out.println("Edytuje Drinka.");
                 break;
@@ -130,13 +124,15 @@ public class Menu {
                 .setIngredient02("White rum")
                 .build();
         drinkManager.addDrinkToList(newDrink);
+        System.out.println("Dodałem drinka:");
+        PrintElement.print(newDrink);
     }
 
     private void option3() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
         int index;
         do {
-            System.out.print("Podaj nr drinka: ");
+            System.out.print("Podaj nr drinka z listy: ");
             index = ConsoleInput.getInputUserInteger();
         } while (index < 0 || index > drinkList.size() - 1);
         System.out.println("Usuwam drinka:");
@@ -147,6 +143,14 @@ public class Menu {
     private void option4() {
         SortDrinks sortDrinks = new SortDrinks(drinkList);
         PrintElements printElements = new PrintElements(sortDrinks.getSortedList(SortItems.ID));
+        printElements.print();
+    }
+
+    private void option5() {
+        List<Drink> list = new ArrayList<>();
+        FilterList filterElements = new FilterList(drinkList);
+        list = filterElements.getFilteredByIngredient(FilterElements.APPLE_JUICE).getFilteredByAlcoholic(true).getResults();
+        PrintElements printElements = new PrintElements(list);
         printElements.print();
     }
 
