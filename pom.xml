@@ -57,7 +57,7 @@
                             <index>true</index>
                             <manifest>
                                 <addClasspath>true</addClasspath>
-                                <mainClass>com.infoshareacademy.App</mainClass>
+                                <mainClass>com.infoshareacademy.drinkers.App</mainClass>
                             </manifest>
                         </archive>
                     </configuration>
@@ -67,7 +67,7 @@
                     <configuration>
                         <archive>
                             <manifest>
-                                <mainClass>com.infoshareacademy.App</mainClass>
+                                <mainClass>com.infoshareacademy.drinkers.App</mainClass>
                             </manifest>
                         </archive>
                         <descriptorRefs>
