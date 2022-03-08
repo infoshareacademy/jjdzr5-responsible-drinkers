@@ -39,9 +39,6 @@ public class App {
                     .getFilteredByAlcoholic(false)
                     .getResults());
 
-//            PrintElements printElements = new PrintElements(drinkList);
-//            printElements.print();
-
             List<Drink> searchDrink = new Search(drinkList)
                     .searchByName("al")
                     .searchByIngredients("vodka")
@@ -53,9 +50,6 @@ public class App {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        System.out.println("Lista sortowana");
-//        PrintElements print = new PrintElements(new SortDrinks(new JsonReader().getDrinkList()).getSortedList(SortItems.DATE));
-//        print.print();
 
 //        PrintElement.print(new JsonReader().getDrinkList().get(5));
 //        PrintElements printElements = new PrintElements(new JsonReader().getDrinkList());

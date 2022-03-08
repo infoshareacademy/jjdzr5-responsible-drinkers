@@ -1,5 +1,6 @@
 package com.infoshareacademy.drinkers;
 
+import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
 import com.infoshareacademy.drinkers.service.console.ConsoleInput;
@@ -15,8 +16,13 @@ import com.infoshareacademy.drinkers.service.sorting.SortItems;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Menu {
+
+    private static final Logger LOGGER = Logger.getLogger(Menu.class.getName());
+
     private List<String> menuOptions = new ArrayList<>();
     private List<Drink> drinkList;
 
@@ -110,17 +116,52 @@ public class Menu {
 
     private void option2() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
-        Drink newDrink = new DrinkBuilder()
-                .setID(1111)
-                .setName("Mohito")
-                .setisAlcoholic(true)
-                .setIngredient01("Orange juice")
-                .setIngredient02("White rum")
-                .build();
-        drinkManager.addDrinkToList(newDrink);
         System.out.println("Dodałem drinka:");
+        Drink newDrink = addDrink();
+        drinkManager.addDrinkToList(newDrink);
         PrintElement.print(newDrink);
     }
+
+    private Drink addDrink() {
+        boolean isNotValid = true;
+        Drink drink = null;
+        do {
+            String input;
+            DrinkBuilder drinkBuilder = new DrinkBuilder();
+            System.out.print("Podaj ID: ");
+            drinkBuilder.setID(ConsoleInput.getInputUserInteger());
+            System.out.print("Podaj nazwe: ");
+            drinkBuilder.setName(ConsoleInput.getInputUserString());
+            System.out.print("Czy alkoholowy [Y/N]: ");
+            drinkBuilder.setisAlcoholic(isAlcoholic());
+            System.out.print("Podaj składnik 1: ");
+            input = ConsoleInput.getInputUserString();
+            drinkBuilder.setIngredient01(input);
+            System.out.print("Podaj składnik 2: ");
+            drinkBuilder.setIngredient02(ConsoleInput.getInputUserString());
+            System.out.print("Podaj składnik 3: ");
+            drinkBuilder.setIngredient03(ConsoleInput.getInputUserString());
+            System.out.print("Podaj składnik 4: ");
+            drinkBuilder.setIngredient04(ConsoleInput.getInputUserString());
+            try {
+                drink = drinkBuilder.build();
+                isNotValid = false;
+            } catch (IllegalStateException e) {
+                System.out.println("Musisz podac conajmniej nazwę i ID");
+            }
+        }   while (isNotValid);
+        return drink;
+    }
+
+    private boolean isAlcoholic() {
+        String s = ConsoleInput.getInputUserString();
+        if (s.equalsIgnoreCase("y")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     private void option3() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
@@ -135,7 +176,7 @@ public class Menu {
     }
 
     private void option4() {
-        lowerMenu(new ArrayList<>(Arrays.asList("exit", "sort by ID", "sort by Date", "sort by Drink name", "sort by alcoholic" )));
+        lowerMenu(new ArrayList<>(Arrays.asList("exit", "sort by ID", "sort by Date", "sort by Drink name", "sort by alcoholic")));
     }
 
     private void option5() {
@@ -159,9 +200,6 @@ public class Menu {
         PrintElements printElements;
 
         switch (source) {
-            case 0:
-                System.out.println("Zamykam program");
-                return false;
             case 1:
                 printElements = new PrintElements(sortDrinks.getSortedList(SortItems.ID));
                 printElements.print();

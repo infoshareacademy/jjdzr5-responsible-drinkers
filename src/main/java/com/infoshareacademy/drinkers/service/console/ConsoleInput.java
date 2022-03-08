@@ -2,6 +2,7 @@ package com.infoshareacademy.drinkers.service.console;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class ConsoleInput {
 
@@ -11,6 +12,9 @@ public class ConsoleInput {
         do {
             try {
                 input = new Scanner(System.in).nextLine();
+                if (input.equals("")) {
+                    return "";
+                }
                 inputIsNotValid = input.trim().isEmpty();
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input.");
@@ -42,8 +46,15 @@ public class ConsoleInput {
         int result = 0;
         do {
             try {
+                String line = new Scanner(System.in).nextLine();
+                try {
+                    result = Integer.valueOf(line);
+                } catch (NumberFormatException e ) {
+                    inputIsNotValid = false;
+                    return -1;
+                }
 
-                result = new Scanner(System.in).nextInt();
+           //     result = new Scanner(System.in).nextInt();
                 inputIsNotValid = false;
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input.");

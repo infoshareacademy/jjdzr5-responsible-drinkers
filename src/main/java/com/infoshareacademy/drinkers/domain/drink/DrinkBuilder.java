@@ -61,13 +61,13 @@ public final class DrinkBuilder {
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
 
-    public Drink build() {
+    public Drink build() throws IllegalStateException {
         Drink drink = new Drink();
         if (idDrink <= 0) {
-            LOGGER.log(Level.INFO, "ID cannot be empty");
+//            LOGGER.log(Level.INFO, "ID cannot be empty");
             throw new IllegalStateException("ID cannot be empty");
         } else if (strDrink.isEmpty()) {
-            LOGGER.log(Level.INFO, "Name cannot be empty");
+//            LOGGER.log(Level.INFO, "Name cannot be empty");
             throw new IllegalStateException("Name cannot be empty");
         } else {
             drink.setIdDrink(idDrink);
