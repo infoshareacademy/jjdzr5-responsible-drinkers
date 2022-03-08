@@ -1,6 +1,5 @@
 package com.infoshareacademy.drinkers;
 
-import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
 import com.infoshareacademy.drinkers.service.console.ConsoleInput;
@@ -13,10 +12,11 @@ import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Menu {
@@ -121,7 +121,7 @@ public class Menu {
             drinkIndex = ConsoleInput.getInputUserInteger();
         }
         while (drinkIndex < 1 || drinkIndex > drinkList.size());
-        PrintElement.print(drinkList.get(drinkIndex-1));
+        PrintElement.print(drinkList.get(drinkIndex - 1));
     }
 
     private void option1() {
@@ -191,26 +191,53 @@ public class Menu {
     }
 
     private void option4() {
-        lowerMenu(new ArrayList<>(Arrays.asList("exit", "sort by ID", "sort by Date", "sort by Drink name", "sort by alcoholic")));
+        int result = lowerMenu(new ArrayList<>(Arrays.asList("exit", "sort by ID", "sort by Date", "sort by Drink name", "sort by alcoholic")));
+        enterSortMenuOptions(result);
     }
 
     private void option5() {
+        int result = lowerMenu(new ArrayList<>(Arrays.asList("exit", "filter by Date", "sort by alcoholic", "by ingredients")));
+        enterFilterMenuOption(result);
+    }
+
+    private void enterFilterMenuOption(int source) {
         List<Drink> list = new ArrayList<>();
         FilterList filterElements = new FilterList(drinkList);
-        list = filterElements.getFilteredByIngredient(FilterElements.APPLE_JUICE).getFilteredByAlcoholic(true).getResults();
+
+        switch (source) {
+            case 0:
+                break;
+            case 1:
+                list = filterElements.getFilteredByIngredient(FilterElements.APPLE_JUICE).getResults();
+                break;
+            case 2:
+                list = filterElements.getFilteredByAlcoholic(true).getResults();
+                break;
+            case 3 :
+                list = filterElements.getFilteredByDate(LocalDate.of(2016,1,1).atStartOfDay(),
+                        LocalDate.of(2017,1,1).atStartOfDay()).getResults();
+            default:
+                break;
+
+        }
+
         PrintElements printElements = new PrintElements(list);
         printElements.print();
+
     }
 
-    private void lowerMenu(List<String> list) {
+    private int lowerMenu(List<String> list) {
         int input;
-        do {
-            displayMenu(list);
-            input = getMenuNumber(list);
-        } while (enterLowerMenuOptions(input));
+//        do {
+//            displayMenu(list);
+//            input = getMenuNumber(list);
+//        } while (enterLowerMenuOptions(input));
+        displayMenu(list);
+        input = getMenuNumber(list);
+        return input;
     }
 
-    private boolean enterLowerMenuOptions(int source) {
+    private boolean enterSortMenuOptions(int source) {
         SortDrinks sortDrinks = new SortDrinks(drinkList);
         PrintElements printElements;
 
