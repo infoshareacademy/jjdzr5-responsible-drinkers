@@ -12,18 +12,17 @@ import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.searching.Search;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
-import org.apache.log4j.Logger;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class BetterMenu {
     private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
     private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
     private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
-
-    final static Logger logger = Logger.getLogger(BetterMenu.class.getName());
 
     private List<Drink> drinkList;
 
@@ -89,14 +88,13 @@ public class BetterMenu {
     }
 
     private void inputSwitcherMainManu(int menuOption) {
-        int lowerMenuOption1, lowerMenuOption2;
         switch (menuOption) {
             case 4: {
                 sortOption();
                 break;
             }
             case 1: {
-                checkAllDrinksOption();
+                printAllDrinksOption();
                 break;
             }
             case 2: {
@@ -140,8 +138,6 @@ public class BetterMenu {
                 .getResults();
         PrintElements printElements = new PrintElements(searchDrink);
         printElements.print();
-
-
     }
 
     private void inputSortMenu(int lowerMenuOption) {
@@ -172,7 +168,7 @@ public class BetterMenu {
     }
 
     private void inputFilterMenu(int lowerMenuOption) {
-        List<Drink> list = new ArrayList<>();
+        List<Drink> list;
         FilterList filterElements = new FilterList(drinkList);
         switch (lowerMenuOption) {
             case 3: {
@@ -197,7 +193,7 @@ public class BetterMenu {
         }
     }
 
-    private void checkAllDrinksOption() {
+    private void printAllDrinksOption() {
         PrintElements printElements = new PrintElements(drinkList);
         printElements.print();
     }
@@ -251,7 +247,7 @@ public class BetterMenu {
     }
 
     private void removeDrinkOption() {
-        checkAllDrinksOption();
+        printAllDrinksOption();
         DrinkManager drinkManager = new DrinkManager(drinkList);
         int index;
         do {
@@ -280,7 +276,7 @@ public class BetterMenu {
     }
 
     private void printDrinkOption() {
-        checkAllDrinksOption();
+        printAllDrinksOption();
         int drinkIndex;
         do {
             System.out.print("Podaj nr drinka z listy: ");
