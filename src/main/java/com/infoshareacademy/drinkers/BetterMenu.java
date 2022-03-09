@@ -7,6 +7,7 @@ import com.infoshareacademy.drinkers.service.filtering.FilterElements;
 import com.infoshareacademy.drinkers.service.filtering.FilterList;
 import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.manage.DrinkManager;
+import com.infoshareacademy.drinkers.service.printing.ConsoleColors;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.searching.Search;
@@ -46,11 +47,12 @@ public class BetterMenu {
     }
 
     private void printMenu(String[] strings) {
-        System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+        System.out.println(ConsoleColors.WHITE_BOLD + ConsoleColors.WHITE_BRIGHT + "@-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-@" + ConsoleColors.RESET);
+
         for (int i = 0; i < strings.length; i++) {
-            System.out.println(i + ". " + strings[i]);
+            System.out.println(ConsoleColors.WHITE_BOLD + ConsoleColors.WHITE_BRIGHT + i + ". " + ConsoleColors.RESET + strings[i]);
         }
-        System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+        System.out.println(ConsoleColors.WHITE_BOLD + ConsoleColors.WHITE_BRIGHT + "@-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-@" + ConsoleColors.RESET);
         System.out.print("Wybierz opcję: ");
     }
 
@@ -84,10 +86,6 @@ public class BetterMenu {
             }
         } while (!isValid);
         return result;
-    }
-
-    private void printObject(Object object) {
-        System.out.println(object + " -> " + object.getClass().getSimpleName());
     }
 
     private void inputSwitcherMainManu(int menuOption) {
@@ -222,8 +220,7 @@ public class BetterMenu {
             System.out.print("Czy alkoholowy [Y/N]: ");
             drinkBuilder.setisAlcoholic(isAlcoholic());
             System.out.print("Podaj składnik 1: ");
-            input = ConsoleInput.getInputUserString();
-            drinkBuilder.setIngredient01(input);
+            drinkBuilder.setIngredient01(ConsoleInput.getInputUserString());
             System.out.print("Podaj składnik 2: ");
             drinkBuilder.setIngredient02(ConsoleInput.getInputUserString());
             System.out.print("Podaj składnik 3: ");
@@ -242,11 +239,7 @@ public class BetterMenu {
 
     private boolean isAlcoholic() {
         String s = ConsoleInput.getInputUserString();
-        if (s.equalsIgnoreCase("y")) {
-            return true;
-        } else {
-            return false;
-        }
+        return s.equalsIgnoreCase("y");
     }
 
     private void removeDrinkOption() {
