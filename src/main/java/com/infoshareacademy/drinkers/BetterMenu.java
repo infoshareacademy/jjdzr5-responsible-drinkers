@@ -46,9 +46,12 @@ public class BetterMenu {
     }
 
     private void printMenu(String[] strings) {
+        System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
         for (int i = 0; i < strings.length; i++) {
             System.out.println(i + ". " + strings[i]);
         }
+        System.out.println("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+        System.out.print("Wybierz opcję: ");
     }
 
     private int readInput(String[] menu) {
