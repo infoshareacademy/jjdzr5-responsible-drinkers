@@ -55,7 +55,10 @@ public class App {
 //        PrintElements printElements = new PrintElements(new JsonReader().getDrinkList());
 //        printElements.print();
 
-        Menu menu = new Menu();
-        menu.run();
+//        Menu menu = new Menu();
+//        menu.run();
+
+        BetterMenu menu = new BetterMenu();
+        menu.start();
     }
 }

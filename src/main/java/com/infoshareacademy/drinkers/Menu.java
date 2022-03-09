@@ -13,7 +13,6 @@ import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -82,24 +81,24 @@ public class Menu {
                 System.out.println("Zamykam program");
                 return;
             case 1:
-                option1();
+                checkAllDrinksOption();
                 break;
             case 2:
-                option2();
+                addDrinkOption();
                 break;
             case 3:
-                option3();
+                removeDrinkOption();
                 break;
             case 4:
-                option4();
+                sortOption();
                 break;
             case 5:
-                option5();
+                filterOption();
             case 6:
                 System.out.println("Edytuje Drinka.");
                 break;
             case 7:
-                option7();
+                printDrinkOption();
                 break;
             case 8:
                 System.out.println("7. Wyszukaj drinka.");
@@ -113,8 +112,8 @@ public class Menu {
         enterIntoMenuOptions(getMenuNumber(menuOptions));
     }
 
-    private void option7() {
-        option1();
+    private void printDrinkOption() {
+        checkAllDrinksOption();
         int drinkIndex;
         do {
             System.out.print("Podaj nr drinka z listy: ");
@@ -124,12 +123,12 @@ public class Menu {
         PrintElement.print(drinkList.get(drinkIndex - 1));
     }
 
-    private void option1() {
+    private void checkAllDrinksOption() {
         PrintElements printElements = new PrintElements(drinkList);
         printElements.print();
     }
 
-    private void option2() {
+    private void addDrinkOption() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
         System.out.println("Dodałem drinka:");
         Drink newDrink = addDrink();
@@ -178,7 +177,7 @@ public class Menu {
     }
 
 
-    private void option3() {
+    private void removeDrinkOption() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
         int index;
         do {
@@ -190,12 +189,12 @@ public class Menu {
         drinkList = drinkManager.removeDrink(index);
     }
 
-    private void option4() {
+    private void sortOption() {
         int result = lowerMenu(new ArrayList<>(Arrays.asList("exit", "sort by ID", "sort by Date", "sort by Drink name", "sort by alcoholic")));
         enterSortMenuOptions(result);
     }
 
-    private void option5() {
+    private void filterOption() {
         int result = lowerMenu(new ArrayList<>(Arrays.asList("exit", "filter by Date", "sort by alcoholic", "by ingredients")));
         enterFilterMenuOption(result);
     }
