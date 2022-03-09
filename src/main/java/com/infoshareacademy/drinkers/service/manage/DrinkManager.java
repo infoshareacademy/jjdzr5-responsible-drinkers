@@ -16,18 +16,18 @@ public class DrinkManager {
         this.drinkList = drinkList;
     }
 
-    public List<Drink> addDrinkToList(Drink newDrink) {
+    public void addDrinkToList(Drink newDrink) {
         drinkList.add(newDrink);
-        return drinkList;
+//        return drinkList;
     }
 
-    public List<Drink> removeDrink(int byIndex) {
+    public void removeDrink(int byIndex) {
         try {
             drinkList.remove(byIndex);
         } catch (IndexOutOfBoundsException e) {
             LOGGER.log(Level.INFO, "Index out of bounds. Can't remove drink", e);
         }
-        return drinkList;
+ //       return drinkList;
     }
 
     public List<Drink> removeDrink(Drink drink) {

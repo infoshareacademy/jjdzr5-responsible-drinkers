@@ -1,5 +1,6 @@
 package com.infoshareacademy.drinkers;
 
+import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
 import com.infoshareacademy.drinkers.service.console.ConsoleInput;
@@ -15,6 +16,7 @@ import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +26,7 @@ public class BetterMenu {
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
     private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
     private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
+    private final static String[] LOWER_EDIT_MENU = {"Wróć wyżej", "Zmien nazwę", "Zmien ID", "Zmien alko / bezalko", "Odrzuć zmiany"};
 
     private List<Drink> drinkList;
 
@@ -115,15 +118,85 @@ public class BetterMenu {
                 break;
             }
             case 7: {
-                System.out.println("Edytuje Drinka.");
+                editDrinkOption();
                 break;
             }
             case 8: {
                 searchForDrink();
-
                 break;
             }
         }
+    }
+
+    private void editDrinkOption() {
+        printAllDrinksOption();
+        System.out.println("Podaj nr drinka do edycji");
+        int number = ConsoleInput.getInputUserInteger() - 1;
+        PrintElement.print(drinkList.get(number));
+        Drink copyOfDrink = drinkList.get(number);
+        int lowerMenuOption;
+        Drink drink = drinkList.get(number);
+        do {
+            lowerMenuOption = readInput(LOWER_EDIT_MENU);
+            drink = inputEditMenu(lowerMenuOption, number);
+        } while (lowerMenuOption != 0 && lowerMenuOption != 4);
+        if (lowerMenuOption != 4) {
+            drinkList.set(number, copyOfDrink);
+        } else {
+            drinkList.set(number, drink);
+        }
+    }
+
+
+    private Drink inputEditMenu(int lowerMenuOption, int drinkToBeEditedIndex) {
+
+        Drink drinkToEdit = drinkList.get(drinkToBeEditedIndex);
+        switch (lowerMenuOption) {
+
+            case 1: {
+                System.out.print("Stara nazwa: ");
+                System.out.println(drinkToEdit.getDrink());
+                System.out.print("Podaj nową: ");
+                String name = ConsoleInput.getInputUserString();
+                drinkToEdit.setDrinkName(name);
+                PrintElement.print(drinkToEdit);
+                break;
+            }
+            case 2: {
+                System.out.print("Stare ID: ");
+                System.out.println(drinkToEdit.getIdDrink());
+                int index;
+                do {
+                    System.out.print("Podaj nowe ID: ");
+                    index = ConsoleInput.getInputUserInteger();
+                } while (index == -1);
+                drinkToEdit.setIdDrink(index);
+                PrintElement.print(drinkToEdit);
+                break;
+            }
+            case 3: {
+                System.out.print("Stare alco: ");
+                System.out.println(drinkToEdit.getAlcoholic());
+                String string;
+                do {
+                    System.out.print("Podaj nowe alko [y/n]: ");
+                    string = ConsoleInput.getInputUserString();
+                } while (!string.equalsIgnoreCase("Y") && !string.equalsIgnoreCase("N"));
+                if (string.equalsIgnoreCase("y")) {
+                    drinkToEdit.setAlcoholic(Alcoholic.ALCOHOLIC.getName());
+                } else {
+                    drinkToEdit.setAlcoholic(Alcoholic.NON_ALCOHOLIC.getName());
+                }
+                PrintElement.print(drinkToEdit);
+                break;
+            }
+            case 4: {
+                return drinkToEdit;
+                //  break;
+            }
+        }
+        drinkToEdit.setDateModified(LocalDateTime.now());
+        return drinkToEdit;
     }
 
     private void searchForDrink() {
@@ -252,7 +325,7 @@ public class BetterMenu {
         } while (index < 0 || index > drinkList.size() - 1);
         System.out.println("Usuwam drinka:");
         PrintElement.print(drinkList.get(index));
-        drinkList = drinkManager.removeDrink(index);
+        drinkManager.removeDrink(index);
     }
 
     private void sortOption() {

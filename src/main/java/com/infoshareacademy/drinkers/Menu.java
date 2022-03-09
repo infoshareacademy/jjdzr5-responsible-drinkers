@@ -186,7 +186,7 @@ public class Menu {
         } while (index < 0 || index > drinkList.size() - 1);
         System.out.println("Usuwam drinka:");
         PrintElement.print(drinkList.get(index));
-        drinkList = drinkManager.removeDrink(index);
+        drinkManager.removeDrink(index);
     }
 
     private void sortOption() {
