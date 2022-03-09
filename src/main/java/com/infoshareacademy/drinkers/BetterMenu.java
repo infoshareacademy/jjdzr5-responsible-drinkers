@@ -9,6 +9,7 @@ import com.infoshareacademy.drinkers.service.gson.JsonReader;
 import com.infoshareacademy.drinkers.service.manage.DrinkManager;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
+import com.infoshareacademy.drinkers.service.searching.Search;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 import org.apache.log4j.Logger;
@@ -119,10 +120,28 @@ public class BetterMenu {
                 break;
             }
             case 8: {
-                System.out.println("Wyszukaj drinka.");
+                searchForDrink();
+
                 break;
             }
         }
+    }
+
+    private void searchForDrink() {
+        String searchText;
+        do {
+            System.out.print("Podaj tekst do wyszukania [min. 3 znaki]: ");
+            searchText = ConsoleInput.getInputUserString();
+        }
+        while (searchText.length() < 3);
+
+        List<Drink> searchDrink = new Search(drinkList)
+                .searchByName(searchText)
+                .getResults();
+        PrintElements printElements = new PrintElements(searchDrink);
+        printElements.print();
+
+
     }
 
     private void inputSortMenu(int lowerMenuOption) {
