@@ -14,6 +14,7 @@ import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.searching.Search;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -21,7 +22,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class BetterMenu {
+public class OtherMenu {
     private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
     private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
@@ -31,7 +32,7 @@ public class BetterMenu {
 
     private final List<Drink> drinkList;
 
-    public BetterMenu() {
+    public OtherMenu() {
         JsonReader jsonReader = new JsonReader();
         drinkList = jsonReader.getDrinkList();
     }
@@ -48,6 +49,9 @@ public class BetterMenu {
                 System.out.println(MAIN_MENU[menuOption]);
             }
         } while (menuOption != 0);
+        String textToGoodBye = ConsoleColors.BLACK_BOLD + ConsoleColors.RED_BACKGROUND + " ~ ~ ~  Do zobaczenia!  ~ ~ ~ " +
+                ConsoleColors.RESET + System.lineSeparator();
+        System.out.print(StringUtils.center(textToGoodBye, 30));
     }
 
     private void printMenu(String[] strings) {

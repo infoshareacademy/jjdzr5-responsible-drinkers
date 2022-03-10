@@ -1,6 +1,6 @@
 package com.infoshareacademy.drinkers;
 
-import com.infoshareacademy.drinkers.service.menu.BetterMenu;
+import com.infoshareacademy.drinkers.service.menu.OtherMenu;
 import com.infoshareacademy.drinkers.service.properties.ApplicationProperties;
 
 import java.util.logging.Level;
@@ -15,7 +15,7 @@ public class App {
     public static void main(String[] args) {
 
         LOGGER.log(Level.INFO, "Responsible drinkers");
-        BetterMenu menu = new BetterMenu();
+        OtherMenu menu = new OtherMenu();
         menu.start();
     }
 }
