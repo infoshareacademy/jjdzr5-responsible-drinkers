@@ -26,9 +26,10 @@ public class BetterMenu {
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
     private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
     private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
-    private final static String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID", "Zmien alko / bezalko", "Odrzuć zmiany"};
+    private final static String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID",
+            "Zmien alko / bezalko", "Odrzuć zmiany"};
 
-    private List<Drink> drinkList;
+    private final List<Drink> drinkList;
 
     public BetterMenu() {
         JsonReader jsonReader = new JsonReader();
