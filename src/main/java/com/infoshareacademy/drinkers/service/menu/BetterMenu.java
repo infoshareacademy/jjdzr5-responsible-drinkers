@@ -1,4 +1,4 @@
-package com.infoshareacademy.drinkers;
+package com.infoshareacademy.drinkers.service.menu;
 
 import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
@@ -26,7 +26,7 @@ public class BetterMenu {
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
     private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
     private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
-    private final static String[] LOWER_EDIT_MENU = {"Wróć wyżej", "Zmien nazwę", "Zmien ID", "Zmien alko / bezalko", "Odrzuć zmiany"};
+    private final static String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID", "Zmien alko / bezalko", "Odrzuć zmiany"};
 
     private List<Drink> drinkList;
 
@@ -280,14 +280,28 @@ public class BetterMenu {
         PrintElement.print(newDrink);
     }
 
+    private boolean checkIfIDExist(int checkID) {
+        for (Drink drink : drinkList) {
+            if (drink.getIdDrink() == checkID) {
+                System.out.println("Podane ID istnieje!");
+                return true;
+            }
+        }
+        return false;
+    }
+
     private Drink addDrink() {
         boolean isNotValid = true;
         Drink drink = null;
         do {
             String input;
             DrinkBuilder drinkBuilder = new DrinkBuilder();
-            System.out.print("Podaj ID: ");
-            drinkBuilder.setID(ConsoleInput.getInputUserInteger());
+            int ID;
+            do {
+                System.out.print("Podaj ID: ");
+                ID = ConsoleInput.getInputUserInteger();
+            } while (checkIfIDExist(ID));
+            drinkBuilder.setID(ID);
             System.out.print("Podaj nazwe: ");
             drinkBuilder.setName(ConsoleInput.getInputUserString());
             System.out.print("Czy alkoholowy [Y/N]: ");

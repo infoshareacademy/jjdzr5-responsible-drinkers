@@ -1,4 +1,4 @@
-package com.infoshareacademy.drinkers;
+package com.infoshareacademy.drinkers.service.menu;
 
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.DrinkBuilder;
