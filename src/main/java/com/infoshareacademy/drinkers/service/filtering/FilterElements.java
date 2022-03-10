@@ -1,7 +1,6 @@
 package com.infoshareacademy.drinkers.service.filtering;
 
 public enum FilterElements {
-    ALCOHOL("Alcoholic"),
     APPLE_JUICE("Apple juice"),
     COFFEE("Coffee"),
     COGNAC("Cognac"),
@@ -12,7 +11,6 @@ public enum FilterElements {
     JUICE("Juice"),
     LIME_JUICE("Lime juice"),
     MILK("Milk"),
-    NON_ALCOHOL("Non alcoholic"),
     ORANGE_JUICE("Orange juice"),
     PINEAPPLE_JUICE("Pineapple juice"),
     RUM("Rum"),

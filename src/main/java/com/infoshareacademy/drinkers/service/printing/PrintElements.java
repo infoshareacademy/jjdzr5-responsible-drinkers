@@ -39,16 +39,19 @@ public class PrintElements {
     }
 
     public void print() {
-        printFrameHorizontal();
-        printTitle();
-        printFrameHorizontal();
-        int index = 0;
-        for (Drink drink : drinkList) {
-            printElement(drink, index);
-            index++;
+        if (drinkList.isEmpty() || drinkList==null) {
+            System.out.println("Brak wynikow do wyswietlenia!");
+        } else {
+            printFrameHorizontal();
+            printTitle();
+            printFrameHorizontal();
+            int index = 0;
+            for (Drink drink : drinkList) {
+                printElement(drink, index);
+                index++;
+            }
+            printFrameHorizontal();
         }
-        printFrameHorizontal();
-
     }
 
     private void printElement(Drink drink, int index) {

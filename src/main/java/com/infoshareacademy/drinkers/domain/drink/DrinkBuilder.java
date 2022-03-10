@@ -61,21 +61,30 @@ public final class DrinkBuilder {
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
 
-    public Drink build() {
+    public Drink build() throws IllegalStateException {
         Drink drink = new Drink();
         if (idDrink <= 0) {
-            LOGGER.log(Level.INFO, "ID cannot be empty");
+//            LOGGER.log(Level.INFO, "ID cannot be empty");
             throw new IllegalStateException("ID cannot be empty");
-        }
-        if (strDrink.isEmpty()) {
-            LOGGER.log(Level.INFO, "Name cannot be empty");
+        } else if (strDrink.isEmpty()) {
+//            LOGGER.log(Level.INFO, "Name cannot be empty");
             throw new IllegalStateException("Name cannot be empty");
+        } else {
+            drink.setIdDrink(idDrink);
+            drink.setDrinkName(strDrink);
+            drink.setDrinkAlternate(strDrinkAlternate);
+            drink.setDateModified(LocalDateTime.now());
+            drink.setAlcoholic(strAlcoholic);
+            drink.setIngredient1(strIngredient1);
+            drink.setIngredient2(strIngredient2);
+            drink.setIngredient3(strIngredient3);
+            drink.setIngredient4(strIngredient4);
+            drink.setIngredient5(strIngredient5);
+            drink.setIngredient6(strIngredient6);
+            drink.setIngredient7(strIngredient7);
+            drink.setIngredient8(strIngredient8);
+            return drink;
         }
-        drink.setIdDrink(idDrink);
-        drink.setDrinkName(strDrink);
-        drink.setDrinkAlternate(strDrinkAlternate);
-        drink.setDateModified(LocalDateTime.now());
-        return drink;
     }
 
     public DrinkBuilder setID(Integer ID) {
@@ -103,42 +112,43 @@ public final class DrinkBuilder {
         }
     }
 
-    public DrinkBuilder setIngredients(String... ingredient) {
-        if (ingredient.length < 9) {
-            if (!ingredient[0].isEmpty()) {
-                this.strIngredient1 = ingredient[0];
-            }
-            if (!ingredient[1].isEmpty()) {
-                this.strIngredient2 = ingredient[1];
-            }
-            if (!ingredient[2].isEmpty()) {
-                this.strIngredient3 = ingredient[2];
-            }
-            if (!ingredient[3].isEmpty()) {
-                this.strIngredient4 = ingredient[3];
-            }
-            if (!ingredient[4].isEmpty()) {
-                this.strIngredient5 = ingredient[4];
-            }
-            if (!ingredient[5].isEmpty()) {
-                this.strIngredient6 = ingredient[5];
-            }
-            if (!ingredient[6].isEmpty()) {
-                this.strIngredient7 = ingredient[6];
-            }
-            if (!ingredient[7].isEmpty()) {
-                this.strIngredient8 = ingredient[7];
-            }
-            if (!ingredient[8].isEmpty()) {
-                this.strIngredient9 = ingredient[8];
-            }
-            if (!ingredient[9].isEmpty()) {
-                this.strIngredient10 = ingredient[9];
-            }
-            return this;
-        } else {
-            LOGGER.log(Level.INFO, "Max 10 ingredients");
-            return this;
-        }
+    public DrinkBuilder setIngredient01(String ingredient) {
+        this.strIngredient1 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient02(String ingredient) {
+        this.strIngredient2 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient03(String ingredient) {
+        this.strIngredient3 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient04(String ingredient) {
+        this.strIngredient4 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient05(String ingredient) {
+        this.strIngredient5 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient06(String ingredient) {
+        this.strIngredient6 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient07(String ingredient) {
+        this.strIngredient7 = ingredient;
+        return this;
+    }
+
+    public DrinkBuilder setIngredient08(String ingredient) {
+        this.strIngredient8 = ingredient;
+        return this;
     }
 }

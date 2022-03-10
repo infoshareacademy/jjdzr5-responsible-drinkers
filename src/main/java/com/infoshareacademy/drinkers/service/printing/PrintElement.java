@@ -36,8 +36,10 @@ public class PrintElement {
     private static String isAlcoholic(Drink drink) {
         if (drink.getAlcoholic().equalsIgnoreCase("alcoholic")) {
             return "YES";
-        } else {
+        }  else if (drink.getAlcoholic().equalsIgnoreCase("non alcoholic")) {
             return "NO";
+        } else {
+            return null;
         }
     }
 

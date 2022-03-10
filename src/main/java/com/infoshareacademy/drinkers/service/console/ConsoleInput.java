@@ -2,24 +2,25 @@ package com.infoshareacademy.drinkers.service.console;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class ConsoleInput {
-
-    private static final Scanner SCANNER = new Scanner(System.in);
-
 
     public static String getInputUserString() {
         boolean inputIsNotValid = true;
         String input = "";
-        do{
+        do {
             try {
                 input = new Scanner(System.in).nextLine();
+                if (input.equals("")) {
+                    return "";
+                }
                 inputIsNotValid = input.trim().isEmpty();
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input.");
                 inputIsNotValid = true;
             }
-        }while (inputIsNotValid);
+        } while (inputIsNotValid);
         return input;
     }
 
@@ -27,7 +28,7 @@ public class ConsoleInput {
 
         boolean inputIsNotValid = true;
         Double input = 0.0;
-        do{
+        do {
             try {
                 input = new Scanner(System.in).nextDouble();
                 inputIsNotValid = false;
@@ -36,21 +37,29 @@ public class ConsoleInput {
                 System.out.println("Wrong input.");
                 inputIsNotValid = true;
             }
-        }while (inputIsNotValid);
+        } while (inputIsNotValid);
         return input;
     }
 
     public static Integer getInputUserInteger() {
         boolean inputIsNotValid = true;
         int result = 0;
-        do{
+        do {
             try {
+                String line = new Scanner(System.in).nextLine();
+                try {
+                    result = Integer.valueOf(line);
+                } catch (NumberFormatException e ) {
+                    inputIsNotValid = false;
+                    return -1;
+                }
 
-                result = new Scanner(System.in).nextInt();
+           //     result = new Scanner(System.in).nextInt();
                 inputIsNotValid = false;
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input.");
-                inputIsNotValid = true;               }
+                inputIsNotValid = true;
+            }
         } while (inputIsNotValid);
         return result;
     }
