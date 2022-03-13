@@ -7,14 +7,11 @@ import java.util.regex.Pattern;
 public class ConsoleInput {
 
     public static String getInputUserString() {
-        boolean inputIsNotValid = true;
+        boolean inputIsNotValid;
         String input = "";
         do {
             try {
                 input = new Scanner(System.in).nextLine();
-                if (input.equals("")) {
-                    return "";
-                }
                 inputIsNotValid = input.trim().isEmpty();
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input.");
@@ -23,6 +20,7 @@ public class ConsoleInput {
         } while (inputIsNotValid);
         return input;
     }
+
 
     public static Double getInputUserDouble() {
 
