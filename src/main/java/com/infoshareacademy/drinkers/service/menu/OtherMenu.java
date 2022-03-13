@@ -323,7 +323,7 @@ public class OtherMenu {
                 } else if(result.equals("n") || result.equals("N")) {
                     inputNotCorrect = false;
                     boolean isAlcoholFree = true;
-                    drinkBuilder.setisNonAlcoholic(true);
+                    drinkBuilder.setisNonAlcoholic(isAlcoholFree);
                 } else {
                     inputNotCorrect = true;
                 }
@@ -352,10 +352,10 @@ public class OtherMenu {
         return input.equalsIgnoreCase("y");
     }
 
-    private boolean isNonAlcoholic(String input) {
-   //     String s = ConsoleInput.getInputUserString();
-        return input.equalsIgnoreCase("n");
-    }
+//    private boolean isNonAlcoholic(String input) {
+//   //     String s = ConsoleInput.getInputUserString();
+//        return input.equalsIgnoreCase("n");
+//    }
 
     private void removeDrinkOption() {
         printAllDrinksOption();
