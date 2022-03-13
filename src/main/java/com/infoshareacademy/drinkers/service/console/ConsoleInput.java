@@ -42,19 +42,12 @@ public class ConsoleInput {
     }
 
     public static Integer getInputUserInteger() {
-        boolean inputIsNotValid = true;
+        boolean inputIsNotValid;
         int result = 0;
         do {
             try {
-                String line = new Scanner(System.in).nextLine();
-                try {
-                    result = Integer.valueOf(line);
-                } catch (NumberFormatException e ) {
-                    inputIsNotValid = false;
-                    return -1;
-                }
 
-           //     result = new Scanner(System.in).nextInt();
+                result = new Scanner(System.in).nextInt();
                 inputIsNotValid = false;
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input.");
@@ -63,5 +56,6 @@ public class ConsoleInput {
         } while (inputIsNotValid);
         return result;
     }
+
 
 }

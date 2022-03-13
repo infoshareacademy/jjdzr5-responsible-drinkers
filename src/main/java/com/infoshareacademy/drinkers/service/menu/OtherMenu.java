@@ -22,6 +22,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+
 public class OtherMenu {
     private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
@@ -310,7 +312,25 @@ public class OtherMenu {
             System.out.print("Podaj nazwe: ");
             drinkBuilder.setName(ConsoleInput.getInputUserString());
             System.out.print("Czy alkoholowy [Y/N]: ");
-            drinkBuilder.setisAlcoholic(isAlcoholic());
+
+            boolean inputNotCorrect = false;
+            do {
+
+                String result = ConsoleInput.getInputUserString();
+                if(result.equals("y") || result.equals("Y"))  {
+                    inputNotCorrect = false;
+                    drinkBuilder.setisAlcoholic(isAlcoholic(result));
+                } else if(result.equals("n") || result.equals("N")) {
+                    inputNotCorrect = false;
+                    boolean isAlcoholFree = true;
+                    drinkBuilder.setisNonAlcoholic(isAlcoholFree);
+                } else {
+                    System.out.println("Musisz wpisac Y lub N. Wszelki inny input nie jest rejestrowany przez system.");
+                    inputNotCorrect = true;
+
+                }
+            } while (inputNotCorrect);
+
             System.out.print("Podaj składnik 1: ");
             drinkBuilder.setIngredient01(ConsoleInput.getInputUserString());
             System.out.print("Podaj składnik 2: ");
@@ -329,18 +349,30 @@ public class OtherMenu {
         return drink;
     }
 
-    private boolean isAlcoholic() {
-        String s = ConsoleInput.getInputUserString();
-        return s.equalsIgnoreCase("y");
+    private boolean isAlcoholic(String input) {
+     //   String s = ConsoleInput.getInputUserString();
+        return input.equalsIgnoreCase("y");
     }
+
+//    private boolean isNonAlcoholic(String input) {
+//   //     String s = ConsoleInput.getInputUserString();
+//        return input.equalsIgnoreCase("n");
+//    }
 
     private void removeDrinkOption() {
         printAllDrinksOption();
         DrinkManager drinkManager = new DrinkManager(drinkList);
         int index;
+        boolean inputNotCorrect;
         do {
             System.out.print("Podaj nr drinka z listy: ");
             index = ConsoleInput.getInputUserInteger() - 1;
+           // inputNotCorrect =index < 0 || index > drinkList.size() - 1;
+            if(index < 0 || index > drinkList.size() - 1) {
+                System.out.println("Podaj nr ID istniejace w bazie.");
+            } else {
+                inputNotCorrect = false;
+            }
         } while (index < 0 || index > drinkList.size() - 1);
         System.out.println("Usuwam drinka:");
         PrintElement.print(drinkList.get(index));
