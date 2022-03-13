@@ -363,9 +363,16 @@ public class OtherMenu {
         printAllDrinksOption();
         DrinkManager drinkManager = new DrinkManager(drinkList);
         int index;
+        boolean inputNotCorrect;
         do {
             System.out.print("Podaj nr drinka z listy: ");
             index = ConsoleInput.getInputUserInteger() - 1;
+           // inputNotCorrect =index < 0 || index > drinkList.size() - 1;
+            if(index < 0 || index > drinkList.size() - 1) {
+                System.out.println("Podaj nr ID istniejace w bazie.");
+            } else {
+                inputNotCorrect = false;
+            }
         } while (index < 0 || index > drinkList.size() - 1);
         System.out.println("Usuwam drinka:");
         PrintElement.print(drinkList.get(index));
