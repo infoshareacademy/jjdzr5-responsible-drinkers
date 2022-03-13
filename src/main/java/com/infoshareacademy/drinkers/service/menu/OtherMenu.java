@@ -325,7 +325,9 @@ public class OtherMenu {
                     boolean isAlcoholFree = true;
                     drinkBuilder.setisNonAlcoholic(isAlcoholFree);
                 } else {
+                    System.out.println("Musisz wpisac Y lub N. Wszelki inny input nie jest rejestrowany przez system.");
                     inputNotCorrect = true;
+
                 }
             } while (inputNotCorrect);
 
