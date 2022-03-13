@@ -17,6 +17,7 @@ public final class DrinkBuilder {
     private String strCategory;
     private String strIBA;
     private String strAlcoholic;
+    private String strNoAlcoholic;
     private String strGlass;
     private String strInstructions;
     private String strInstructionsES;
@@ -108,6 +109,16 @@ public final class DrinkBuilder {
             return this;
         } else {
             this.strAlcoholic = Alcoholic.NON_ALCOHOLIC.getName();
+            return this;
+        }
+    }
+
+    public DrinkBuilder setisNonAlcoholic(boolean isAlcoholic) {
+        if (isAlcoholic) {
+            this.strAlcoholic = Alcoholic.NON_ALCOHOLIC.getName();
+            return this;
+        } else {
+            this.strAlcoholic = Alcoholic.ALCOHOLIC.getName();
             return this;
         }
     }

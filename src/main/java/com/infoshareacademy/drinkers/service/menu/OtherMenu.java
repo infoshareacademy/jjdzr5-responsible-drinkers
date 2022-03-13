@@ -22,6 +22,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.apache.commons.lang3.RandomUtils.nextInt;
+
 public class OtherMenu {
     private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
@@ -310,7 +312,23 @@ public class OtherMenu {
             System.out.print("Podaj nazwe: ");
             drinkBuilder.setName(ConsoleInput.getInputUserString());
             System.out.print("Czy alkoholowy [Y/N]: ");
-            drinkBuilder.setisAlcoholic(isAlcoholic());
+
+            boolean inputNotCorrect = false;
+            do {
+
+                String result = ConsoleInput.getInputUserString();
+                if(result.equals("y") || result.equals("Y"))  {
+                    inputNotCorrect = false;
+                    drinkBuilder.setisAlcoholic(isAlcoholic(result));
+                } else if(result.equals("n") || result.equals("N")) {
+                    inputNotCorrect = false;
+                    boolean isAlcoholFree = true;
+                    drinkBuilder.setisNonAlcoholic(true);
+                } else {
+                    inputNotCorrect = true;
+                }
+            } while (inputNotCorrect);
+
             System.out.print("Podaj składnik 1: ");
             drinkBuilder.setIngredient01(ConsoleInput.getInputUserString());
             System.out.print("Podaj składnik 2: ");
@@ -329,9 +347,14 @@ public class OtherMenu {
         return drink;
     }
 
-    private boolean isAlcoholic() {
-        String s = ConsoleInput.getInputUserString();
-        return s.equalsIgnoreCase("y");
+    private boolean isAlcoholic(String input) {
+     //   String s = ConsoleInput.getInputUserString();
+        return input.equalsIgnoreCase("y");
+    }
+
+    private boolean isNonAlcoholic(String input) {
+   //     String s = ConsoleInput.getInputUserString();
+        return input.equalsIgnoreCase("n");
     }
 
     private void removeDrinkOption() {
