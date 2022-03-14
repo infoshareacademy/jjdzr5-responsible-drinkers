@@ -26,7 +26,7 @@ public class Search {
 
     public Search searchByID(Integer ID) {
         for (Drink drink : drinkList) {
-            if (drink.getIdDrink()==ID) {
+            if (String.valueOf(drink.getIdDrink()).contains(String.valueOf(ID))) {
                 resultList.add(drink);
             }
         }
