@@ -213,9 +213,16 @@ public class OtherMenu {
             searchText = ConsoleInput.getInputUserString();
         }
         while (searchText.length() < 3);
+        Integer ID;
+        try {
+            ID = Integer.parseInt(searchText);
+        } catch (NumberFormatException e) {
+            ID = null;
+        }
 
         List<Drink> searchDrink = new Search(drinkList)
                 .searchByName(searchText)
+                .searchByID(ID)
                 .getResults();
         PrintElements printElements = new PrintElements(searchDrink);
         printElements.print();
