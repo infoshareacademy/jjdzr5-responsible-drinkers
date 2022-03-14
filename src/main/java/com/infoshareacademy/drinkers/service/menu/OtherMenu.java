@@ -209,7 +209,7 @@ public class OtherMenu {
     private void searchForDrink() {
         String searchText;
         do {
-            System.out.print("Podaj tekst do wyszukania [min. 3 znaki]: ");
+            System.out.print("Podaj tekst lub numer ID do wyszukania [min. 3 znaki]: ");
             searchText = ConsoleInput.getInputUserString();
         }
         while (searchText.length() < 3);
