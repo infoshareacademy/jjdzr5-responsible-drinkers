@@ -18,11 +18,12 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.apache.commons.lang3.RandomUtils.nextInt;
+import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 
 public class OtherMenu {
     private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
@@ -254,25 +255,32 @@ public class OtherMenu {
         switch (lowerMenuOption) {
             case 4: {
                 list = filterElements.getFilteredByIngredient(FilterElements.VODKA).getResults();
+                System.out.println("Filter: " + FilterElements.VODKA.getName());
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
             }
             case 3: {
                 list = filterElements.getFilteredByAlcoholic(false).getResults();
+                System.out.println("Filter: " + Alcoholic.NON_ALCOHOLIC.getName());
+
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
             }
             case 2: {
                 list = filterElements.getFilteredByAlcoholic(true).getResults();
+                System.out.println("Filter: " + Alcoholic.ALCOHOLIC.getName());
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
             }
             case 1: {
-                list = filterElements.getFilteredByDate(LocalDate.of(2016, 1, 1).atStartOfDay(),
-                        LocalDate.of(2017, 1, 1).atStartOfDay()).getResults();
+                LocalDateTime startDate = LocalDate.of(2016, 1, 1).atStartOfDay();
+                LocalDateTime endDate = LocalDate.of(2016, 12, 31).atStartOfDay();
+                list = filterElements.getFilteredByDate(startDate, endDate).getResults();
+                System.out.println("Filter: od " + startDate.format(DateTimeFormatter.ofPattern(DATE_PATTERN)) +
+                        " -> do " + endDate.format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
