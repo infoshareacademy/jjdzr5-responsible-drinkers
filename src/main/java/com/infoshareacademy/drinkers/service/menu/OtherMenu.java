@@ -16,7 +16,6 @@ import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 import org.apache.commons.lang3.StringUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
@@ -28,8 +27,10 @@ import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 public class OtherMenu {
     private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
-    private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
-    private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by non-alcoholic", "by Ingredients"};
+    private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "Sortuj po ID", "Sortuj po Dacie", "Sortuj po nazwie",
+            "Sortuj po 'Alkoholic'"};
+    private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "filtruj po dacie", "Wyświetla drinki alkoholowe",
+            "Wyświetla drinki bezalkoholowe", "Wyświetl drinki ze skladnikiem"};
     private final static String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID",
             "Zmien alko / bezalko", "Odrzuć zmiany"};
 
@@ -276,8 +277,19 @@ public class OtherMenu {
                 break;
             }
             case 1: {
-                LocalDateTime startDate = LocalDate.of(2016, 1, 1).atStartOfDay();
-                LocalDateTime endDate = LocalDate.of(2016, 12, 31).atStartOfDay();
+                LocalDateTime startDate, endDate;
+                boolean datePeriodNotValid = true;
+                do {
+                    System.out.print("Podaj datę początkową [" + DATE_PATTERN + "]: ");
+                    startDate = ConsoleInput.getInputUserDateTime();
+                    System.out.print("Podaj datę końcową [" + DATE_PATTERN + "]: ");
+                    endDate = ConsoleInput.getInputUserDateTime();
+                    if (startDate.isBefore(endDate)) {
+                        datePeriodNotValid = false;
+                    } else {
+                        System.out.println("Przedział daty niepoprawny");
+                    }
+                } while (datePeriodNotValid);
                 list = filterElements.getFilteredByDate(startDate, endDate).getResults();
                 System.out.println("Filter: od " + startDate.format(DateTimeFormatter.ofPattern(DATE_PATTERN)) +
                         " -> do " + endDate.format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
