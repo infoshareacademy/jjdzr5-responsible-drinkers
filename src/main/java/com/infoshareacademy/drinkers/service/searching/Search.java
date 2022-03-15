@@ -1,6 +1,5 @@
 package com.infoshareacademy.drinkers.service.searching;
 
-import com.infoshareacademy.drinkers.App;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 
 import java.util.ArrayList;
@@ -10,7 +9,7 @@ import java.util.logging.Logger;
 
 public class Search {
 
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(Search.class.getName());
 
     private final List<Drink> drinkList;
     private final List<Drink> resultList = new ArrayList<>();
