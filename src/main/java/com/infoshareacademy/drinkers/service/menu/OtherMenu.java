@@ -209,13 +209,20 @@ public class OtherMenu {
     private void searchForDrink() {
         String searchText;
         do {
-            System.out.print("Podaj tekst do wyszukania [min. 3 znaki]: ");
+            System.out.print("Podaj tekst lub numer ID do wyszukania [min. 3 znaki]: ");
             searchText = ConsoleInput.getInputUserString();
         }
         while (searchText.length() < 3);
+        Integer ID;
+        try {
+            ID = Integer.parseInt(searchText);
+        } catch (NumberFormatException e) {
+            ID = null;
+        }
 
         List<Drink> searchDrink = new Search(drinkList)
                 .searchByName(searchText)
+                .searchByID(ID)
                 .getResults();
         PrintElements printElements = new PrintElements(searchDrink);
         printElements.print();
