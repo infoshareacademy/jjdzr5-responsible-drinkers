@@ -41,7 +41,7 @@ public class PrintElements {
     }
 
     public void print() {
-        if (drinkList.isEmpty() || drinkList==null) {
+        if (drinkList.isEmpty()) {
             System.out.println("Brak wynikow do wyswietlenia!");
         } else {
             printFrameHorizontal();
@@ -56,6 +56,12 @@ public class PrintElements {
         }
     }
 
+    private String optionalChecker(Optional<LocalDateTime> optional) {
+        return optional
+                .map(localDateTime -> localDateTime.format(DateTimeFormatter.ofPattern(DATE_PATTERN)))
+                .orElse("* brak danych *");
+    }
+
     private void printElement(Drink drink, int index) {
         Optional<LocalDateTime> optional = Optional.ofNullable(drink.getDateModified());
         String colorLine;
@@ -67,79 +73,42 @@ public class PrintElements {
         }
         StringBuilder lineBuilder = new StringBuilder();
 
-        if (optional.isPresent()) {
-            lineBuilder
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%d.", index + 1), COL_1_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%d", drink.getIdDrink()), COL_2_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%s", drink.getDrink()), COL_3_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%s", drink.getAlcoholic()), COL_4_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%s", drink.getGlass()), COL_5_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format(" %s", drink.getCategory()), COL_6_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.left(String.format(" %-70s", drink.getStringIntredientrs()), COL_7_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format(" %s", drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN))), COL_8_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(System.lineSeparator());
-        } else if (optional.isEmpty()){
-            lineBuilder
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%d.", index + 1), COL_1_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%d", drink.getIdDrink()), COL_2_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%s", drink.getDrink()), COL_3_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%s", drink.getAlcoholic()), COL_4_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format("%s", drink.getGlass()), COL_5_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format(" %s", drink.getCategory()), COL_6_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.left(String.format(" %-70s", drink.getStringIntredientrs()), COL_7_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(colorLine)
-                    .append(StringUtils.center(String.format(" %s", "brak danych"), COL_8_WIDTH))
-                    .append(colorLineReset)
-                    .append("|")
-                    .append(System.lineSeparator());
-        }
+        lineBuilder
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format("%d.", index + 1), COL_1_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format("%d", drink.getIdDrink()), COL_2_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format("%s", drink.getDrink()), COL_3_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format("%s", drink.getAlcoholic()), COL_4_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format("%s", drink.getGlass()), COL_5_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format(" %s", drink.getCategory()), COL_6_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.left(String.format(" %-70s", drink.getStringIntredientrs()), COL_7_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(colorLine)
+                .append(StringUtils.center(String.format(" %s", optionalChecker(optional)), COL_8_WIDTH))
+                //       .append(StringUtils.center(String.format(" %s", drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN))), COL_8_WIDTH))
+                .append(colorLineReset)
+                .append("|")
+                .append(System.lineSeparator());
         System.out.print(lineBuilder);
     }
 

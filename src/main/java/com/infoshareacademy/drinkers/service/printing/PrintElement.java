@@ -15,8 +15,14 @@ import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 public class PrintElement {
 
     private static final Logger LOGGER = Logger.getLogger(PrintElement.class.getName());
-    final static int FRAME_LENGTH = 113;
-    final static int MAX_LINE_LENGTH = 75;
+    static final int FRAME_LENGTH = 113;
+    static final int MAX_LINE_LENGTH = 75;
+
+    private static String optionalChecker(Optional<LocalDateTime> optional) {
+        return optional
+                .map(localDateTime -> localDateTime.format(DateTimeFormatter.ofPattern(DATE_PATTERN)))
+                .orElse("* brak danych *");
+    }
 
     public static void print(Drink drink) {
         if (drink != null) {
@@ -29,12 +35,7 @@ public class PrintElement {
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
             System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + drink.getStringIntredientrs() + " ");
             System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.FR));
-            if (optional.isPresent()) {
-                System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
-            }
-            if (optional.isEmpty()) {
-                System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + "brak danych");
-            }
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + optionalChecker(optional));
             printLine();
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
