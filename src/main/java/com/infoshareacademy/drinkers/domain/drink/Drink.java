@@ -5,11 +5,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class Drink {
-
-    private static final Logger LOGGER = Logger.getLogger(Drink.class.getName());
 
     private int idDrink;
     private String strDrink;
@@ -62,6 +59,44 @@ public class Drink {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
+
+    public void setIngredients(String stringWithIngredients) {
+        stringWithIngredients = stringWithIngredients.replace(" ", "");
+        String[] arrayWithIngredients = stringWithIngredients.split(",");
+        for (int i = 0; i < arrayWithIngredients.length; i++) {
+            if (i == 0) {
+                strIngredient1 = arrayWithIngredients[i];
+            } else if (i == 1) {
+                strIngredient2 = arrayWithIngredients[i];
+            } else if (i == 2) {
+                strIngredient3 = arrayWithIngredients[i];
+            } else if (i == 3) {
+                strIngredient4 = arrayWithIngredients[i];
+            } else if (i == 4) {
+                strIngredient5 = arrayWithIngredients[i];
+            } else if (i == 5) {
+                strIngredient6 = arrayWithIngredients[i];
+            } else if (i == 6) {
+                strIngredient7 = arrayWithIngredients[i];
+            } else if (i == 7) {
+                strIngredient8 = arrayWithIngredients[i];
+            } else if (i == 8) {
+                strIngredient9 = arrayWithIngredients[i];
+            } else if (i == 9) {
+                strIngredient10 = arrayWithIngredients[i];
+            } else if (i == 10) {
+                strIngredient11 = arrayWithIngredients[i];
+            } else if (i == 11) {
+                strIngredient12 = arrayWithIngredients[i];
+            } else if (i == 12) {
+                strIngredient13 = arrayWithIngredients[i];
+            } else if (i == 13) {
+                strIngredient14 = arrayWithIngredients[i];
+            } else if (i == 14) {
+                strIngredient15 = arrayWithIngredients[i];
+            }
+        }
+    }
 
     public List<String> getIngredients() {
         List<String> result = new ArrayList<>();
@@ -140,15 +175,15 @@ public class Drink {
     }
 
     public String getStringIntredientrs() {
-        String strIngredients = "";
+        StringBuilder strIngredients = new StringBuilder();
         for (String s : getIngredients()) {
-            if (strIngredients.equals("")) {
-                strIngredients = s;
+            if (strIngredients.toString().equals("")) {
+                strIngredients = new StringBuilder(s);
             } else {
-                strIngredients += ", " + s;
+                strIngredients.append(", ").append(s);
             }
         }
-        return strIngredients;
+        return strIngredients.toString();
     }
 
     public Integer getIdDrink() {

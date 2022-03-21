@@ -25,7 +25,7 @@ import java.util.Scanner;
 import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 
 public class OtherMenu {
-    private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
+    private static final String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
     private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "Sortuj po ID", "Sortuj po Dacie", "Sortuj po nazwie",
             "Sortuj po 'Alkoholic'"};
@@ -134,6 +134,7 @@ public class OtherMenu {
                 searchForDrink();
                 break;
             }
+
         }
     }
 
@@ -254,6 +255,7 @@ public class OtherMenu {
                 printElements.print();
                 break;
             }
+
         }
     }
 
@@ -314,7 +316,6 @@ public class OtherMenu {
 
     private void addDrinkOption() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
-        System.out.println("Dodałem drinka:");
         Drink newDrink = addDrink();
         drinkManager.addDrinkToList(newDrink);
         PrintElement.print(newDrink);
@@ -334,14 +335,13 @@ public class OtherMenu {
         boolean isNotValid = true;
         Drink drink = null;
         do {
-            String input;
             DrinkBuilder drinkBuilder = new DrinkBuilder();
-            int ID;
+            int id;
             do {
-                System.out.print("Podaj ID: ");
-                ID = ConsoleInput.getInputUserInteger();
-            } while (checkIfIDExist(ID));
-            drinkBuilder.setID(ID);
+                System.out.print("Podaj id: ");
+                id = ConsoleInput.getInputUserInteger();
+            } while (checkIfIDExist(id));
+            drinkBuilder.setID(id);
             System.out.print("Podaj nazwe: ");
             drinkBuilder.setName(ConsoleInput.getInputUserString());
             System.out.print("Czy alkoholowy [Y/N]: ");
@@ -376,7 +376,7 @@ public class OtherMenu {
                 drink = drinkBuilder.build();
                 isNotValid = false;
             } catch (IllegalStateException e) {
-                System.out.println("Musisz podac conajmniej nazwę i ID");
+                System.out.println("Musisz podac conajmniej nazwę i id");
             }
         } while (isNotValid);
         return drink;

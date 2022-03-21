@@ -3,8 +3,10 @@ package com.infoshareacademy.drinkers.service.printing;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import org.apache.commons.lang3.StringUtils;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
@@ -54,7 +56,14 @@ public class PrintElements {
         }
     }
 
+    private String optionalChecker(Optional<LocalDateTime> optional) {
+        return optional
+                .map(localDateTime -> localDateTime.format(DateTimeFormatter.ofPattern(DATE_PATTERN)))
+                .orElse("* brak danych *");
+    }
+
     private void printElement(Drink drink, int index) {
+        Optional<LocalDateTime> optional = Optional.ofNullable(drink.getDateModified());
         String colorLine;
         String colorLineReset = ConsoleColors.RESET;
         if (index % 2 == 0) {
@@ -63,6 +72,7 @@ public class PrintElements {
             colorLine = ConsoleColors.RESET;
         }
         StringBuilder lineBuilder = new StringBuilder();
+
         lineBuilder
                 .append("|")
                 .append(colorLine)
@@ -94,7 +104,8 @@ public class PrintElements {
                 .append(colorLineReset)
                 .append("|")
                 .append(colorLine)
-                .append(StringUtils.center(String.format(" %s", drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN))), COL_8_WIDTH))
+                .append(StringUtils.center(String.format(" %s", optionalChecker(optional)), COL_8_WIDTH))
+                //       .append(StringUtils.center(String.format(" %s", drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN))), COL_8_WIDTH))
                 .append(colorLineReset)
                 .append("|")
                 .append(System.lineSeparator());

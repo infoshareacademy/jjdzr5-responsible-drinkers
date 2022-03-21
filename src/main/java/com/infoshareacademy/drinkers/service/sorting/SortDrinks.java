@@ -5,6 +5,7 @@ import com.infoshareacademy.drinkers.domain.drink.Drink;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,16 +44,20 @@ public class SortDrinks {
 
     private List<Drink> getSortedByDateModified(boolean isASC) {
         if (isASC) {
-            return drinkList.stream().sorted(new DrinkDateModifiedComparator()).collect(Collectors.toList());
+            return drinkList.stream()
+                    .sorted(Comparator.comparing(Drink::getDateModified, Comparator.nullsLast(Comparator.reverseOrder())))
+                    .collect(Collectors.toList());
         }
-        return drinkList.stream().sorted(new DrinkDateModifiedComparator().reversed()).collect(Collectors.toList());
+        return drinkList.stream()
+                .sorted(Comparator.comparing(Drink::getDateModified, Comparator.nullsLast(Comparator.reverseOrder())))
+                .collect(Collectors.toList());
     }
 
     public List<Drink> getSortedList(SortItems item) {
         List<Drink> result = new ArrayList<>();
         boolean isASC = true;
         if (SORT_DIRECTION.equalsIgnoreCase("DESC")) {
-            isASC =false;
+            isASC = false;
         }
 
         switch (item) {

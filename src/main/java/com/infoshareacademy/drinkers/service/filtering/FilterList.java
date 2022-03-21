@@ -131,13 +131,17 @@ public class FilterList {
 
     public FilterList getFilteredByDate(LocalDateTime start, LocalDateTime finish) {
         List<Drink> result = new ArrayList<>();
+
         for (Drink drink : resultDinkList) {
-            try {
-                if (drink.getDateModified().isAfter(start) && drink.getDateModified().isBefore(finish)) {
-                    result.add(drink);
+            Optional<LocalDateTime> optional = Optional.ofNullable(drink.getDateModified());
+            if (optional.isPresent()) {
+                try {
+                    if (drink.getDateModified().isAfter(start) && drink.getDateModified().isBefore(finish)) {
+                        result.add(drink);
+                    }
+                } catch (NullPointerException e) {
+                    LOGGER.log(Level.INFO, "Can't compare date", e);
                 }
-            } catch (NullPointerException e) {
-                LOGGER.log(Level.INFO, "Can't compare date", e);
             }
         }
         this.resultDinkList = result;

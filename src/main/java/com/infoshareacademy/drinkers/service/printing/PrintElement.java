@@ -4,7 +4,9 @@ import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.Instruction;
 import com.infoshareacademy.drinkers.domain.drink.InstructionsLanguage;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,11 +15,18 @@ import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 public class PrintElement {
 
     private static final Logger LOGGER = Logger.getLogger(PrintElement.class.getName());
-    final static int FRAME_LENGTH = 113;
-    final static int MAX_LINE_LENGTH = 75;
+    static final int FRAME_LENGTH = 113;
+    static final int MAX_LINE_LENGTH = 75;
+
+    private static String optionalChecker(Optional<LocalDateTime> optional) {
+        return optional
+                .map(localDateTime -> localDateTime.format(DateTimeFormatter.ofPattern(DATE_PATTERN)))
+                .orElse("* brak danych *");
+    }
 
     public static void print(Drink drink) {
         if (drink != null) {
+            Optional<LocalDateTime> optional = Optional.ofNullable(drink.getDateModified());
             printLine();
             System.out.print(ConsoleColors.BLUE_BOLD + "\tID: " + ConsoleColors.YELLOW + drink.getIdDrink() + "\t");
             System.out.print(ConsoleColors.BLUE_BOLD + "Name: " + ConsoleColors.YELLOW + drink.getDrink() + "\t");
@@ -26,7 +35,7 @@ public class PrintElement {
             System.out.println(ConsoleColors.BLUE_BOLD + "Category: " + ConsoleColors.YELLOW + drink.getCategory());
             System.out.println(ConsoleColors.BLUE_BOLD + "\tIngredients: " + ConsoleColors.YELLOW + drink.getStringIntredientrs() + " ");
             System.out.println(ConsoleColors.BLUE_BOLD + "\tInstructions: " + ConsoleColors.YELLOW + printInstructions(drink, InstructionsLanguage.FR));
-            System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + drink.getDateModified().format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
+            System.out.println(ConsoleColors.BLUE_BOLD + "\tDate modified: " + ConsoleColors.YELLOW + optionalChecker(optional));
             printLine();
         } else {
             LOGGER.log(Level.INFO, "Nothing to print!");
@@ -36,7 +45,7 @@ public class PrintElement {
     private static String isAlcoholic(Drink drink) {
         if (drink.getAlcoholic().equalsIgnoreCase("alcoholic")) {
             return "YES";
-        }  else if (drink.getAlcoholic().equalsIgnoreCase("non alcoholic")) {
+        } else if (drink.getAlcoholic().equalsIgnoreCase("non alcoholic")) {
             return "NO";
         } else {
             return null;
