@@ -42,7 +42,7 @@ public class PrintElements {
 
     public void print() {
         if (drinkList.isEmpty()) {
-            System.out.println("Brak wynikow do wyswietlenia!");
+            System.out.println(ConsoleColors.BLUE_BOLD + "Brak wynikow do wyswietlenia!" + ConsoleColors.RESET);
         } else {
             printFrameHorizontal();
             printTitle();

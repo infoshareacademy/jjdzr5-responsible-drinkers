@@ -16,20 +16,23 @@ import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 import org.apache.commons.lang3.StringUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
+
 public class OtherMenu {
     private static final String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
-    private static final String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
-    private static final String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
-    private static final String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID",
+    private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "Sortuj po ID", "Sortuj po Dacie", "Sortuj po nazwie",
+            "Sortuj po 'Alkoholic'"};
+    private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "filtruj po dacie", "Wyświetla drinki alkoholowe",
+            "Wyświetla drinki bezalkoholowe", "Wyświetl drinki ze skladnikiem"};
+    private final static String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID",
             "Zmien alko / bezalko", "Odrzuć zmiany"};
-    private static final String SWITCH_DEFAUL_TEXT = "Nieoczekiwany wybór! ";
 
     private final List<Drink> drinkList;
 
@@ -131,8 +134,7 @@ public class OtherMenu {
                 searchForDrink();
                 break;
             }
-            default:
-                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + menuOption);
+
         }
     }
 
@@ -202,8 +204,6 @@ public class OtherMenu {
                 return drinkToEdit;
                 //  break;
             }
-            default:
-                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + lowerMenuOption);
         }
         drinkToEdit.setDateModified(LocalDateTime.now());
         return drinkToEdit;
@@ -212,13 +212,20 @@ public class OtherMenu {
     private void searchForDrink() {
         String searchText;
         do {
-            System.out.print("Podaj tekst do wyszukania [min. 3 znaki]: ");
+            System.out.print("Podaj tekst lub numer ID do wyszukania [min. 3 znaki]: ");
             searchText = ConsoleInput.getInputUserString();
         }
         while (searchText.length() < 3);
+        Integer ID;
+        try {
+            ID = Integer.parseInt(searchText);
+        } catch (NumberFormatException e) {
+            ID = null;
+        }
 
         List<Drink> searchDrink = new Search(drinkList)
                 .searchByName(searchText)
+                .searchByID(ID)
                 .getResults();
         PrintElements printElements = new PrintElements(searchDrink);
         printElements.print();
@@ -248,8 +255,7 @@ public class OtherMenu {
                 printElements.print();
                 break;
             }
-            default:
-                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + lowerMenuOption);
+
         }
     }
 
@@ -257,27 +263,49 @@ public class OtherMenu {
         List<Drink> list;
         FilterList filterElements = new FilterList(drinkList);
         switch (lowerMenuOption) {
-            case 3: {
+            case 4: {
                 list = filterElements.getFilteredByIngredient(FilterElements.VODKA).getResults();
+                System.out.println("Filter: " + FilterElements.VODKA.getName());
+                PrintElements printElements = new PrintElements(list);
+                printElements.print();
+                break;
+            }
+            case 3: {
+                list = filterElements.getFilteredByAlcoholic(false).getResults();
+                System.out.println("Filter: " + Alcoholic.NON_ALCOHOLIC.getName());
+
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
             }
             case 2: {
                 list = filterElements.getFilteredByAlcoholic(true).getResults();
+                System.out.println("Filter: " + Alcoholic.ALCOHOLIC.getName());
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
             }
             case 1: {
-                list = filterElements.getFilteredByDate(LocalDate.of(2016, 1, 1).atStartOfDay(),
-                        LocalDate.of(2017, 1, 1).atStartOfDay()).getResults();
+                LocalDateTime startDate, endDate;
+                boolean datePeriodNotValid = true;
+                do {
+                    System.out.print("Podaj datę początkową [" + DATE_PATTERN + "]: ");
+                    startDate = ConsoleInput.getInputUserDateTime();
+                    System.out.print("Podaj datę końcową [" + DATE_PATTERN + "]: ");
+                    endDate = ConsoleInput.getInputUserDateTime();
+                    if (startDate.isBefore(endDate)) {
+                        datePeriodNotValid = false;
+                    } else {
+                        System.out.println("Przedział daty niepoprawny");
+                    }
+                } while (datePeriodNotValid);
+                list = filterElements.getFilteredByDate(startDate, endDate).getResults();
+                System.out.println("Filter: od " + startDate.format(DateTimeFormatter.ofPattern(DATE_PATTERN)) +
+                        " -> do " + endDate.format(DateTimeFormatter.ofPattern(DATE_PATTERN)));
                 PrintElements printElements = new PrintElements(list);
                 printElements.print();
                 break;
             }
-            default:
-                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + lowerMenuOption);
         }
     }
 
@@ -317,7 +345,25 @@ public class OtherMenu {
             System.out.print("Podaj nazwe: ");
             drinkBuilder.setName(ConsoleInput.getInputUserString());
             System.out.print("Czy alkoholowy [Y/N]: ");
-            drinkBuilder.setisAlcoholic(isAlcoholic());
+
+            boolean inputNotCorrect = false;
+            do {
+
+                String result = ConsoleInput.getInputUserString();
+                if (result.equals("y") || result.equals("Y")) {
+                    inputNotCorrect = false;
+                    drinkBuilder.setisAlcoholic(isAlcoholic(result));
+                } else if (result.equals("n") || result.equals("N")) {
+                    inputNotCorrect = false;
+                    boolean isAlcoholFree = true;
+                    drinkBuilder.setisNonAlcoholic(isAlcoholFree);
+                } else {
+                    System.out.println("Musisz wpisac Y lub N. Wszelki inny input nie jest rejestrowany przez system.");
+                    inputNotCorrect = true;
+
+                }
+            } while (inputNotCorrect);
+
             System.out.print("Podaj składnik 1: ");
             drinkBuilder.setIngredient01(ConsoleInput.getInputUserString());
             System.out.print("Podaj składnik 2: ");
@@ -336,18 +382,30 @@ public class OtherMenu {
         return drink;
     }
 
-    private boolean isAlcoholic() {
-        String s = ConsoleInput.getInputUserString();
-        return s.equalsIgnoreCase("y");
+    private boolean isAlcoholic(String input) {
+        //   String s = ConsoleInput.getInputUserString();
+        return input.equalsIgnoreCase("y");
     }
+
+//    private boolean isNonAlcoholic(String input) {
+//   //     String s = ConsoleInput.getInputUserString();
+//        return input.equalsIgnoreCase("n");
+//    }
 
     private void removeDrinkOption() {
         printAllDrinksOption();
         DrinkManager drinkManager = new DrinkManager(drinkList);
         int index;
+        boolean inputNotCorrect;
         do {
             System.out.print("Podaj nr drinka z listy: ");
             index = ConsoleInput.getInputUserInteger() - 1;
+            // inputNotCorrect =index < 0 || index > drinkList.size() - 1;
+            if (index < 0 || index > drinkList.size() - 1) {
+                System.out.println("Podaj nr ID istniejace w bazie.");
+            } else {
+                inputNotCorrect = false;
+            }
         } while (index < 0 || index > drinkList.size() - 1);
         System.out.println("Usuwam drinka:");
         PrintElement.print(drinkList.get(index));
