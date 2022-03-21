@@ -23,12 +23,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class OtherMenu {
-    private final static String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
+    private static final String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
             "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
-    private final static String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
-    private final static String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
-    private final static String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID",
+    private static final String[] LOWER_SORT_MENU = {"Wróć wyżej", "by ID", "by Date", "by Name", "by Alkoholic"};
+    private static final String[] LOWER_FILTER_MENU = {"Wróć wyżej", "by Date", "by alcoholic", "by Ingredients"};
+    private static final String[] LOWER_EDIT_MENU = {"Zapisz i wróć wyżej", "Zmien nazwę", "Zmien ID",
             "Zmien alko / bezalko", "Odrzuć zmiany"};
+    private static final String SWITCH_DEFAUL_TEXT = "Nieoczekiwany wybór! ";
 
     private final List<Drink> drinkList;
 
@@ -130,6 +131,8 @@ public class OtherMenu {
                 searchForDrink();
                 break;
             }
+            default:
+                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + menuOption);
         }
     }
 
@@ -199,6 +202,8 @@ public class OtherMenu {
                 return drinkToEdit;
                 //  break;
             }
+            default:
+                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + lowerMenuOption);
         }
         drinkToEdit.setDateModified(LocalDateTime.now());
         return drinkToEdit;
@@ -243,6 +248,8 @@ public class OtherMenu {
                 printElements.print();
                 break;
             }
+            default:
+                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + lowerMenuOption);
         }
     }
 
@@ -269,6 +276,8 @@ public class OtherMenu {
                 printElements.print();
                 break;
             }
+            default:
+                throw new IllegalStateException(SWITCH_DEFAUL_TEXT + lowerMenuOption);
         }
     }
 
@@ -279,7 +288,6 @@ public class OtherMenu {
 
     private void addDrinkOption() {
         DrinkManager drinkManager = new DrinkManager(drinkList);
-        System.out.println("Dodałem drinka:");
         Drink newDrink = addDrink();
         drinkManager.addDrinkToList(newDrink);
         PrintElement.print(newDrink);
@@ -299,14 +307,13 @@ public class OtherMenu {
         boolean isNotValid = true;
         Drink drink = null;
         do {
-            String input;
             DrinkBuilder drinkBuilder = new DrinkBuilder();
-            int ID;
+            int id;
             do {
-                System.out.print("Podaj ID: ");
-                ID = ConsoleInput.getInputUserInteger();
-            } while (checkIfIDExist(ID));
-            drinkBuilder.setID(ID);
+                System.out.print("Podaj id: ");
+                id = ConsoleInput.getInputUserInteger();
+            } while (checkIfIDExist(id));
+            drinkBuilder.setID(id);
             System.out.print("Podaj nazwe: ");
             drinkBuilder.setName(ConsoleInput.getInputUserString());
             System.out.print("Czy alkoholowy [Y/N]: ");
@@ -323,7 +330,7 @@ public class OtherMenu {
                 drink = drinkBuilder.build();
                 isNotValid = false;
             } catch (IllegalStateException e) {
-                System.out.println("Musisz podac conajmniej nazwę i ID");
+                System.out.println("Musisz podac conajmniej nazwę i id");
             }
         } while (isNotValid);
         return drink;
