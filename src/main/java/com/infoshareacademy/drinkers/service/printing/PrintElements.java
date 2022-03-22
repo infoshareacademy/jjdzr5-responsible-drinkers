@@ -118,7 +118,7 @@ public class PrintElements {
 
     private void printTitle() {
         StringBuilder titleBuilder = new StringBuilder();
-        String colorLine = ConsoleColors.WHITE_BOLD;
+        String colorLine = ConsoleColors.WHITE_BOLD + ConsoleColors.WHITE_BRIGHT;
         String colorLineReset = ConsoleColors.RESET;
         titleBuilder
                 .append("|")
