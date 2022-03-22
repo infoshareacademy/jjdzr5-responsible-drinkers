@@ -2,12 +2,8 @@ package com.infoshareacademy.drinkers.domain.drink;
 
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public final class DrinkBuilder {
-
-    private static final Logger LOGGER = Logger.getLogger(DrinkBuilder.class.getName());
 
     private int idDrink;
     private String strDrink;
@@ -65,10 +61,8 @@ public final class DrinkBuilder {
     public Drink build() throws IllegalStateException {
         Drink drink = new Drink();
         if (idDrink <= 0) {
-//            LOGGER.log(Level.INFO, "ID cannot be empty");
             throw new IllegalStateException("ID cannot be empty");
         } else if (strDrink.isEmpty()) {
-//            LOGGER.log(Level.INFO, "Name cannot be empty");
             throw new IllegalStateException("Name cannot be empty");
         } else {
             drink.setIdDrink(idDrink);
@@ -88,8 +82,8 @@ public final class DrinkBuilder {
         }
     }
 
-    public DrinkBuilder setID(Integer ID) {
-        this.idDrink = ID;
+    public DrinkBuilder setID(Integer id) {
+        this.idDrink = id;
         return this;
     }
 

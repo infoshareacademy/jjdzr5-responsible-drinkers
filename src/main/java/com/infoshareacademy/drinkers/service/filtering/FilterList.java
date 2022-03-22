@@ -69,7 +69,7 @@ public class FilterList {
         List<Drink> result = new ArrayList<>();
 
         Alcoholic filterElements;
-        if (isAlcoholic) {
+        if (Boolean.TRUE.equals(isAlcoholic)) {
             filterElements = Alcoholic.ALCOHOLIC;
         } else {
             filterElements = Alcoholic.NON_ALCOHOLIC;
@@ -122,13 +122,6 @@ public class FilterList {
 //        return this.drinkList;
 //    }
 
-    private String checkStringIsNull(String str) {
-        if (str == null) {
-            return "";
-        }
-        return str;
-    }
-
     public FilterList getFilteredByDate(LocalDateTime start, LocalDateTime finish) {
         List<Drink> result = new ArrayList<>();
 
@@ -149,12 +142,8 @@ public class FilterList {
     }
 
     public List<Drink> getResults() {
-        Optional<List<Drink>> optionalDrinkList = Optional.of(this.resultDinkList);
-        if (optionalDrinkList.isPresent()) {
-            return optionalDrinkList.get();
-        } else {
-            return optionalDrinkList.orElse(new ArrayList<>());
-        }
+        Optional<List<Drink>> optionalDrinkList = Optional.ofNullable(this.resultDinkList);
+        return optionalDrinkList.orElseGet(() -> optionalDrinkList.orElse(new ArrayList<>()));
     }
 
 }

@@ -1,19 +1,17 @@
 package com.infoshareacademy.drinkers.service.sorting;
 
-import com.infoshareacademy.drinkers.App;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.infoshareacademy.drinkers.App.SORT_DIRECTION;
 
 public class SortDrinks {
 
-    private static final Logger LOGGER = Logger.getLogger(App.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SortDrinks.class.getName());
 
     private final List<Drink> drinkList;
 
@@ -23,34 +21,46 @@ public class SortDrinks {
 
     private List<Drink> getSortedByName(boolean isASC) {
         if (isASC) {
-            return drinkList.stream().sorted(new DrinkNameComparator()).collect(Collectors.toList());
+            return drinkList.stream()
+                    .sorted(new DrinkNameComparator())
+                    .toList();
         }
-        return drinkList.stream().sorted(new DrinkNameComparator().reversed()).collect(Collectors.toList());
+        return drinkList.stream()
+                .sorted(new DrinkNameComparator().reversed())
+                .toList();
     }
 
     private List<Drink> getSortedByID(boolean isASC) {
         if (isASC) {
-            return drinkList.stream().sorted(new DrinkIDComparator()).collect(Collectors.toList());
+            return drinkList.stream()
+                    .sorted(new DrinkIDComparator())
+                    .toList();
         }
-        return drinkList.stream().sorted(new DrinkIDComparator().reversed()).collect(Collectors.toList());
+        return drinkList.stream()
+                .sorted(new DrinkIDComparator().reversed())
+                .toList();
     }
 
     private List<Drink> getSortedByAlcoholic(boolean isASC) {
         if (isASC) {
-            return drinkList.stream().sorted(new DrinkAlcoholicComparator()).collect(Collectors.toList());
+            return drinkList.stream()
+                    .sorted(new DrinkAlcoholicComparator())
+                    .toList();
         }
-        return drinkList.stream().sorted(new DrinkAlcoholicComparator().reversed()).collect(Collectors.toList());
+        return drinkList.stream()
+                .sorted(new DrinkAlcoholicComparator().reversed())
+                .toList();
     }
 
     private List<Drink> getSortedByDateModified(boolean isASC) {
         if (isASC) {
             return drinkList.stream()
-                    .sorted(Comparator.comparing(Drink::getDateModified, Comparator.nullsLast(Comparator.reverseOrder())))
-                    .collect(Collectors.toList());
+                    .sorted(Comparator.comparing(Drink::getDateModified, Comparator.nullsLast(Comparator.naturalOrder())))
+                    .toList();
         }
         return drinkList.stream()
                 .sorted(Comparator.comparing(Drink::getDateModified, Comparator.nullsLast(Comparator.reverseOrder())))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public List<Drink> getSortedList(SortItems item) {

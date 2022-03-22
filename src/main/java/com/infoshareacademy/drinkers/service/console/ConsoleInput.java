@@ -11,7 +11,7 @@ import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 
 public class ConsoleInput {
 
-    private final static String TEXT_IF_WRONG_INPUT = "Wprowadzono złe dane";
+    private static final String TEXT_IF_WRONG_INPUT = "Wprowadzono złe dane";
 
     public static String getInputUserString() {
         boolean inputIsNotValid;

@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 public class App {
 
     private static final Logger LOGGER = Logger.getLogger(App.class.getName());
-    public final static String DATE_PATTERN = ApplicationProperties.getDatePattern();
-    public final static String SORT_DIRECTION = ApplicationProperties.getSortDirection();
+    public static final String DATE_PATTERN = ApplicationProperties.getDatePattern();
+    public static final String SORT_DIRECTION = ApplicationProperties.getSortDirection();
 
     public static void main(String[] args) {
 
