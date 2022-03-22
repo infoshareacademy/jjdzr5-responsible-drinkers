@@ -1,7 +1,5 @@
 package com.infoshareacademy.drinkers.service.sorting;
 
-import java.util.Date;
-
 public enum SortItems {
     ID("ID"),
     DRINK_NAME("DrinkName"),
