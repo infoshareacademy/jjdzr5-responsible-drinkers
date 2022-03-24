@@ -16,6 +16,8 @@ public class ConnectToApi {
     private static final URI API_ADDRESS_A = URI.create("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a");
     private static final URI API_ADDRESS_M = URI.create("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=m");
     private static final URI API_ADDRESS_T = URI.create("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=t");
+    private static final URI API_ADDRESS_J = URI.create("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=j");
+    private static final URI API_ADDRESS_S = URI.create("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=s");
 
     private List<Drink> drinkListConcat;
 
@@ -23,19 +25,22 @@ public class ConnectToApi {
         String jsonData0 = getJsonData(API_ADDRESS_A);
         String jsonData1 = getJsonData(API_ADDRESS_M);
         String jsonData2 = getJsonData(API_ADDRESS_T);
+        String jsonData3 = getJsonData(API_ADDRESS_J);
+        String jsonData4 = getJsonData(API_ADDRESS_S);
 
         drinkListConcat = drinksConcat(getDrinks(jsonData0),getDrinks(jsonData1));
         drinkListConcat = drinksConcat(drinkListConcat,getDrinks(jsonData2));
-        drinkListConcat.forEach(System.out::println);
+        drinkListConcat = drinksConcat(drinkListConcat,getDrinks(jsonData3));
+        drinkListConcat = drinksConcat(drinkListConcat,getDrinks(jsonData4));
 
     }
 
     private String getJsonData(URI uri) {
         GetDataFromApi getDataFromApi = new GetDataFromApi();
-        return getDataFromApi.getData(API_ADDRESS_A);
+        return getDataFromApi.getData(uri);
     }
 
-    public List<Drink> drinksConcat(List<Drink> listFirst, List<Drink> listSecond) {
+    private List<Drink> drinksConcat(List<Drink> listFirst, List<Drink> listSecond) {
         return Stream.concat(listFirst.stream(), listSecond.stream()).toList();
     }
 
