@@ -3,6 +3,8 @@
 
 **Group name**: _Responsible Drinkers Inc._
 
+Authors: **Shirley**, **Kamil**, [**Tomek**](https://github.com/tomek-jaworski-elb)
+
 ------------
 
 ## **1st Sprint.** 
