@@ -12,8 +12,6 @@ import com.infoshareacademy.drinkers.service.printing.ConsoleColors;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.searching.Search;
-import com.infoshareacademy.drinkers.service.sorting.DrinkDateModifiedComparator;
-import com.infoshareacademy.drinkers.service.sorting.DrinkIDComparator;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
 import com.infoshareacademy.drinkers.service.url.ConnectToApi;
@@ -149,10 +147,9 @@ public class OtherMenu {
     private void getDataFromURL() {
         ConnectToApi connectToApi = new ConnectToApi();
         Optional<List<Drink>> allDrinks = connectToApi.getAllDrinks();
-        PrintElements printElements = new PrintElements(allDrinks.get().stream()
-                .sorted(new DrinkIDComparator())
-                .toList());
-        System.out.println("Lista sortowana wg ID");
+        SortDrinks sortDrinks = new SortDrinks(allDrinks.get());
+        PrintElements printElements = new PrintElements(sortDrinks.getSortedList(SortItems.DATE));
+        System.out.println("Lista sortowana wg Daty");
         printElements.print();
     }
 
