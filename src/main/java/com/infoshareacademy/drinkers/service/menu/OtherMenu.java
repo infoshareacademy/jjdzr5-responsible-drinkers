@@ -12,21 +12,26 @@ import com.infoshareacademy.drinkers.service.printing.ConsoleColors;
 import com.infoshareacademy.drinkers.service.printing.PrintElement;
 import com.infoshareacademy.drinkers.service.printing.PrintElements;
 import com.infoshareacademy.drinkers.service.searching.Search;
+import com.infoshareacademy.drinkers.service.sorting.DrinkDateModifiedComparator;
+import com.infoshareacademy.drinkers.service.sorting.DrinkIDComparator;
 import com.infoshareacademy.drinkers.service.sorting.SortDrinks;
 import com.infoshareacademy.drinkers.service.sorting.SortItems;
+import com.infoshareacademy.drinkers.service.url.ConnectToApi;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import static com.infoshareacademy.drinkers.App.DATE_PATTERN;
 
 public class OtherMenu {
     private static final String[] MAIN_MENU = {"Zamknij program", "Wyświetl listę drinków", "Dodaj drinka",
-            "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka"};
+            "Usuń drinka", "Lista sortowana", "Lista filtrowana", "Wyświetl drinka", "Edytuj drinka", "Wyszukaj drinka",
+            "Pobierz dane on-line z API"};
     private static final String[] LOWER_SORT_MENU = {"Wróć wyżej", "Sortuj po ID", "Sortuj po Dacie", "Sortuj po nazwie",
             "Sortuj po 'Alkoholic'"};
     private static final String[] LOWER_FILTER_MENU = {"Wróć wyżej", "filtruj po dacie", "Wyświetla drinki alkoholowe",
@@ -134,8 +139,21 @@ public class OtherMenu {
                 searchForDrink();
                 break;
             }
-
+            case 9: {
+                getDataFromURL();
+                break;
+            }
         }
+    }
+
+    private void getDataFromURL() {
+        ConnectToApi connectToApi = new ConnectToApi();
+        Optional<List<Drink>> allDrinks = connectToApi.getAllDrinks();
+        PrintElements printElements = new PrintElements(allDrinks.get().stream()
+                .sorted(new DrinkIDComparator())
+                .toList());
+        System.out.println("Lista sortowana wg ID");
+        printElements.print();
     }
 
     private void editDrinkOption() {
@@ -147,7 +165,7 @@ public class OtherMenu {
             number = ConsoleInput.getInputUserInteger() - 1;
             if (number > 0 && number < drinkList.size()) {
                 isNotValid = false;
-            } else  {
+            } else {
                 System.out.println("Liczba spoza zakresu!");
             }
         } while (isNotValid);
