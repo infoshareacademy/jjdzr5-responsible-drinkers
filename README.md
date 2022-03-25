@@ -25,7 +25,7 @@ _List filtered by ..._<br/>
 _List sorted by ID_<br/>
 ![img_4.png](img_4.png "Sorting")
 
-Date: (March'22)
+Date: <br/>March 2022
 
 --------------------------
 Data taken from:<br/>
