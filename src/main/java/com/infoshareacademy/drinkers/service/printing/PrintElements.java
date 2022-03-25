@@ -17,12 +17,12 @@ public class PrintElements {
 
     private static final int COL_1_WIDTH = 6;
     private static final int COL_2_WIDTH = 10;
-    private static final int COL_3_WIDTH = 16;
+    private static final int COL_3_WIDTH = 19;
     private static final int COL_4_WIDTH = 16;
     private static final int COL_5_WIDTH = 22;
     private static final int COL_6_WIDTH = 20;
     private static final int COL_7_WIDTH = 70;
-    private static final int COL_8_WIDTH = 18;
+    private static final int COL_8_WIDTH = 20;
     private static final int LINE_LENGTH = COL_1_WIDTH + COL_2_WIDTH + COL_3_WIDTH + COL_4_WIDTH + COL_5_WIDTH +
             COL_6_WIDTH + COL_7_WIDTH + COL_8_WIDTH + 7;
     private static final String COL_1_TITLE = "NO";
