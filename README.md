@@ -11,7 +11,7 @@ Authors: <br/>**Shirley**, **Kamil**, [**Tomek**](https://github.com/tomek-jawor
 ##### Console Application with text menu and console input interaction with user.
 
 _Main menu_<br/>
-![img.png](img.png "Menu")
+![img_5.png](img_5.png "Menu")
 
 _List of elements_<br/>
 ![img_1.png](img_1.png "List of elements")
