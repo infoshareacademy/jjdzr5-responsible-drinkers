@@ -60,6 +60,14 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
 
+    public String getStrDrink() {
+        return strDrink;
+    }
+
+    public void setStrDrink(String strDrink) {
+        this.strDrink = strDrink;
+    }
+
     public List<String> getIngredients() {
         List<String> result = new ArrayList<>();
         if (getIngredient1() != null) {
