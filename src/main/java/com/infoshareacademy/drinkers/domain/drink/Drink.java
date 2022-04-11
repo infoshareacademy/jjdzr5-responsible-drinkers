@@ -1,5 +1,8 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,7 +11,10 @@ import java.util.Objects;
 
 public class Drink {
 
+
     private int idDrink;
+
+    @Size(min=2, max = 25, message = "{walidacja.nazwa}")
     private String strDrink;
     private String strDrinkAlternate;
     private String strTags;
