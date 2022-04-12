@@ -1,7 +1,5 @@
 package com.infoshareacademy.drinkers.domain.drink;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.net.URI;
 import java.time.LocalDateTime;
@@ -14,15 +12,19 @@ public class Drink {
 
     private int idDrink;
 
-    @Size(min=2, max = 25, message = "{walidacja.nazwa}")
+    @Size(min = 2, max = 25, message = "{walidacja.nazwa}")
     private String strDrink;
     private String strDrinkAlternate;
     private String strTags;
     private String strVideo;
+
+    @Size(min = 2, max = 25, message = "{walidacja.kategoria}")
     private String strCategory;
     private String strIBA;
     private String strAlcoholic;
     private String strGlass;
+
+    @Size(min = 2, max = 250, message = "{walidacja.przepis}")
     private String strInstructions;
     private String strInstructionsES;
     private String strInstructionsDE;
@@ -31,7 +33,11 @@ public class Drink {
     private String strInstructionsZH_HANS;
     private String strInstructionsZH_HANT;
     private URI strDrinkThumb;
+
+    @Size(min = 2, max = 25, message = "{walidacja.skladnik}")
+
     private String strIngredient1;
+    @Size(min = 2, max = 25, message = "{walidacja.skladnik}")
     private String strIngredient2;
     private String strIngredient3;
     private String strIngredient4;
@@ -65,6 +71,47 @@ public class Drink {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
+
+
+    public String getStrCategory() {
+        return strCategory;
+    }
+
+    public void setStrCategory(String strCategory) {
+        this.strCategory = strCategory;
+    }
+
+    public String getStrIngredient1() {
+        return strIngredient1;
+    }
+
+    public String getStrInstructions() {
+        return strInstructions;
+    }
+
+    public void setStrInstructions(String strInstructions) {
+        this.strInstructions = strInstructions;
+    }
+
+    public void setStrIngredient1(String strIngredient1) {
+        this.strIngredient1 = strIngredient1;
+    }
+
+    public String getStrIngredient2() {
+        return strIngredient2;
+    }
+
+    public URI getStrDrinkThumb() {
+        return strDrinkThumb;
+    }
+
+    public void setStrDrinkThumb(URI strDrinkThumb) {
+        this.strDrinkThumb = strDrinkThumb;
+    }
+
+    public void setStrIngredient2(String strIngredient2) {
+        this.strIngredient2 = strIngredient2;
+    }
 
     public String getStrDrink() {
         return strDrink;
