@@ -12,7 +12,7 @@ public class Drink {
 
     private int idDrink;
 
-    @Size(min = 2, max = 25, message = "{walidacja.nazwa}")
+    @Size(min = 2, max = 35, message = "{walidacja.nazwa}")
     private String strDrink;
     private String strDrinkAlternate;
     private String strTags;
@@ -22,6 +22,8 @@ public class Drink {
     private String strCategory;
     private String strIBA;
     private String strAlcoholic;
+
+    @Size(min = 2, max = 25, message = "{walidacja.nazwa}")
     private String strGlass;
 
     @Size(min = 2, max = 250, message = "{walidacja.przepis}")
@@ -35,10 +37,11 @@ public class Drink {
     private URI strDrinkThumb;
 
     @Size(min = 2, max = 25, message = "{walidacja.skladnik}")
-
     private String strIngredient1;
+
     @Size(min = 2, max = 25, message = "{walidacja.skladnik}")
     private String strIngredient2;
+
     private String strIngredient3;
     private String strIngredient4;
     private String strIngredient5;
@@ -72,6 +75,14 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
 
+
+    public String getStrGlass() {
+        return strGlass;
+    }
+
+    public void setStrGlass(String strGlass) {
+        this.strGlass = strGlass;
+    }
 
     public String getStrCategory() {
         return strCategory;
@@ -200,7 +211,7 @@ public class Drink {
     public String getStringIntredientrs() {
         StringBuilder strIngredients = new StringBuilder();
         for (String s : getIngredients()) {
-            if (strIngredients.toString().equals("")) {
+            if (strIngredients.toString().equals("") || strIngredients.toString().replace(" ","").isBlank()) {
                 strIngredients = new StringBuilder(s);
             } else {
                 strIngredients.append(", ").append(s);
