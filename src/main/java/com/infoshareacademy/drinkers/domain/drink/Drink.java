@@ -9,7 +9,6 @@ import java.util.Objects;
 
 public class Drink {
 
-
     private int idDrink;
 
     @Size(min = 2, max = 35, message = "{walidacja.nazwa}")
@@ -74,7 +73,6 @@ public class Drink {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
-
 
     public String getStrGlass() {
         return strGlass;
@@ -211,7 +209,7 @@ public class Drink {
     public String getStringIntredientrs() {
         StringBuilder strIngredients = new StringBuilder();
         for (String s : getIngredients()) {
-            if (strIngredients.toString().equals("") || strIngredients.toString().replace(" ","").isBlank()) {
+            if (strIngredients.toString().isEmpty() || strIngredients.toString().replace(" ", "").isBlank()) {
                 strIngredients = new StringBuilder(s);
             } else {
                 strIngredients.append(", ").append(s);
