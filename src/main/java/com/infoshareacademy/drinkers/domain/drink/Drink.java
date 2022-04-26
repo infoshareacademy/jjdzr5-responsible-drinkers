@@ -73,6 +73,15 @@ public class Drink {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
+    private Status status;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public String getStrGlass() {
         return strGlass;
