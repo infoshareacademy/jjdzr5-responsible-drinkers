@@ -12,6 +12,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
 import java.util.logging.Level;
@@ -47,11 +48,12 @@ public class JsonReader {
     }
 
     private List<Drink> setStatusToAllDrinks(List<Drink> drinks) {
-        Function<Drink, Drink> function = drink -> {
+        Iterator<Drink> iterator = drinks.iterator();
+        while (iterator.hasNext()) {
+            Drink drink = iterator.next();
             drink.setStatus(Status.ACCEPTED);
-            return drink;
-        };
-        return drinks.stream().map(function).toList();
+        }
+        return drinks;
     }
 
     public Drinks getDrinks() {
