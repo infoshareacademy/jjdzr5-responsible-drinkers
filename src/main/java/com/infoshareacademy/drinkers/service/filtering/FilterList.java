@@ -2,6 +2,7 @@ package com.infoshareacademy.drinkers.service.filtering;
 
 import com.infoshareacademy.drinkers.domain.drink.Alcoholic;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
+import com.infoshareacademy.drinkers.domain.drink.Status;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -137,6 +138,13 @@ public class FilterList {
                 }
             }
         }
+        this.resultDinkList = result;
+        return this;
+    }
+
+    public FilterList getFilteredByStatus(Status status) {
+        List<Drink> result = new ArrayList<>();
+        result = resultDinkList.stream().filter(drink -> drink.getStatus().equals(status)).toList();
         this.resultDinkList = result;
         return this;
     }
