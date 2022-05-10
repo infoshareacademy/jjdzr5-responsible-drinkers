@@ -21,51 +21,6 @@ public class FilterList {
         this.resultDinkList = drinkList;
     }
 
-/*    private List<Drink> getFilteredDrinkListStream() {
-        String noneAlcoholic = FilterElements.NON_ALCOHOL.getName();
-        String ingredient = FilterElements.ORANGE_JUICE.getName();
-        Predicate<Drink> byNoneAlcohol = new Predicate<Drink>() {
-            @Override
-            public boolean test(Drink drink) {
-                return !drink.getAlcoholic().isEmpty() && drink.getAlcoholic().equalsIgnoreCase(noneAlcoholic);
-            }
-        };
-        Predicate<Drink> byOrangeJuice = new Predicate<Drink>() {
-            @Override
-            public boolean test(Drink drink) {
-                return drink.getIngredient1() != null && drink.getIngredient1().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient2() != null && drink.getIngredient2().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient3() != null && drink.getIngredient3().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient4() != null && drink.getIngredient4().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient5() != null && drink.getIngredient5().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient6() != null && drink.getIngredient6().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient7() != null && drink.getIngredient7().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient8() != null && drink.getIngredient8().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient9() != null && drink.getIngredient9().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient10() != null && drink.getIngredient10().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient11() != null && drink.getIngredient11().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient12() != null && drink.getIngredient12().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient13() != null && drink.getIngredient13().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient14() != null && drink.getIngredient14().equalsIgnoreCase(ingredient) ||
-                        drink.getIngredient15() != null && drink.getIngredient15().equalsIgnoreCase(ingredient);
-            }
-        };
-        return drinkList.stream().filter(byOrangeJuice).filter(Objects::nonNull).filter(Objects::nonNull).collect(Collectors.toList());
-    }*/
-
-/*    public List<Drink> getFilteredDrinkList() {
-        String noneAlcoholic = FilterElements.NON_ALCOHOL.getName();
-        String orangeJuice = FilterElements.ORANGE_JUICE.getName();
-        List<Drink> result = new ArrayList<>();
-
-        for (Drink drink : drinkList) {
-            if (!drink.getAlcoholic().isEmpty() && drink.getAlcoholic().equalsIgnoreCase(noneAlcoholic)) {
-                result.add(drink);
-            }
-        }
-        return result;
-    }*/
-
     public FilterList getFilteredByAlcoholic(Boolean isAlcoholic) {
         List<Drink> result = new ArrayList<>();
 
@@ -111,18 +66,6 @@ public class FilterList {
         return this;
     }
 
-//    public List<Drink> getDrinkListFiltered(FilterElements... filterElements) {
-//
-//        for (FilterElements elements : filterElements) {
-//            if (elements.equals(FilterElements.NON_ALCOHOL) || elements.equals(FilterElements.ALCOHOL)) {
-//                this.drinkList = getFilteredByAlcohol(elements);
-//            } else {
-//                this.drinkList = getFilteredByIngredient(elements);
-//            }
-//        }
-//        return this.drinkList;
-//    }
-
     public FilterList getFilteredByDate(LocalDateTime start, LocalDateTime finish) {
         List<Drink> result = new ArrayList<>();
 
@@ -143,8 +86,11 @@ public class FilterList {
     }
 
     public FilterList getFilteredByStatus(Status status) {
-        List<Drink> result = new ArrayList<>();
-        result = resultDinkList.stream().filter(drink -> drink.getStatus().equals(status)).toList();
+        List<Drink> result;
+        result = resultDinkList.stream()
+                .filter(drink -> drink.getStatus()
+                        .equals(status))
+                .toList();
         this.resultDinkList = result;
         return this;
     }
