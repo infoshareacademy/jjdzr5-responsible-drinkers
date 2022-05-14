@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,10 @@ public class AppProperties {
 
     public AppProperties(String propertiesFileName) {
         readFileWithProperties(propertiesFileName);
+    }
+
+    AppProperties(Properties appProperties) {
+        this.appProperties = appProperties;
     }
 
     private void readFileWithProperties(String fileName) {
@@ -65,16 +70,10 @@ public class AppProperties {
         }
     }
 
-    public String getDatePatern() {
-        String result = "";
-        if (appProperties != null) {
-            result = appProperties.getProperty("dateFormat");
-            if (!result.isEmpty()) {
-                return result;
-            }
-        }
-        result = "";
-        return result;
+    public String getDatePattern() {
+        return Optional.ofNullable(appProperties)
+                .map(properties -> properties.getProperty("dateFormat"))
+                .orElse("");
     }
 
     public String getSortType() {
