@@ -25,7 +25,7 @@ public class Drink {
     @Size(min = 2, max = 25, message = "{walidacja.nazwa}")
     private String strGlass;
 
-    @Size(min = 2, max = 250, message = "{walidacja.przepis}")
+    @Size(min = 2, max = 500, message = "{walidacja.przepis}")
     private String strInstructions;
     private String strInstructionsES;
     private String strInstructionsDE;
@@ -73,6 +73,15 @@ public class Drink {
     private String strImageAttribution;
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
+    private Status status;
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public String getStrGlass() {
         return strGlass;

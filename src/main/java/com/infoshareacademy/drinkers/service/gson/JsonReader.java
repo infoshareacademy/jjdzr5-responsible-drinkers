@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.infoshareacademy.drinkers.domain.drink.Drink;
 import com.infoshareacademy.drinkers.domain.drink.Drinks;
+import com.infoshareacademy.drinkers.domain.drink.Status;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +12,9 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +34,7 @@ public class JsonReader {
 
             drinks = gson.fromJson(json, Drinks.class);
             drinkList = drinks.getDrinks();
+            drinkList = setStatusToAllDrinks(drinkList);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, "File read Error");
             LOGGER.log(Level.INFO, FILE_JSON.toString());
@@ -41,6 +45,15 @@ public class JsonReader {
             drinkList = new ArrayList<>();
             drinks = new Drinks();
         }
+    }
+
+    private List<Drink> setStatusToAllDrinks(List<Drink> drinks) {
+        Iterator<Drink> iterator = drinks.iterator();
+        while (iterator.hasNext()) {
+            Drink drink = iterator.next();
+            drink.setStatus(Status.ACCEPTED);
+        }
+        return drinks;
     }
 
     public Drinks getDrinks() {
