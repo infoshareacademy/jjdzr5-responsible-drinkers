@@ -6,9 +6,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Drink {
 
+    private UUID id;
     private int idDrink;
 
     @Size(min = 2, max = 35, message = "{walidacja.nazwa}")
@@ -74,6 +76,14 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
     private Status status;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public Status getStatus() {
         return status;
@@ -644,12 +654,12 @@ public class Drink {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Drink drink = (Drink) o;
-        return idDrink == drink.idDrink && Objects.equals(strDrink, drink.strDrink) && Objects.equals(strDrinkAlternate, drink.strDrinkAlternate) && Objects.equals(strTags, drink.strTags) && Objects.equals(strVideo, drink.strVideo) && Objects.equals(strCategory, drink.strCategory) && Objects.equals(strIBA, drink.strIBA) && Objects.equals(strAlcoholic, drink.strAlcoholic) && Objects.equals(strGlass, drink.strGlass) && Objects.equals(strInstructions, drink.strInstructions) && Objects.equals(strInstructionsES, drink.strInstructionsES) && Objects.equals(strInstructionsDE, drink.strInstructionsDE) && Objects.equals(strInstructionsFR, drink.strInstructionsFR) && Objects.equals(strInstructionsIT, drink.strInstructionsIT) && Objects.equals(strInstructionsZH_HANS, drink.strInstructionsZH_HANS) && Objects.equals(strInstructionsZH_HANT, drink.strInstructionsZH_HANT) && Objects.equals(strDrinkThumb, drink.strDrinkThumb) && Objects.equals(strIngredient1, drink.strIngredient1) && Objects.equals(strIngredient2, drink.strIngredient2) && Objects.equals(strIngredient3, drink.strIngredient3) && Objects.equals(strIngredient4, drink.strIngredient4) && Objects.equals(strIngredient5, drink.strIngredient5) && Objects.equals(strIngredient6, drink.strIngredient6) && Objects.equals(strIngredient7, drink.strIngredient7) && Objects.equals(strIngredient8, drink.strIngredient8) && Objects.equals(strIngredient9, drink.strIngredient9) && Objects.equals(strIngredient10, drink.strIngredient10) && Objects.equals(strIngredient11, drink.strIngredient11) && Objects.equals(strIngredient12, drink.strIngredient12) && Objects.equals(strIngredient13, drink.strIngredient13) && Objects.equals(strIngredient14, drink.strIngredient14) && Objects.equals(strIngredient15, drink.strIngredient15) && Objects.equals(strMeasure1, drink.strMeasure1) && Objects.equals(strMeasure2, drink.strMeasure2) && Objects.equals(strMeasure3, drink.strMeasure3) && Objects.equals(strMeasure4, drink.strMeasure4) && Objects.equals(strMeasure5, drink.strMeasure5) && Objects.equals(strMeasure6, drink.strMeasure6) && Objects.equals(strMeasure7, drink.strMeasure7) && Objects.equals(strMeasure8, drink.strMeasure8) && Objects.equals(strMeasure9, drink.strMeasure9) && Objects.equals(strMeasure10, drink.strMeasure10) && Objects.equals(strMeasure11, drink.strMeasure11) && Objects.equals(strMeasure12, drink.strMeasure12) && Objects.equals(strMeasure13, drink.strMeasure13) && Objects.equals(strMeasure14, drink.strMeasure14) && Objects.equals(strMeasure15, drink.strMeasure15) && Objects.equals(strImageSource, drink.strImageSource) && Objects.equals(strImageAttribution, drink.strImageAttribution) && Objects.equals(strCreativeCommonsConfirmed, drink.strCreativeCommonsConfirmed) && Objects.equals(dateModified, drink.dateModified);
+        return idDrink == drink.idDrink && Objects.equals(id, drink.id) && Objects.equals(strDrink, drink.strDrink) && Objects.equals(strDrinkAlternate, drink.strDrinkAlternate) && Objects.equals(strTags, drink.strTags) && Objects.equals(strVideo, drink.strVideo) && Objects.equals(strCategory, drink.strCategory) && Objects.equals(strIBA, drink.strIBA) && Objects.equals(strAlcoholic, drink.strAlcoholic) && Objects.equals(strGlass, drink.strGlass) && Objects.equals(strInstructions, drink.strInstructions) && Objects.equals(strInstructionsES, drink.strInstructionsES) && Objects.equals(strInstructionsDE, drink.strInstructionsDE) && Objects.equals(strInstructionsFR, drink.strInstructionsFR) && Objects.equals(strInstructionsIT, drink.strInstructionsIT) && Objects.equals(strInstructionsZH_HANS, drink.strInstructionsZH_HANS) && Objects.equals(strInstructionsZH_HANT, drink.strInstructionsZH_HANT) && Objects.equals(strDrinkThumb, drink.strDrinkThumb) && Objects.equals(strIngredient1, drink.strIngredient1) && Objects.equals(strIngredient2, drink.strIngredient2) && Objects.equals(strIngredient3, drink.strIngredient3) && Objects.equals(strIngredient4, drink.strIngredient4) && Objects.equals(strIngredient5, drink.strIngredient5) && Objects.equals(strIngredient6, drink.strIngredient6) && Objects.equals(strIngredient7, drink.strIngredient7) && Objects.equals(strIngredient8, drink.strIngredient8) && Objects.equals(strIngredient9, drink.strIngredient9) && Objects.equals(strIngredient10, drink.strIngredient10) && Objects.equals(strIngredient11, drink.strIngredient11) && Objects.equals(strIngredient12, drink.strIngredient12) && Objects.equals(strIngredient13, drink.strIngredient13) && Objects.equals(strIngredient14, drink.strIngredient14) && Objects.equals(strIngredient15, drink.strIngredient15) && Objects.equals(strMeasure1, drink.strMeasure1) && Objects.equals(strMeasure2, drink.strMeasure2) && Objects.equals(strMeasure3, drink.strMeasure3) && Objects.equals(strMeasure4, drink.strMeasure4) && Objects.equals(strMeasure5, drink.strMeasure5) && Objects.equals(strMeasure6, drink.strMeasure6) && Objects.equals(strMeasure7, drink.strMeasure7) && Objects.equals(strMeasure8, drink.strMeasure8) && Objects.equals(strMeasure9, drink.strMeasure9) && Objects.equals(strMeasure10, drink.strMeasure10) && Objects.equals(strMeasure11, drink.strMeasure11) && Objects.equals(strMeasure12, drink.strMeasure12) && Objects.equals(strMeasure13, drink.strMeasure13) && Objects.equals(strMeasure14, drink.strMeasure14) && Objects.equals(strMeasure15, drink.strMeasure15) && Objects.equals(strImageSource, drink.strImageSource) && Objects.equals(strImageAttribution, drink.strImageAttribution) && Objects.equals(strCreativeCommonsConfirmed, drink.strCreativeCommonsConfirmed) && Objects.equals(dateModified, drink.dateModified) && status == drink.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idDrink, strDrink, strDrinkAlternate, strTags, strVideo, strCategory, strIBA, strAlcoholic, strGlass, strInstructions, strInstructionsES, strInstructionsDE, strInstructionsFR, strInstructionsIT, strInstructionsZH_HANS, strInstructionsZH_HANT, strDrinkThumb, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strImageSource, strImageAttribution, strCreativeCommonsConfirmed, dateModified);
+        return Objects.hash(id, idDrink, strDrink, strDrinkAlternate, strTags, strVideo, strCategory, strIBA, strAlcoholic, strGlass, strInstructions, strInstructionsES, strInstructionsDE, strInstructionsFR, strInstructionsIT, strInstructionsZH_HANS, strInstructionsZH_HANT, strDrinkThumb, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strImageSource, strImageAttribution, strCreativeCommonsConfirmed, dateModified, status);
     }
 
     @Override
