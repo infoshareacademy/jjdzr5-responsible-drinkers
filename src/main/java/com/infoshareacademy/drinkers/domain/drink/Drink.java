@@ -6,9 +6,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Drink {
 
+    private UUID id;
     private int idDrink;
 
     @Size(min = 2, max = 35, message = "{walidacja.nazwa}")
@@ -74,6 +76,14 @@ public class Drink {
     private String strCreativeCommonsConfirmed;
     private LocalDateTime dateModified;
     private Status status;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public Status getStatus() {
         return status;
@@ -644,68 +654,71 @@ public class Drink {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Drink drink = (Drink) o;
-        return idDrink == drink.idDrink && Objects.equals(strDrink, drink.strDrink) && Objects.equals(strDrinkAlternate, drink.strDrinkAlternate) && Objects.equals(strTags, drink.strTags) && Objects.equals(strVideo, drink.strVideo) && Objects.equals(strCategory, drink.strCategory) && Objects.equals(strIBA, drink.strIBA) && Objects.equals(strAlcoholic, drink.strAlcoholic) && Objects.equals(strGlass, drink.strGlass) && Objects.equals(strInstructions, drink.strInstructions) && Objects.equals(strInstructionsES, drink.strInstructionsES) && Objects.equals(strInstructionsDE, drink.strInstructionsDE) && Objects.equals(strInstructionsFR, drink.strInstructionsFR) && Objects.equals(strInstructionsIT, drink.strInstructionsIT) && Objects.equals(strInstructionsZH_HANS, drink.strInstructionsZH_HANS) && Objects.equals(strInstructionsZH_HANT, drink.strInstructionsZH_HANT) && Objects.equals(strDrinkThumb, drink.strDrinkThumb) && Objects.equals(strIngredient1, drink.strIngredient1) && Objects.equals(strIngredient2, drink.strIngredient2) && Objects.equals(strIngredient3, drink.strIngredient3) && Objects.equals(strIngredient4, drink.strIngredient4) && Objects.equals(strIngredient5, drink.strIngredient5) && Objects.equals(strIngredient6, drink.strIngredient6) && Objects.equals(strIngredient7, drink.strIngredient7) && Objects.equals(strIngredient8, drink.strIngredient8) && Objects.equals(strIngredient9, drink.strIngredient9) && Objects.equals(strIngredient10, drink.strIngredient10) && Objects.equals(strIngredient11, drink.strIngredient11) && Objects.equals(strIngredient12, drink.strIngredient12) && Objects.equals(strIngredient13, drink.strIngredient13) && Objects.equals(strIngredient14, drink.strIngredient14) && Objects.equals(strIngredient15, drink.strIngredient15) && Objects.equals(strMeasure1, drink.strMeasure1) && Objects.equals(strMeasure2, drink.strMeasure2) && Objects.equals(strMeasure3, drink.strMeasure3) && Objects.equals(strMeasure4, drink.strMeasure4) && Objects.equals(strMeasure5, drink.strMeasure5) && Objects.equals(strMeasure6, drink.strMeasure6) && Objects.equals(strMeasure7, drink.strMeasure7) && Objects.equals(strMeasure8, drink.strMeasure8) && Objects.equals(strMeasure9, drink.strMeasure9) && Objects.equals(strMeasure10, drink.strMeasure10) && Objects.equals(strMeasure11, drink.strMeasure11) && Objects.equals(strMeasure12, drink.strMeasure12) && Objects.equals(strMeasure13, drink.strMeasure13) && Objects.equals(strMeasure14, drink.strMeasure14) && Objects.equals(strMeasure15, drink.strMeasure15) && Objects.equals(strImageSource, drink.strImageSource) && Objects.equals(strImageAttribution, drink.strImageAttribution) && Objects.equals(strCreativeCommonsConfirmed, drink.strCreativeCommonsConfirmed) && Objects.equals(dateModified, drink.dateModified);
+        return idDrink == drink.idDrink && Objects.equals(id, drink.id) && Objects.equals(strDrink, drink.strDrink) && Objects.equals(strDrinkAlternate, drink.strDrinkAlternate) && Objects.equals(strTags, drink.strTags) && Objects.equals(strVideo, drink.strVideo) && Objects.equals(strCategory, drink.strCategory) && Objects.equals(strIBA, drink.strIBA) && Objects.equals(strAlcoholic, drink.strAlcoholic) && Objects.equals(strGlass, drink.strGlass) && Objects.equals(strInstructions, drink.strInstructions) && Objects.equals(strInstructionsES, drink.strInstructionsES) && Objects.equals(strInstructionsDE, drink.strInstructionsDE) && Objects.equals(strInstructionsFR, drink.strInstructionsFR) && Objects.equals(strInstructionsIT, drink.strInstructionsIT) && Objects.equals(strInstructionsZH_HANS, drink.strInstructionsZH_HANS) && Objects.equals(strInstructionsZH_HANT, drink.strInstructionsZH_HANT) && Objects.equals(strDrinkThumb, drink.strDrinkThumb) && Objects.equals(strIngredient1, drink.strIngredient1) && Objects.equals(strIngredient2, drink.strIngredient2) && Objects.equals(strIngredient3, drink.strIngredient3) && Objects.equals(strIngredient4, drink.strIngredient4) && Objects.equals(strIngredient5, drink.strIngredient5) && Objects.equals(strIngredient6, drink.strIngredient6) && Objects.equals(strIngredient7, drink.strIngredient7) && Objects.equals(strIngredient8, drink.strIngredient8) && Objects.equals(strIngredient9, drink.strIngredient9) && Objects.equals(strIngredient10, drink.strIngredient10) && Objects.equals(strIngredient11, drink.strIngredient11) && Objects.equals(strIngredient12, drink.strIngredient12) && Objects.equals(strIngredient13, drink.strIngredient13) && Objects.equals(strIngredient14, drink.strIngredient14) && Objects.equals(strIngredient15, drink.strIngredient15) && Objects.equals(strMeasure1, drink.strMeasure1) && Objects.equals(strMeasure2, drink.strMeasure2) && Objects.equals(strMeasure3, drink.strMeasure3) && Objects.equals(strMeasure4, drink.strMeasure4) && Objects.equals(strMeasure5, drink.strMeasure5) && Objects.equals(strMeasure6, drink.strMeasure6) && Objects.equals(strMeasure7, drink.strMeasure7) && Objects.equals(strMeasure8, drink.strMeasure8) && Objects.equals(strMeasure9, drink.strMeasure9) && Objects.equals(strMeasure10, drink.strMeasure10) && Objects.equals(strMeasure11, drink.strMeasure11) && Objects.equals(strMeasure12, drink.strMeasure12) && Objects.equals(strMeasure13, drink.strMeasure13) && Objects.equals(strMeasure14, drink.strMeasure14) && Objects.equals(strMeasure15, drink.strMeasure15) && Objects.equals(strImageSource, drink.strImageSource) && Objects.equals(strImageAttribution, drink.strImageAttribution) && Objects.equals(strCreativeCommonsConfirmed, drink.strCreativeCommonsConfirmed) && Objects.equals(dateModified, drink.dateModified) && status == drink.status;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idDrink, strDrink, strDrinkAlternate, strTags, strVideo, strCategory, strIBA, strAlcoholic, strGlass, strInstructions, strInstructionsES, strInstructionsDE, strInstructionsFR, strInstructionsIT, strInstructionsZH_HANS, strInstructionsZH_HANT, strDrinkThumb, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strImageSource, strImageAttribution, strCreativeCommonsConfirmed, dateModified);
+        return Objects.hash(id, idDrink, strDrink, strDrinkAlternate, strTags, strVideo, strCategory, strIBA, strAlcoholic, strGlass, strInstructions, strInstructionsES, strInstructionsDE, strInstructionsFR, strInstructionsIT, strInstructionsZH_HANS, strInstructionsZH_HANT, strDrinkThumb, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15, strImageSource, strImageAttribution, strCreativeCommonsConfirmed, dateModified, status);
     }
 
     @Override
     public String toString() {
-        return "Drink{" +
-                "idDrink=" + idDrink +
-                ", strDrink='" + strDrink + '\'' +
-                ", strDrinkAlternate='" + strDrinkAlternate + '\'' +
-                ", strTags='" + strTags + '\'' +
-                ", strVideo='" + strVideo + '\'' +
-                ", strCategory='" + strCategory + '\'' +
-                ", strIBA='" + strIBA + '\'' +
-                ", strAlcoholic='" + strAlcoholic + '\'' +
-                ", strGlass='" + strGlass + '\'' +
-                ", strInstructions='" + strInstructions + '\'' +
-                ", strInstructionsES='" + strInstructionsES + '\'' +
-                ", strInstructionsDE='" + strInstructionsDE + '\'' +
-                ", strInstructionsFR='" + strInstructionsFR + '\'' +
-                ", strInstructionsIT='" + strInstructionsIT + '\'' +
-                ", strInstructionsZH_HANS='" + strInstructionsZH_HANS + '\'' +
-                ", strInstructionsZH_HANT='" + strInstructionsZH_HANT + '\'' +
-                ", strDrinkThumb=" + strDrinkThumb +
-                ", strIngredient1='" + strIngredient1 + '\'' +
-                ", strIngredient2='" + strIngredient2 + '\'' +
-                ", strIngredient3='" + strIngredient3 + '\'' +
-                ", strIngredient4='" + strIngredient4 + '\'' +
-                ", strIngredient5='" + strIngredient5 + '\'' +
-                ", strIngredient6='" + strIngredient6 + '\'' +
-                ", strIngredient7='" + strIngredient7 + '\'' +
-                ", strIngredient8='" + strIngredient8 + '\'' +
-                ", strIngredient9='" + strIngredient9 + '\'' +
-                ", strIngredient10='" + strIngredient10 + '\'' +
-                ", strIngredient11='" + strIngredient11 + '\'' +
-                ", strIngredient12='" + strIngredient12 + '\'' +
-                ", strIngredient13='" + strIngredient13 + '\'' +
-                ", strIngredient14='" + strIngredient14 + '\'' +
-                ", strIngredient15='" + strIngredient15 + '\'' +
-                ", strMeasure1='" + strMeasure1 + '\'' +
-                ", strMeasure2='" + strMeasure2 + '\'' +
-                ", strMeasure3='" + strMeasure3 + '\'' +
-                ", strMeasure4='" + strMeasure4 + '\'' +
-                ", strMeasure5='" + strMeasure5 + '\'' +
-                ", strMeasure6='" + strMeasure6 + '\'' +
-                ", strMeasure7='" + strMeasure7 + '\'' +
-                ", strMeasure8='" + strMeasure8 + '\'' +
-                ", strMeasure9='" + strMeasure9 + '\'' +
-                ", strMeasure10='" + strMeasure10 + '\'' +
-                ", strMeasure11='" + strMeasure11 + '\'' +
-                ", strMeasure12='" + strMeasure12 + '\'' +
-                ", strMeasure13='" + strMeasure13 + '\'' +
-                ", strMeasure14='" + strMeasure14 + '\'' +
-                ", strMeasure15='" + strMeasure15 + '\'' +
-                ", strImageSource=" + strImageSource +
-                ", strImageAttribution='" + strImageAttribution + '\'' +
-                ", strCreativeCommonsConfirmed='" + strCreativeCommonsConfirmed + '\'' +
-                ", dateModified=" + dateModified +
-                '}';
+        final StringBuffer sb = new StringBuffer("Drink{");
+        sb.append("id=").append(id);
+        sb.append(", idDrink=").append(idDrink);
+        sb.append(", strDrink='").append(strDrink).append('\'');
+        sb.append(", strDrinkAlternate='").append(strDrinkAlternate).append('\'');
+        sb.append(", strTags='").append(strTags).append('\'');
+        sb.append(", strVideo='").append(strVideo).append('\'');
+        sb.append(", strCategory='").append(strCategory).append('\'');
+        sb.append(", strIBA='").append(strIBA).append('\'');
+        sb.append(", strAlcoholic='").append(strAlcoholic).append('\'');
+        sb.append(", strGlass='").append(strGlass).append('\'');
+        sb.append(", strInstructions='").append(strInstructions).append('\'');
+        sb.append(", strInstructionsES='").append(strInstructionsES).append('\'');
+        sb.append(", strInstructionsDE='").append(strInstructionsDE).append('\'');
+        sb.append(", strInstructionsFR='").append(strInstructionsFR).append('\'');
+        sb.append(", strInstructionsIT='").append(strInstructionsIT).append('\'');
+        sb.append(", strInstructionsZH_HANS='").append(strInstructionsZH_HANS).append('\'');
+        sb.append(", strInstructionsZH_HANT='").append(strInstructionsZH_HANT).append('\'');
+        sb.append(", strDrinkThumb=").append(strDrinkThumb);
+        sb.append(", strIngredient1='").append(strIngredient1).append('\'');
+        sb.append(", strIngredient2='").append(strIngredient2).append('\'');
+        sb.append(", strIngredient3='").append(strIngredient3).append('\'');
+        sb.append(", strIngredient4='").append(strIngredient4).append('\'');
+        sb.append(", strIngredient5='").append(strIngredient5).append('\'');
+        sb.append(", strIngredient6='").append(strIngredient6).append('\'');
+        sb.append(", strIngredient7='").append(strIngredient7).append('\'');
+        sb.append(", strIngredient8='").append(strIngredient8).append('\'');
+        sb.append(", strIngredient9='").append(strIngredient9).append('\'');
+        sb.append(", strIngredient10='").append(strIngredient10).append('\'');
+        sb.append(", strIngredient11='").append(strIngredient11).append('\'');
+        sb.append(", strIngredient12='").append(strIngredient12).append('\'');
+        sb.append(", strIngredient13='").append(strIngredient13).append('\'');
+        sb.append(", strIngredient14='").append(strIngredient14).append('\'');
+        sb.append(", strIngredient15='").append(strIngredient15).append('\'');
+        sb.append(", strMeasure1='").append(strMeasure1).append('\'');
+        sb.append(", strMeasure2='").append(strMeasure2).append('\'');
+        sb.append(", strMeasure3='").append(strMeasure3).append('\'');
+        sb.append(", strMeasure4='").append(strMeasure4).append('\'');
+        sb.append(", strMeasure5='").append(strMeasure5).append('\'');
+        sb.append(", strMeasure6='").append(strMeasure6).append('\'');
+        sb.append(", strMeasure7='").append(strMeasure7).append('\'');
+        sb.append(", strMeasure8='").append(strMeasure8).append('\'');
+        sb.append(", strMeasure9='").append(strMeasure9).append('\'');
+        sb.append(", strMeasure10='").append(strMeasure10).append('\'');
+        sb.append(", strMeasure11='").append(strMeasure11).append('\'');
+        sb.append(", strMeasure12='").append(strMeasure12).append('\'');
+        sb.append(", strMeasure13='").append(strMeasure13).append('\'');
+        sb.append(", strMeasure14='").append(strMeasure14).append('\'');
+        sb.append(", strMeasure15='").append(strMeasure15).append('\'');
+        sb.append(", strImageSource=").append(strImageSource);
+        sb.append(", strImageAttribution='").append(strImageAttribution).append('\'');
+        sb.append(", strCreativeCommonsConfirmed='").append(strCreativeCommonsConfirmed).append('\'');
+        sb.append(", dateModified=").append(dateModified);
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
     }
 }
